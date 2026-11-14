@@ -1,0 +1,465 @@
+/**
+ * Goodnite Store Locator - Frontend Stylesheet
+ */
+
+:root {
+	--gn-primary: #0f172a;
+	--gn-accent: #2563eb;
+	--gn-accent-hover: #1d4ed8;
+	--gn-accent-light: #eff6ff;
+	--gn-text-main: #1e293b;
+	--gn-text-muted: #64748b;
+	--gn-bg-surface: #ffffff;
+	--gn-border-color: #e2e8f0;
+	--gn-badge-exact-bg: #dcfce7;
+	--gn-badge-exact-text: #15803d;
+	--gn-badge-nearby-bg: #fef3c7;
+	--gn-badge-nearby-text: #b45309;
+	--gn-radius-card: 16px;
+	--gn-radius-pill: 9999px;
+	--gn-shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+	--gn-shadow-hover: 0 20px 35px -5px rgba(37, 99, 235, 0.12), 0 8px 10px -4px rgba(0, 0, 0, 0.04);
+}
+
+.goodnite-sl-section {
+	padding: 60px 20px;
+	background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+	font-family: inherit;
+	color: var(--gn-text-main);
+	box-sizing: border-box;
+}
+
+.goodnite-sl-section * {
+	box-sizing: border-box;
+}
+
+.goodnite-sl-container {
+	max-width: 1180px;
+	margin: 0 auto;
+}
+
+/* Header */
+.goodnite-sl-header {
+	text-align: center;
+	max-width: 680px;
+	margin: 0 auto 36px auto;
+}
+
+.goodnite-sl-pill-tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: var(--gn-accent-light);
+	color: var(--gn-accent);
+	font-size: 13px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.8px;
+	padding: 6px 14px;
+	border-radius: var(--gn-radius-pill);
+	margin-bottom: 14px;
+	border: 1px solid rgba(37, 99, 235, 0.15);
+}
+
+.goodnite-sl-title {
+	font-size: 32px;
+	font-weight: 800;
+	color: var(--gn-primary);
+	line-height: 1.25;
+	margin: 0 0 12px 0;
+}
+
+.goodnite-sl-subtitle {
+	font-size: 16px;
+	color: var(--gn-text-muted);
+	line-height: 1.6;
+	margin: 0;
+}
+
+/* Search Box */
+.goodnite-sl-search-wrapper {
+	max-width: 720px;
+	margin: 0 auto 36px auto;
+}
+
+.goodnite-sl-input-group {
+	display: flex;
+	align-items: center;
+	background: var(--gn-bg-surface);
+	border: 2px solid var(--gn-border-color);
+	border-radius: var(--gn-radius-pill);
+	padding: 6px 8px 6px 18px;
+	box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.06);
+	transition: all 0.25s ease;
+}
+
+.goodnite-sl-input-group:focus-within {
+	border-color: var(--gn-accent);
+	box-shadow: 0 10px 25px -4px rgba(37, 99, 235, 0.2);
+}
+
+.goodnite-sl-input-icon {
+	color: var(--gn-text-muted);
+	display: flex;
+	align-items: center;
+	margin-right: 12px;
+}
+
+.goodnite-sl-input {
+	flex: 1;
+	border: none;
+	background: transparent;
+	font-size: 16px;
+	font-weight: 500;
+	color: var(--gn-text-main);
+	outline: none;
+	padding: 8px 0;
+	min-width: 140px;
+}
+
+.goodnite-sl-input::placeholder {
+	color: #94a3b8;
+	font-weight: 400;
+}
+
+.goodnite-sl-geo-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: transparent;
+	border: none;
+	color: var(--gn-text-muted);
+	font-size: 13px;
+	font-weight: 600;
+	padding: 8px 12px;
+	border-radius: var(--gn-radius-pill);
+	cursor: pointer;
+	transition: all 0.2s;
+	white-space: nowrap;
+}
+
+.goodnite-sl-geo-btn:hover {
+	background: #f1f5f9;
+	color: var(--gn-accent);
+}
+
+.goodnite-sl-btn-primary {
+	background: var(--gn-accent);
+	color: #ffffff;
+	border: none;
+	padding: 12px 24px;
+	border-radius: var(--gn-radius-pill);
+	font-size: 15px;
+	font-weight: 600;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	transition: all 0.2s ease;
+	box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.goodnite-sl-btn-primary:hover {
+	background: var(--gn-accent-hover);
+	box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+	transform: translateY(-1px);
+}
+
+/* Quick Search Pills */
+.goodnite-sl-quick-pills {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 14px;
+	font-size: 13px;
+}
+
+.quick-pills-label {
+	color: var(--gn-text-muted);
+	font-weight: 500;
+}
+
+.quick-pill-btn {
+	background: rgba(0, 0, 0, 0.04);
+	border: 1px solid var(--gn-border-color);
+	color: var(--gn-text-main);
+	padding: 4px 12px;
+	border-radius: var(--gn-radius-pill);
+	font-size: 12px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.quick-pill-btn:hover {
+	background: var(--gn-accent-light);
+	border-color: var(--gn-accent);
+	color: var(--gn-accent);
+}
+
+/* Status Bar */
+.goodnite-sl-status-bar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	margin: 0 auto 30px auto;
+	padding: 10px 18px;
+	background: #f8fafc;
+	border: 1px solid var(--gn-border-color);
+	border-radius: var(--gn-radius-pill);
+	max-width: fit-content;
+}
+
+.status-badge {
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	padding: 3px 8px;
+	border-radius: var(--gn-radius-pill);
+}
+
+.status-badge.exact {
+	background: var(--gn-badge-exact-bg);
+	color: var(--gn-badge-exact-text);
+}
+
+.status-badge.nearby {
+	background: var(--gn-badge-nearby-bg);
+	color: var(--gn-badge-nearby-text);
+}
+
+.status-text {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--gn-text-main);
+}
+
+/* Results Grid */
+.goodnite-sl-dealers-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+	gap: 24px;
+}
+
+/* Dealer Card */
+.goodnite-sl-dealer-card {
+	background: var(--gn-bg-surface);
+	border: 1px solid var(--gn-border-color);
+	border-radius: var(--gn-radius-card);
+	padding: 24px;
+	box-shadow: var(--gn-shadow-card);
+	transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.goodnite-sl-dealer-card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--gn-shadow-hover);
+	border-color: #cbd5e1;
+}
+
+.dealer-card-badge-top {
+	align-self: flex-start;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	padding: 3px 8px;
+	border-radius: 6px;
+	margin-bottom: 12px;
+	background: #f1f5f9;
+	color: #475569;
+}
+
+.goodnite-sl-dealer-card.is-nearest .dealer-card-badge-top {
+	background: var(--gn-badge-exact-bg);
+	color: var(--gn-badge-exact-text);
+}
+
+.dealer-title {
+	font-size: 18px;
+	font-weight: 700;
+	color: var(--gn-primary);
+	margin: 0 0 10px 0;
+	line-height: 1.35;
+}
+
+.dealer-address {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	color: var(--gn-text-muted);
+	font-size: 14px;
+	line-height: 1.5;
+	margin-bottom: 14px;
+}
+
+.dealer-address svg {
+	flex-shrink: 0;
+	margin-top: 3px;
+	color: #94a3b8;
+}
+
+.dealer-meta-list {
+	margin-top: auto;
+	padding-top: 14px;
+	border-top: 1px dashed var(--gn-border-color);
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: 18px;
+	font-size: 13px;
+}
+
+.dealer-meta-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--gn-text-muted);
+}
+
+.dealer-meta-item svg {
+	color: #94a3b8;
+}
+
+.dealer-meta-item strong {
+	color: var(--gn-text-main);
+}
+
+/* Card CTA Buttons */
+.dealer-actions {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+.btn-dealer-call {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	background: #f8fafc;
+	color: var(--gn-text-main);
+	border: 1px solid var(--gn-border-color);
+	border-radius: 10px;
+	padding: 10px 14px;
+	font-size: 13px;
+	font-weight: 600;
+	text-decoration: none;
+	transition: all 0.2s;
+}
+
+.btn-dealer-call:hover {
+	background: #ffffff;
+	border-color: var(--gn-accent);
+	color: var(--gn-accent);
+}
+
+.btn-dealer-map {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	background: var(--gn-accent-light);
+	color: var(--gn-accent);
+	border: 1px solid rgba(37, 99, 235, 0.2);
+	border-radius: 10px;
+	padding: 10px 14px;
+	font-size: 13px;
+	font-weight: 600;
+	text-decoration: none;
+	transition: all 0.2s;
+}
+
+.btn-dealer-map:hover {
+	background: var(--gn-accent);
+	color: #ffffff;
+}
+
+/* Empty & Initial States */
+.goodnite-sl-empty-initial, .goodnite-sl-empty-results {
+	background: #ffffff;
+	border: 2px dashed var(--gn-border-color);
+	border-radius: var(--gn-radius-card);
+	padding: 48px 24px;
+	text-align: center;
+	max-width: 580px;
+	margin: 0 auto;
+}
+
+.empty-icon-circle {
+	width: 64px;
+	height: 64px;
+	background: var(--gn-accent-light);
+	color: var(--gn-accent);
+	border-radius: 50%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 16px;
+}
+
+.goodnite-sl-empty-initial h3, .goodnite-sl-empty-results h3 {
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--gn-primary);
+	margin: 0 0 8px 0;
+}
+
+.goodnite-sl-empty-initial p, .goodnite-sl-empty-results p {
+	color: var(--gn-text-muted);
+	font-size: 14px;
+	line-height: 1.6;
+	margin: 0;
+}
+
+/* Spinner Animation */
+.btn-spinner {
+	width: 16px;
+	height: 16px;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-radius: 50%;
+	border-top-color: #ffffff;
+	animation: gnSpin 0.7s linear infinite;
+}
+
+@keyframes gnSpin {
+	to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+	.goodnite-sl-title {
+		font-size: 24px;
+	}
+	
+	.goodnite-sl-input-group {
+		flex-direction: column;
+		border-radius: 16px;
+		padding: 12px;
+		gap: 10px;
+	}
+
+	.goodnite-sl-input {
+		width: 100%;
+		text-align: center;
+	}
+
+	.goodnite-sl-btn-primary, .goodnite-sl-geo-btn {
+		width: 100%;
+	}
+
+	.goodnite-sl-dealers-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.dealer-actions {
+		grid-template-columns: 1fr;
+	}
+}
