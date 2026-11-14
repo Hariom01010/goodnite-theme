@@ -1,0 +1,18 @@
+/*
+Theme Name: Goodnite
+Theme URI: https://goodnite.com.my/
+Author: Goodnite Development Team
+Author URI: https://goodnite.com.my/
+Description: Custom, high-performance editorial WordPress theme for Goodnite India flagship website. Engineered with zero runtime layout shift, accessible navigation, interactive sleep finder, and modular component architecture.
+Version: 1.0.0
+Requires at least: 6.4
+Tested up to: 6.8
+Requires PHP: 8.0
+License: Proprietary
+Text Domain: goodnite
+*/
+
+/*
+ * The main stylesheet for this theme is compiled and enqueued via
+ * assets/css/theme.css to ensure clean separation of metadata and design tokens.
+ */

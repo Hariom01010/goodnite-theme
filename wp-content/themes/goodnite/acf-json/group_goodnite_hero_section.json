@@ -1,0 +1,91 @@
+{
+    "key": "group_goodnite_hero_section",
+    "title": "Homepage - Hero Section",
+    "fields": [
+        {
+            "key": "field_hero_title",
+            "label": "Hero Title",
+            "name": "hero_title",
+            "type": "text",
+            "instructions": "Main headline for the hero banner",
+            "default_value": "Sleep Beyond Ordinary.",
+            "placeholder": "Sleep Beyond Ordinary."
+        },
+        {
+            "key": "field_hero_body",
+            "label": "Hero Description",
+            "name": "hero_body",
+            "type": "textarea",
+            "instructions": "Supporting description copy beneath the headline",
+            "rows": 3,
+            "default_value": "Discover a world of comfort shaped by international sleep expertise, thoughtful innovation and the way you sleep."
+        },
+        {
+            "key": "field_hero_primary_cta_label",
+            "label": "Primary Button Label",
+            "name": "hero_primary_cta_label",
+            "type": "text",
+            "default_value": "Explore Mattresses"
+        },
+        {
+            "key": "field_hero_primary_cta_url",
+            "label": "Primary Button URL",
+            "name": "hero_primary_cta_url",
+            "type": "text",
+            "default_value": "/mattresses"
+        },
+        {
+            "key": "field_hero_secondary_cta_label",
+            "label": "Secondary Button Label",
+            "name": "hero_secondary_cta_label",
+            "type": "text",
+            "default_value": "Find Your Mattress"
+        },
+        {
+            "key": "field_hero_secondary_cta_url",
+            "label": "Secondary Button URL",
+            "name": "hero_secondary_cta_url",
+            "type": "text",
+            "default_value": "/find-your-mattress"
+        },
+        {
+            "key": "field_hero_slides",
+            "label": "Hero Slides (Repeater)",
+            "name": "hero_slides",
+            "type": "repeater",
+            "instructions": "Add and reorder slides for the hero background slider",
+            "button_label": "Add Slide",
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_hero_slide_image",
+                    "label": "Slide Image",
+                    "name": "image",
+                    "type": "image",
+                    "instructions": "Recommended 1920x1080 WebP or JPG",
+                    "return_format": "array"
+                },
+                {
+                    "key": "field_hero_slide_alt",
+                    "label": "Alt Text",
+                    "name": "alt_text",
+                    "type": "text",
+                    "instructions": "Image description for accessibility and SEO"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "active": true
+}
