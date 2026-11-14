@@ -15,9 +15,11 @@ jobs:
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
             echo "repo_path=/home/goodnite/home/goodnite/repositories/goodnite-live" >> $GITHUB_OUTPUT
+            echo "branch=main" >> $GITHUB_OUTPUT
             echo "env_name=Production (goodnite.in)" >> $GITHUB_OUTPUT
           else
             echo "repo_path=/home/goodnite/home/goodnite/repositories/goodnite-staging" >> $GITHUB_OUTPUT
+            echo "branch=preview" >> $GITHUB_OUTPUT
             echo "env_name=Staging (staging.goodnite.in)" >> $GITHUB_OUTPUT
           fi
 
@@ -25,17 +27,19 @@ jobs:
         run: |
           echo "Deploying to ${{ steps.target.outputs.env_name }}..."
           REPO_PATH="${{ steps.target.outputs.repo_path }}"
+          BRANCH="${{ steps.target.outputs.branch }}"
 
           # Clean host: remove https://, http://, ports, and trailing slashes
           RAW_HOST="${{ secrets.CPANEL_HOST }}"
           CLEAN_HOST=$(echo "$RAW_HOST" | sed -E 's|https?://||' | sed -E 's|:.*||' | sed -E 's|/.*||' | xargs)
 
           echo "Target server: ${CLEAN_HOST}"
+          echo "Branch: ${BRANCH}"
 
-          # 1. Update repository from remote
-          echo "Step 1: Pulling latest changes..."
+          # 1. Update from remote (cPanel requires &branch= to trigger git pull)
+          echo "Step 1: Pulling latest changes from remote..."
           UPDATE_RES=$(curl -sS -k -H "Authorization: cpanel ${{ secrets.CPANEL_USER }}:${{ secrets.CPANEL_TOKEN }}" \
-            "https://${CLEAN_HOST}:2083/execute/VersionControl/update?repository_root=${REPO_PATH}")
+            "https://${CLEAN_HOST}:2083/execute/VersionControl/update?repository_root=${REPO_PATH}&branch=${BRANCH}")
           echo "Update result: $UPDATE_RES"
 
           # 2. Deploy HEAD commit via .cpanel.yml
