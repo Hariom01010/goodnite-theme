@@ -1,0 +1,35 @@
+name: Auto Deploy (Staging & Live)
+
+on:
+  push:
+    branches:
+      - preview
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Select Deployment Target
+        id: target
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "repo_path=/home/goodnite/home/goodnite/repositories/goodnite-live" >> $GITHUB_OUTPUT
+            echo "env_name=Production (goodnite.in)" >> $GITHUB_OUTPUT
+          else
+            echo "repo_path=/home/goodnite/home/goodnite/repositories/goodnite-staging" >> $GITHUB_OUTPUT
+            echo "env_name=Staging (staging.goodnite.in)" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Trigger cPanel Git Pull & Deploy
+        run: |
+          echo "Deploying to ${{ steps.target.outputs.env_name }}..."
+          REPO_PATH="${{ steps.target.outputs.repo_path }}"
+
+          # 1. Update repository from remote
+          curl -s -H "Authorization: cpanel ${{ secrets.CPANEL_USER }}:${{ secrets.CPANEL_TOKEN }}" \
+            "https://${{ secrets.CPANEL_HOST }}:2083/execute/VersionControl/update?repository_root=${REPO_PATH}"
+
+          # 2. Deploy HEAD commit via .cpanel.yml
+          curl -s -H "Authorization: cpanel ${{ secrets.CPANEL_USER }}:${{ secrets.CPANEL_TOKEN }}" \
+            "https://${{ secrets.CPANEL_HOST }}:2083/execute/VersionControlDeployment/create?repository_root=${REPO_PATH}"
