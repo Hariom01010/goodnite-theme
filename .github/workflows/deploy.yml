@@ -26,10 +26,20 @@ jobs:
           echo "Deploying to ${{ steps.target.outputs.env_name }}..."
           REPO_PATH="${{ steps.target.outputs.repo_path }}"
 
+          # Clean host: remove https://, http://, ports, and trailing slashes
+          RAW_HOST="${{ secrets.CPANEL_HOST }}"
+          CLEAN_HOST=$(echo "$RAW_HOST" | sed -E 's|https?://||' | sed -E 's|:.*||' | sed -E 's|/.*||' | xargs)
+
+          echo "Target server: ${CLEAN_HOST}"
+
           # 1. Update repository from remote
-          curl -s -H "Authorization: cpanel ${{ secrets.CPANEL_USER }}:${{ secrets.CPANEL_TOKEN }}" \
-            "https://${{ secrets.CPANEL_HOST }}:2083/execute/VersionControl/update?repository_root=${REPO_PATH}"
+          echo "Step 1: Pulling latest changes..."
+          UPDATE_RES=$(curl -sS -k -H "Authorization: cpanel ${{ secrets.CPANEL_USER }}:${{ secrets.CPANEL_TOKEN }}" \
+            "https://${CLEAN_HOST}:2083/execute/VersionControl/update?repository_root=${REPO_PATH}")
+          echo "Update result: $UPDATE_RES"
 
           # 2. Deploy HEAD commit via .cpanel.yml
-          curl -s -H "Authorization: cpanel ${{ secrets.CPANEL_USER }}:${{ secrets.CPANEL_TOKEN }}" \
-            "https://${{ secrets.CPANEL_HOST }}:2083/execute/VersionControlDeployment/create?repository_root=${REPO_PATH}"
+          echo "Step 2: Deploying files via .cpanel.yml..."
+          DEPLOY_RES=$(curl -sS -k -H "Authorization: cpanel ${{ secrets.CPANEL_USER }}:${{ secrets.CPANEL_TOKEN }}" \
+            "https://${CLEAN_HOST}:2083/execute/VersionControlDeployment/create?repository_root=${REPO_PATH}")
+          echo "Deployment result: $DEPLOY_RES"
