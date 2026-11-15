@@ -1,0 +1,99 @@
+{
+    "key": "group_goodnite_legacy_section",
+    "title": "Homepage - Legacy & Heritage Section",
+    "fields": [
+        {
+            "key": "field_legacy_image",
+            "label": "Craftsmanship Image",
+            "name": "legacy_image",
+            "type": "image",
+            "instructions": "Close-up craftsmanship/quilted upholstery photo (Recommended 1122x1402)",
+            "return_format": "array"
+        },
+        {
+            "key": "field_legacy_title",
+            "label": "Section Headline",
+            "name": "legacy_title",
+            "type": "text",
+            "default_value": "A Legacy of Better Sleep, Since 1989"
+        },
+        {
+            "key": "field_legacy_body",
+            "label": "Story Description",
+            "name": "legacy_body",
+            "type": "textarea",
+            "rows": 4,
+            "default_value": "For decades, Goodnite has brought together sleep expertise, material innovation and manufacturing craftsmanship to create comfort for people around the world.\n\nToday, that global heritage begins a new chapter in India bringing thoughtfully engineered sleep solutions to a market that deserves more than one definition of perfect sleep."
+        },
+        {
+            "key": "field_legacy_cta_label",
+            "label": "CTA Button Label",
+            "name": "legacy_cta_label",
+            "type": "text",
+            "default_value": "Discover Our Story"
+        },
+        {
+            "key": "field_legacy_cta_url",
+            "label": "CTA Button URL",
+            "name": "legacy_cta_url",
+            "type": "text",
+            "default_value": "/our-story"
+        },
+        {
+            "key": "field_legacy_m1_val",
+            "label": "Metric 1 - Animated Count Target",
+            "name": "legacy_m1_val",
+            "type": "text",
+            "default_value": "1500",
+            "instructions": "Number that will animate on scroll (e.g. 1500)"
+        },
+        {
+            "key": "field_legacy_m1_label",
+            "label": "Metric 1 - Label",
+            "name": "legacy_m1_label",
+            "type": "text",
+            "default_value": "Mattresses per day manufacturing capacity"
+        },
+        {
+            "key": "field_legacy_m2_val",
+            "label": "Metric 2 - Value",
+            "name": "legacy_m2_val",
+            "type": "text",
+            "default_value": "5 M+"
+        },
+        {
+            "key": "field_legacy_m2_label",
+            "label": "Metric 2 - Label",
+            "name": "legacy_m2_label",
+            "type": "text",
+            "default_value": "Mattresses Sold Worldwide"
+        },
+        {
+            "key": "field_legacy_m3_val",
+            "label": "Metric 3 - Value",
+            "name": "legacy_m3_val",
+            "type": "text",
+            "default_value": "15+"
+        },
+        {
+            "key": "field_legacy_m3_label",
+            "label": "Metric 3 - Label",
+            "name": "legacy_m3_label",
+            "type": "text",
+            "default_value": "Countries"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "normal",
+    "style": "default",
+    "active": true
+}
