@@ -11,6 +11,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+$post_id          = get_queried_object_id();
+$hosp_title       = function_exists( 'get_field' ) ? (string) get_field( 'hospitality_title', $post_id ) : '';
+$hosp_title       = $hosp_title ?: 'Exceptional Sleep for Exceptional Stays.';
+
+$hosp_desc        = function_exists( 'get_field' ) ? (string) get_field( 'hospitality_description', $post_id ) : '';
+$hosp_desc        = $hosp_desc ?: 'For hotels, resorts and hospitality destinations, Goodnite brings decades of international mattress expertise to the guest experience, delivering thoughtfully engineered comfort where expectations are high.';
+
+$hosp_cta_lbl     = function_exists( 'get_field' ) ? (string) get_field( 'hospitality_cta_label', $post_id ) : '';
+$hosp_cta_lbl     = $hosp_cta_lbl ?: 'Explore Hospitality Solutions';
+
+$hosp_cta_url     = function_exists( 'get_field' ) ? (string) get_field( 'hospitality_cta_url', $post_id ) : '';
+$hosp_cta_url     = $hosp_cta_url ?: '/hospitality';
+
+$hosp_client_lbl  = function_exists( 'get_field' ) ? (string) get_field( 'hospitality_clients_label', $post_id ) : '';
+$hosp_client_lbl  = $hosp_client_lbl ?: 'OUR HOSPITALITY CLIENT PORTFOLIO';
+
+$scf_img          = function_exists( 'get_field' ) ? get_field( 'hospitality_image', $post_id ) : null;
+$hosp_img_url     = is_array( $scf_img ) ? ( $scf_img['url'] ?? '' ) : ( is_string( $scf_img ) ? $scf_img : '' );
+if ( empty( $hosp_img_url ) ) {
+	$hosp_img_url = goodnite_asset_url( 'images/goodnite-hospitality-suite-v2.png' );
+}
+
 $hospitality_logos = array(
 	array( 'name' => 'Taj', 'file' => '01_Taj 1.png' ),
 	array( 'name' => 'Grand Hyatt', 'file' => '02_Grand_Hyatt 1.png' ),
@@ -35,13 +57,13 @@ $hospitality_logos = array(
 );
 ?>
 <section class="gn-home-hospitality gn-hospitality" data-section="hospitality-showcase" aria-labelledby="hospitality-heading">
-	<div class="gn-hospitality__visual"><img src="<?php echo esc_url( goodnite_asset_url( 'images/goodnite-hospitality-suite-v2.png' ) ); ?>" alt="Contemporary luxury hotel suite with a prominent king-size bed and layered ivory bedding" width="1400" height="1600" loading="lazy" decoding="async"></div>
+	<div class="gn-hospitality__visual"><img src="<?php echo esc_url( $hosp_img_url ); ?>" alt="Contemporary luxury hotel suite with a prominent king-size bed and layered ivory bedding" width="1400" height="1600" loading="lazy" decoding="async"></div>
 	<div class="gn-hospitality__content reveal">
-		<h2 id="hospitality-heading">Exceptional Sleep for Exceptional Stays.</h2>
-		<p class="gn-hospitality__description">For hotels, resorts and hospitality destinations, Goodnite brings decades of international mattress expertise to the guest experience, delivering thoughtfully engineered comfort where expectations are high.</p>
-		<a class="button-link primary gn-hospitality__cta" href="<?php echo esc_url( goodnite_url( '/hospitality' ) ); ?>">Explore Hospitality Solutions <span aria-hidden="true">→</span></a>
+		<h2 id="hospitality-heading"><?php echo esc_html( $hosp_title ); ?></h2>
+		<p class="gn-hospitality__description"><?php echo esc_html( $hosp_desc ); ?></p>
+		<a class="button-link primary gn-hospitality__cta" href="<?php echo esc_url( goodnite_url( $hosp_cta_url ) ); ?>"><?php echo esc_html( $hosp_cta_lbl ); ?> <span aria-hidden="true">→</span></a>
 		<div class="gn-hospitality__clients">
-			<div class="gn-hospitality__clients-label">OUR HOSPITALITY CLIENT PORTFOLIO</div>
+			<div class="gn-hospitality__clients-label"><?php echo esc_html( $hosp_client_lbl ); ?></div>
 			<div class="gn-hospitality__marquee" data-hospitality-marquee tabindex="0" aria-label="<?php esc_attr_e( 'Hospitality client portfolio logos', 'goodnite' ); ?>">
 				<div class="gn-hospitality__marquee-track">
 					<div class="gn-hospitality__logo-set">

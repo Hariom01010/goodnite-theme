@@ -11,15 +11,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$store_url = goodnite_url( goodnite_mod( 'goodnite_store_url', '/stores' ) );
+$post_id      = get_queried_object_id();
+$store_title  = function_exists( 'get_field' ) ? (string) get_field( 'store_title', $post_id ) : '';
+$store_title  = $store_title ?: goodnite_mod( 'goodnite_store_title', 'Feel the Difference.' );
+
+$store_body   = function_exists( 'get_field' ) ? (string) get_field( 'store_body', $post_id ) : '';
+$store_body   = $store_body ?: goodnite_mod( 'goodnite_store_body', 'Find a Goodnite showroom or authorized retail partner near you.' );
+
+$store_button = function_exists( 'get_field' ) ? (string) get_field( 'store_button', $post_id ) : '';
+$store_button = $store_button ?: goodnite_mod( 'goodnite_store_button', 'Find Dealers' );
+
+$store_url    = goodnite_url( goodnite_mod( 'goodnite_store_url', '/stores' ) );
 ?>
 <section class="gn-home-store-locator section locator" data-section="store-locator" aria-labelledby="locator-heading"><div class="container-shell locator-grid">
 	<div class="reveal locator-copy">
 		<div class="locator-search-state" data-store-search-state>
-		<h2 id="locator-heading"><?php echo esc_html( goodnite_mod( 'goodnite_store_title', 'Feel the Difference.' ) ); ?></h2>
-		<p><?php echo esc_html( goodnite_mod( 'goodnite_store_body', 'Find a Goodnite showroom or authorized retail partner near you.' ) ); ?></p>
+		<h2 id="locator-heading"><?php echo esc_html( $store_title ); ?></h2>
+		<p><?php echo esc_html( $store_body ); ?></p>
 		<form action="<?php echo esc_url( $store_url ); ?>" method="get" novalidate data-store-form>
-			<div class="search-field"><?php echo goodnite_icon( 'search', 19 ); ?><input id="store-pincode" name="q" inputmode="numeric" maxlength="6" autocomplete="postal-code" placeholder="Enter your 6-digit pincode." aria-describedby="store-help store-error"><button type="submit"><?php echo esc_html( goodnite_mod( 'goodnite_store_button', 'Find Dealers' ) ); ?></button></div>
+			<div class="search-field"><?php echo goodnite_icon( 'search', 19 ); ?><input id="store-pincode" name="q" inputmode="numeric" maxlength="6" autocomplete="postal-code" placeholder="Enter your 6-digit pincode." aria-describedby="store-help store-error"><button type="submit"><?php echo esc_html( $store_button ); ?></button></div>
 			<small id="store-help">Enter your 6-digit pincode.</small>
 			<span id="store-error" class="form-error" role="alert" hidden>Enter a valid 6-digit pincode.</span>
 		</form>
