@@ -70,69 +70,6 @@ if ( empty( $legacy_image_url ) ) {
 	$legacy_image_url = goodnite_asset_url( 'images/goodnite-brand-craftsmanship.webp' );
 	$legacy_image_alt = 'Close detail of quilted mattress upholstery and tailored side stitching';
 }
-
-$post_id = get_queried_object_id();
-
-// 1. Resolve Dynamic Content from SCF (with clean fallbacks).
-$legacy_title = '';
-$legacy_body  = '';
-$legacy_image_url = '';
-$legacy_image_alt = '';
-
-if ( function_exists( 'get_field' ) ) {
-	$legacy_title = (string) get_field( 'legacy_title', $post_id );
-	$legacy_body  = (string) get_field( 'legacy_body', $post_id );
-
-	$img_field = get_field( 'legacy_image', $post_id );
-	if ( ! empty( $img_field ) ) {
-		if ( is_array( $img_field ) && ! empty( $img_field['url'] ) ) {
-			$legacy_image_url = (string) $img_field['url'];
-			$legacy_image_alt = (string) ( $img_field['alt'] ?? '' );
-		} elseif ( is_numeric( $img_field ) ) {
-			$legacy_image_url = (string) wp_get_attachment_image_url( (int) $img_field, 'full' );
-			$legacy_image_alt = (string) get_post_meta( (int) $img_field, '_wp_attachment_image_alt', true );
-		} elseif ( is_string( $img_field ) ) {
-			$legacy_image_url = (string) $img_field;
-		}
-	}
-}
-
-// Fallbacks.
-if ( empty( $legacy_title ) ) {
-	$legacy_title = (string) goodnite_mod( 'goodnite_legacy_title', 'A Legacy of Better Sleep, Since 1989' );
-}
-
-if ( empty( $legacy_body ) ) {
-	$default_body = "For decades, Goodnite has brought together sleep expertise, material innovation and manufacturing craftsmanship to create comfort for people around the world.\n\nToday, that global heritage begins a new chapter in India bringing thoughtfully engineered sleep solutions to a market that deserves more than one definition of perfect sleep.";
-	$legacy_body  = (string) goodnite_mod( 'goodnite_legacy_body', $default_body );
-}
-
-$cta_label = function_exists( 'get_field' ) && get_field( 'legacy_cta_label', $post_id )
-	? (string) get_field( 'legacy_cta_label', $post_id )
-	: (string) goodnite_mod( 'goodnite_legacy_cta_label', 'Discover Our Story' );
-
-$cta_url = function_exists( 'get_field' ) && get_field( 'legacy_cta_url', $post_id )
-	? (string) get_field( 'legacy_cta_url', $post_id )
-	: (string) goodnite_mod( 'goodnite_legacy_cta_url', '/our-story' );
-
-// Metrics.
-$m1_val   = function_exists( 'get_field' ) && get_field( 'legacy_m1_val', $post_id ) ? (string) get_field( 'legacy_m1_val', $post_id ) : '1500';
-$m1_label = function_exists( 'get_field' ) && get_field( 'legacy_m1_label', $post_id ) ? (string) get_field( 'legacy_m1_label', $post_id ) : (string) goodnite_mod( 'goodnite_metric_1_label', 'Mattresses per day manufacturing capacity' );
-
-$m2_val   = function_exists( 'get_field' ) && get_field( 'legacy_m2_val', $post_id ) ? (string) get_field( 'legacy_m2_val', $post_id ) : (string) goodnite_mod( 'goodnite_metric_2_val', '5 M+' );
-$m2_label = function_exists( 'get_field' ) && get_field( 'legacy_m2_label', $post_id ) ? (string) get_field( 'legacy_m2_label', $post_id ) : (string) goodnite_mod( 'goodnite_metric_2_label', 'Mattresses Sold Worldwide' );
-
-$m3_val   = function_exists( 'get_field' ) && get_field( 'legacy_m3_val', $post_id ) ? (string) get_field( 'legacy_m3_val', $post_id ) : (string) goodnite_mod( 'goodnite_metric_3_val', '15+' );
-$m3_label = function_exists( 'get_field' ) && get_field( 'legacy_m3_label', $post_id ) ? (string) get_field( 'legacy_m3_label', $post_id ) : (string) goodnite_mod( 'goodnite_metric_3_label', 'Countries' );
-
-// Clean numeric counter target.
-$m1_numeric = preg_replace( '/[^0-9]/', '', $m1_val );
-$m1_numeric = ! empty( $m1_numeric ) ? $m1_numeric : '1500';
-
-if ( empty( $legacy_image_url ) ) {
-	$legacy_image_url = goodnite_asset_url( 'images/goodnite-brand-craftsmanship.webp' );
-	$legacy_image_alt = 'Close detail of quilted mattress upholstery and tailored side stitching';
-}
 ?>
 <section class="section legacy" aria-labelledby="legacy-heading" data-section="legacy">
 	<div class="container-shell legacy-grid">

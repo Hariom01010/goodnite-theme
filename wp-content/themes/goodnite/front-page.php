@@ -17,6 +17,7 @@ get_header();
 	<?php
 	get_template_part( 'template-parts/home/section-hero' );
 	get_template_part( 'template-parts/home/section-legacy' );
+	get_template_part( 'template-parts/home/section-usp-strip' );
 	get_template_part( 'template-parts/home/section-collections' );
 	get_template_part( 'template-parts/home/section-finder' );
 	get_template_part( 'template-parts/home/section-technology' );
