@@ -1,0 +1,85 @@
+{
+    "key": "group_goodnite_collections_section",
+    "title": "Homepage - Collections Section",
+    "fields": [
+        {
+            "key": "field_collections_title",
+            "label": "Section Title",
+            "name": "collections_title",
+            "type": "text",
+            "default_value": "Three Collections. A World of Comfort."
+        },
+        {
+            "key": "field_collections_body",
+            "label": "Section Description",
+            "name": "collections_body",
+            "type": "textarea",
+            "rows": 3,
+            "default_value": "From essential engineered comfort to advanced sleep technology and our most sophisticated constructions."
+        },
+        {
+            "key": "field_collections_items",
+            "label": "Collections Cards (Repeater)",
+            "name": "collections_items",
+            "type": "repeater",
+            "button_label": "Add Collection Card",
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_collection_item_title",
+                    "label": "Collection Title",
+                    "name": "title",
+                    "type": "text",
+                    "default_value": "Dreamer Series"
+                },
+                {
+                    "key": "field_collection_item_subtitle",
+                    "label": "Subtitle / Tagline",
+                    "name": "subtitle",
+                    "type": "text",
+                    "default_value": "Essential Engineered Comfort"
+                },
+                {
+                    "key": "field_collection_item_desc",
+                    "label": "Description",
+                    "name": "description",
+                    "type": "textarea",
+                    "rows": 2
+                },
+                {
+                    "key": "field_collection_item_img",
+                    "label": "Card Image",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "array"
+                },
+                {
+                    "key": "field_collection_item_alt",
+                    "label": "Image Alt Text",
+                    "name": "alt_text",
+                    "type": "text"
+                },
+                {
+                    "key": "field_collection_item_url",
+                    "label": "Target URL",
+                    "name": "url",
+                    "type": "text",
+                    "default_value": "/mattresses/dreamer"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 2,
+    "position": "normal",
+    "style": "default",
+    "active": true
+}
