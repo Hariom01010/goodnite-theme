@@ -56,6 +56,18 @@ function goodnite_enqueue_assets(): void {
 				(string) filemtime( $home_css )
 			);
 		}
+
+		$home_js = get_template_directory() . '/assets/js/home.js';
+		if ( file_exists( $home_js ) ) {
+			wp_enqueue_script(
+				'goodnite-home',
+				get_template_directory_uri() . '/assets/js/home.js',
+				array( 'goodnite-theme' ),
+				(string) filemtime( $home_js ),
+				true
+			);
+			wp_script_add_data( 'goodnite-home', 'strategy', 'defer' );
+		}
 	}
 
 	// 3. Modular Product Page Sections (Enqueued conditionally only on PDP & product preview).
