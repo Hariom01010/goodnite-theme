@@ -3,48 +3,76 @@
     "title": "Homepage - Hospitality Section",
     "fields": [
         {
-            "key": "field_hospitality_eyebrow",
-            "label": "Eyebrow Text",
-            "name": "hospitality_eyebrow",
-            "type": "text",
-            "default_value": "GOODNITE HOSPITALITY"
-        },
-        {
-            "key": "field_hospitality_title",
-            "label": "Section Heading",
-            "name": "hospitality_title",
-            "type": "text",
-            "default_value": "Exceptional Sleep for Exceptional Stays."
-        },
-        {
-            "key": "field_hospitality_body",
-            "label": "Description Text",
-            "name": "hospitality_body",
-            "type": "textarea",
-            "rows": 4,
-            "default_value": "For hotels, resorts and hospitality destinations, Goodnite brings decades of international mattress expertise to the guest experience, delivering thoughtfully engineered comfort where expectations are high."
-        },
-        {
             "key": "field_hospitality_image",
             "label": "Showcase Image",
             "name": "hospitality_image",
             "type": "image",
             "return_format": "array",
-            "preview_size": "medium"
+            "preview_size": "medium",
+            "instructions": "Visual suite image on the left."
+        },
+        {
+            "key": "field_hospitality_title",
+            "label": "Section Title",
+            "name": "hospitality_title",
+            "type": "text",
+            "default_value": "Exceptional Sleep for Exceptional Stays."
+        },
+        {
+            "key": "field_hospitality_description",
+            "label": "Description",
+            "name": "hospitality_description",
+            "type": "textarea",
+            "rows": 4,
+            "default_value": "For hotels, resorts and hospitality destinations, Goodnite brings decades of international mattress expertise to the guest experience, delivering thoughtfully engineered comfort where expectations are high."
         },
         {
             "key": "field_hospitality_cta_label",
-            "label": "CTA Button Label",
+            "label": "CTA Text",
             "name": "hospitality_cta_label",
             "type": "text",
             "default_value": "Explore Hospitality Solutions"
         },
         {
             "key": "field_hospitality_cta_url",
-            "label": "CTA Button URL",
+            "label": "CTA URL",
             "name": "hospitality_cta_url",
             "type": "text",
             "default_value": "/hospitality"
+        },
+        {
+            "key": "field_hospitality_clients_label",
+            "label": "Client Portfolio Label",
+            "name": "hospitality_clients_label",
+            "type": "text",
+            "default_value": "OUR HOSPITALITY CLIENT PORTFOLIO"
+        },
+        {
+            "key": "field_hospitality_logos",
+            "label": "Hospitality Client Logos",
+            "name": "hospitality_logos",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add Client Logo",
+            "instructions": "Upload partner hotel logos for the infinite marquee.",
+            "sub_fields": [
+                {
+                    "key": "field_logo_image",
+                    "label": "Logo Image",
+                    "name": "logo_image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all"
+                },
+                {
+                    "key": "field_logo_client_name",
+                    "label": "Client Name",
+                    "name": "client_name",
+                    "type": "text",
+                    "placeholder": "Taj"
+                }
+            ]
         }
     ],
     "location": [
@@ -70,4 +98,3 @@
     "instruction_placement": "label",
     "active": true
 }
-

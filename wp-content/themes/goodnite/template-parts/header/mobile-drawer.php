@@ -1,6 +1,6 @@
 <?php
 /**
- * Accessible mobile navigation drawer.
+ * Accessible mobile navigation drawer matching Goodnite Website/Homepage.
  *
  * @package Goodnite
  */
@@ -23,9 +23,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<summary><?php esc_html_e( 'Mattresses', 'goodnite' ); ?> <?php echo goodnite_icon( 'chevron-down', 16 ); ?></summary>
 				<div class="mobile-subnav">
 					<a href="<?php echo esc_url( goodnite_url( '/mattresses' ) ); ?>"><?php esc_html_e( 'All Mattresses', 'goodnite' ); ?></a>
-					<a href="<?php echo esc_url( goodnite_url( '/mattresses/dreamer' ) ); ?>"><?php esc_html_e( 'Dreamer Series', 'goodnite' ); ?></a>
-					<a href="<?php echo esc_url( goodnite_url( '/mattresses/love' ) ); ?>"><?php esc_html_e( 'Love Series', 'goodnite' ); ?></a>
-					<a href="<?php echo esc_url( goodnite_url( '/mattresses/signature' ) ); ?>"><?php esc_html_e( 'Signature Series', 'goodnite' ); ?></a>
+					<a class="mobile-collection-link" href="<?php echo esc_url( goodnite_url( '/mattresses/dreamer' ) ); ?>">
+						<img class="mobile-collection-icon" src="<?php echo esc_url( goodnite_asset_url( 'Megamenu Icons/Dreamer Series.png' ) ); ?>" alt="" width="40" height="40">
+						<span><?php esc_html_e( 'Dreamer Series', 'goodnite' ); ?></span>
+					</a>
+					<a class="mobile-collection-link" href="<?php echo esc_url( goodnite_url( '/mattresses/love' ) ); ?>">
+						<img class="mobile-collection-icon" src="<?php echo esc_url( goodnite_asset_url( 'Megamenu Icons/Lover Series.png' ) ); ?>" alt="" width="40" height="40">
+						<span><?php esc_html_e( 'Love Series', 'goodnite' ); ?></span>
+					</a>
+					<a class="mobile-collection-link" href="<?php echo esc_url( goodnite_url( '/mattresses/signature' ) ); ?>">
+						<img class="mobile-collection-icon" src="<?php echo esc_url( goodnite_asset_url( 'Megamenu Icons/Signature Series.png' ) ); ?>" alt="" width="40" height="40">
+						<span><?php esc_html_e( 'Signature Series', 'goodnite' ); ?></span>
+					</a>
 				</div>
 			</details>
 
@@ -43,9 +52,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			} else {
 				goodnite_fallback_menu(
 					array(
-						'Sleep Technology' => '/sleep-technology',
-						'Our Story'        => '/our-story',
-						'Hospitality'      => '/hospitality',
+						'Our Story'   => '/our-story',
+						'Hospitality' => '/hospitality',
 					),
 					'mobile-primary-menu'
 				);

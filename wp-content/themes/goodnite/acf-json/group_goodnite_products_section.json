@@ -1,17 +1,17 @@
 {
     "key": "group_goodnite_products_section",
-    "title": "Homepage - Products Carousel Section",
+    "title": "Homepage - Products Section",
     "fields": [
         {
             "key": "field_products_title",
-            "label": "Section Heading",
+            "label": "Section Title",
             "name": "products_title",
             "type": "text",
             "default_value": "Comfort Worth Discovering."
         },
         {
             "key": "field_products_cta_label",
-            "label": "CTA Link Text",
+            "label": "CTA Text",
             "name": "products_cta_label",
             "type": "text",
             "default_value": "Shop All Mattresses"
@@ -24,14 +24,25 @@
             "default_value": "/mattresses"
         },
         {
-            "key": "field_products_selection",
+            "key": "field_products_repeater",
             "label": "Featured WooCommerce Products",
-            "name": "products_selection",
-            "type": "post_object",
-            "post_type": ["product"],
-            "multiple": 1,
-            "return_format": "id",
-            "instructions": "Select specific WooCommerce products to showcase. If empty, all published WooCommerce products or default dummy mattresses will be displayed."
+            "name": "products_repeater",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add WooCommerce Product",
+            "instructions": "Select which WooCommerce products appear in the carousel. The cards will display the selected products in this exact order.",
+            "sub_fields": [
+                {
+                    "key": "field_prod_item",
+                    "label": "Select Product",
+                    "name": "product",
+                    "type": "post_object",
+                    "post_type": ["product"],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "id"
+                }
+            ]
         }
     ],
     "location": [
@@ -57,4 +68,3 @@
     "instruction_placement": "label",
     "active": true
 }
-

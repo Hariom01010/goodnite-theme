@@ -1,7 +1,6 @@
 <?php
 /**
- * Technology pillars section with dynamic SCF support.
- * Matches Goodnite Website/Homepage with 3 full-bleed visual cards and indicators.
+ * Recreated from Goodnite Website/Homepage/templates/home/technology-pillars.php
  *
  * @package Goodnite
  */
@@ -14,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $post_id = get_queried_object_id();
 
+// Section Title & CTA (with SCF support if set, otherwise exact prototype defaults).
 $tech_title = function_exists( 'get_field' ) && get_field( 'tech_title', $post_id )
 	? (string) get_field( 'tech_title', $post_id )
 	: 'Inside Goodnite Technology.';
@@ -26,66 +26,66 @@ $tech_cta_url = function_exists( 'get_field' ) && get_field( 'tech_cta_url', $po
 	? (string) get_field( 'tech_cta_url', $post_id )
 	: '/sleep-technology';
 
-$technology_pillars = array();
+// Exact pillars data from Goodnite Website/Homepage/templates/home/technology-pillars.php.
+$technology_pillars = array(
+	array(
+		'title'       => 'Our Fabric',
+		'description' => 'The sleep surface is where comfort begins. Goodnite’s fabric technologies are designed around cooling, softness, protection and everyday sleep comfort.',
+		'microcopy'   => 'Includes anti-static, cooling, protective and comfort-focused fabric technologies.',
+		'image'       => 'goodnite-technology-fabric-v2.png',
+		'alt'         => 'Close-up of premium quilted mattress fabric',
+		'items'       => array( 'StatFree®', 'IceSleep™', 'IcyYarn™', 'MosFree®', 'Anti-Bed Bug', 'Fire Retardant', 'Knitted Fabric', 'Damask Fabric' ),
+	),
+	array(
+		'title'       => 'Our Coil System',
+		'description' => 'Beneath the surface, Goodnite’s coil systems are engineered to deliver different kinds of support, responsiveness and movement control.',
+		'microcopy'   => 'From traditional spring support to independently responsive pocketed systems.',
+		'image'       => 'goodnite-technology-coil-v2.png',
+		'alt'         => 'Premium mattress pocket coil system construction',
+		'items'       => array( 'Dual Layer Pocketed Coil System', 'Double Posture Coil® (DPC®)', 'Pocketed Spring', 'Posture Coil' ),
+	),
+	array(
+		'title'       => 'Our Material',
+		'description' => 'Goodnite combines carefully selected comfort materials to create different sleep sensations, from contouring support to naturally responsive comfort.',
+		'microcopy'   => 'Materials chosen for comfort, breathability, responsiveness and support.',
+		'image'       => 'goodnite-technology-material-v2.png',
+		'alt'         => 'Layered mattress comfort materials in neutral tones',
+		'items'       => array( 'Natural Latex', 'Memory Foam', 'Coconut Fibre', 'Palm Oil Foam' ),
+	),
+);
 
-// 1. Resolve from SCF repeater if populated (supports tech_cards and legacy tech_pillars).
+// If custom cards are provided via SCF, override them.
 if ( function_exists( 'get_field' ) ) {
-	$scf_cards = get_field( 'tech_cards', $post_id ) ?: get_field( 'tech_pillars', $post_id );
+	$scf_cards = get_field( 'tech_cards', $post_id );
 	if ( ! empty( $scf_cards ) && is_array( $scf_cards ) ) {
-		foreach ( $scf_cards as $p ) {
-			if ( empty( $p['title'] ) ) {
+		$custom_pillars = array();
+		foreach ( $scf_cards as $c ) {
+			if ( empty( $c['title'] ) ) {
 				continue;
 			}
-
-			$img_url = '';
-			if ( ! empty( $p['image'] ) ) {
-				if ( is_array( $p['image'] ) && ! empty( $p['image']['url'] ) ) {
-					$img_url = (string) $p['image']['url'];
-				} elseif ( is_numeric( $p['image'] ) ) {
-					$img_url = (string) wp_get_attachment_image_url( (int) $p['image'], 'full' );
-				} elseif ( is_string( $p['image'] ) ) {
-					$img_url = (string) $p['image'];
+			$img_src = '';
+			if ( ! empty( $c['image'] ) ) {
+				if ( is_array( $c['image'] ) && ! empty( $c['image']['url'] ) ) {
+					$img_src = (string) $c['image']['url'];
+				} elseif ( is_numeric( $c['image'] ) ) {
+					$img_src = (string) wp_get_attachment_image_url( (int) $c['image'], 'full' );
+				} elseif ( is_string( $c['image'] ) ) {
+					$img_src = (string) $c['image'];
 				}
 			}
-
-			$subtitle = ! empty( $p['subtitle'] ) ? (string) $p['subtitle'] : ( ! empty( $p['microcopy'] ) ? (string) $p['microcopy'] : '' );
-
-			$technology_pillars[] = array(
-				'title'       => (string) $p['title'],
-				'subtitle'    => $subtitle,
-				'description' => (string) ( $p['description'] ?? '' ),
-				'image_url'   => $img_url,
-				'alt'         => (string) ( $p['alt_text'] ?? $p['title'] ),
+			$custom_pillars[] = array(
+				'title'       => (string) $c['title'],
+				'description' => (string) ( $c['description'] ?? '' ),
+				'microcopy'   => (string) ( $c['subtitle'] ?? '' ),
+				'image'       => '',
+				'image_url'   => $img_src,
+				'alt'         => (string) $c['title'],
 			);
 		}
+		if ( ! empty( $custom_pillars ) ) {
+			$technology_pillars = $custom_pillars;
+		}
 	}
-}
-
-// 2. Fallback 3 pillars matching Goodnite Website/Homepage.
-if ( empty( $technology_pillars ) ) {
-	$technology_pillars = array(
-		array(
-			'title'       => 'Our Fabric',
-			'subtitle'    => 'Includes anti-static, cooling, protective and comfort-focused fabric technologies.',
-			'description' => 'The sleep surface is where comfort begins. Goodnite’s fabric technologies are designed around cooling, softness, protection and everyday sleep comfort.',
-			'image_url'   => goodnite_asset_url( 'images/goodnite-technology-fabric-v2.png' ),
-			'alt'         => 'Close-up of premium quilted mattress fabric',
-		),
-		array(
-			'title'       => 'Our Coil System',
-			'subtitle'    => 'From traditional spring support to independently responsive pocketed systems.',
-			'description' => 'Beneath the surface, Goodnite’s coil systems are engineered to deliver different kinds of support, responsiveness and movement control.',
-			'image_url'   => goodnite_asset_url( 'images/goodnite-technology-coil-v2.png' ),
-			'alt'         => 'Premium mattress pocket coil system construction',
-		),
-		array(
-			'title'       => 'Our Material',
-			'subtitle'    => 'Materials chosen for comfort, breathability, responsiveness and support.',
-			'description' => 'Goodnite combines carefully selected comfort materials to create different sleep sensations, from contouring support to naturally responsive comfort.',
-			'image_url'   => goodnite_asset_url( 'images/goodnite-technology-material-v2.png' ),
-			'alt'         => 'Layered mattress comfort materials in neutral tones',
-		),
-	);
 }
 ?>
 <section class="gn-home-technology section gn-tech-pillars" data-section="technology-pillars" aria-labelledby="technology-heading">
@@ -99,16 +99,17 @@ if ( empty( $technology_pillars ) ) {
 
 		<div class="gn-tech-pillars__grid" data-tech-grid>
 			<?php foreach ( $technology_pillars as $pillar ) : ?>
+				<?php
+				$img_url = ! empty( $pillar['image_url'] ) ? $pillar['image_url'] : goodnite_asset_url( 'images/' . $pillar['image'] );
+				?>
 				<article class="gn-tech-pillars__card reveal">
 					<div class="gn-tech-pillars__image">
-						<img src="<?php echo esc_url( $pillar['image_url'] ); ?>" alt="<?php echo esc_attr( $pillar['alt'] ); ?>" loading="lazy" decoding="async" width="1600" height="760">
+						<img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $pillar['alt'] ); ?>" loading="lazy" decoding="async" width="1600" height="760">
 					</div>
 					<div class="gn-tech-pillars__content">
 						<h3><?php echo esc_html( $pillar['title'] ); ?></h3>
 						<p><?php echo esc_html( $pillar['description'] ); ?></p>
-						<?php if ( ! empty( $pillar['subtitle'] ) ) : ?>
-							<small><?php echo esc_html( $pillar['subtitle'] ); ?></small>
-						<?php endif; ?>
+						<small><?php echo esc_html( $pillar['microcopy'] ); ?></small>
 					</div>
 				</article>
 			<?php endforeach; ?>

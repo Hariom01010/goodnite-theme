@@ -28,9 +28,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	} else {
 		goodnite_fallback_menu(
 			array(
-				'Sleep Technology' => '/sleep-technology',
-				'Our Story'        => '/our-story',
-				'Hospitality'      => '/hospitality',
+				'Our Story'   => '/our-story',
+				'Hospitality' => '/hospitality',
 			),
 			'primary-menu'
 		);
