@@ -1,4 +1,7 @@
-    - export DEPLOY_ROOT="$HOME/public_html"
+---
+deployment:
+  tasks:
+    - export DEPLOY_ROOT="/home/nitegoodin/public_html"
     - /bin/mkdir -p $DEPLOY_ROOT/wp-content/themes
     - /bin/mkdir -p $DEPLOY_ROOT/wp-content/plugins
     - /bin/cp -R wp-content/* $DEPLOY_ROOT/wp-content/
