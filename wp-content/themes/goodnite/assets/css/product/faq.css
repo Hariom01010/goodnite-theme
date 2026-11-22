@@ -1,0 +1,62 @@
+/**
+ * Product: FAQ Component
+ *
+ * @package Goodnite
+ */
+
+.gn-pdp-faq {
+  padding: 92px 0;
+  background: #fff;
+}
+
+.gn-pdp-faq .gn-pdp-section__head h2 {
+  font-size: var(--type-h2);
+  font-weight: 400;
+  margin-bottom: 28px;
+}
+
+.gn-pdp-faq__list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.gn-pdp-faq__item {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.gn-pdp-faq__item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0;
+  font-size: var(--type-body-large);
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  list-style: none;
+}
+
+.gn-pdp-faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.gn-pdp-faq__item summary span {
+  font-size: 22px;
+  color: var(--brand-red);
+  line-height: 1;
+}
+
+.gn-pdp-faq__item p {
+  padding-bottom: 22px;
+  font-size: var(--type-body);
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 1023px) {
+  .gn-pdp-faq {
+    padding: 68px 0;
+  }
+}

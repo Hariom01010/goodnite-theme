@@ -1,0 +1,194 @@
+{
+    "key": "group_goodnite_collection",
+    "title": "Collection Page & Category Settings",
+    "fields": [
+        {
+            "key": "field_col_tab_hero",
+            "label": "Hero",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_col_hero_title",
+            "label": "Hero Title",
+            "name": "collection_hero_title",
+            "type": "text",
+            "instructions": "Collection page main heading",
+            "default_value": "The Goodnite Collection",
+            "placeholder": "The Goodnite Collection"
+        },
+        {
+            "key": "field_col_hero_desc",
+            "label": "Hero Description",
+            "name": "collection_hero_description",
+            "type": "textarea",
+            "instructions": "Hero descriptive copy",
+            "default_value": "Ten thoughtfully engineered mattresses across three distinct collections—made for cooler nights, deeper support and comfort that feels personal.",
+            "rows": 3
+        },
+        {
+            "key": "field_col_hero_img",
+            "label": "Hero Desktop Image",
+            "name": "collection_hero_image",
+            "type": "image",
+            "instructions": "Desktop banner image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_col_hero_mob_img",
+            "label": "Hero Mobile Image",
+            "name": "collection_hero_mobile_image",
+            "type": "image",
+            "instructions": "Mobile banner image (max-width: 767px)",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_col_hero_alt",
+            "label": "Hero Image Alt Text",
+            "name": "collection_hero_alt",
+            "type": "text",
+            "instructions": "Accessibility alt text",
+            "default_value": "A calm premium bedroom featuring a beautifully dressed mattress"
+        },
+        {
+            "key": "field_col_tab_banners",
+            "label": "Banners",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_col_banners",
+            "label": "Editorial Banners",
+            "name": "collection_banners",
+            "type": "repeater",
+            "instructions": "Curated editorial cards inserted into the product grid",
+            "layout": "block",
+            "button_label": "Add Editorial Banner",
+            "sub_fields": [
+                {
+                    "key": "field_col_banner_id",
+                    "label": "Banner ID",
+                    "name": "banner_id",
+                    "type": "text",
+                    "instructions": "Unique identifier (e.g. cooler-materials-1)",
+                    "default_value": "cooler-materials-1"
+                },
+                {
+                    "key": "field_col_banner_title",
+                    "label": "Banner Title",
+                    "name": "banner_title",
+                    "type": "text",
+                    "instructions": "Card headline",
+                    "default_value": "Breathable materials for cooler sleep."
+                },
+                {
+                    "key": "field_col_banner_img",
+                    "label": "Banner Image",
+                    "name": "banner_image",
+                    "type": "image",
+                    "instructions": "Portrait banner image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all"
+                },
+                {
+                    "key": "field_col_banner_alt",
+                    "label": "Banner Alt Text",
+                    "name": "banner_alt",
+                    "type": "text",
+                    "instructions": "Alt text for accessibility",
+                    "default_value": "Layered breathable mattress materials in a warm neutral studio"
+                },
+                {
+                    "key": "field_col_banner_pos_desk",
+                    "label": "Insert After (Desktop)",
+                    "name": "after_desktop",
+                    "type": "number",
+                    "instructions": "Insert after N products on desktop (4-col grid)",
+                    "default_value": 3,
+                    "min": 1,
+                    "max": 50,
+                    "step": 1
+                },
+                {
+                    "key": "field_col_banner_pos_tab",
+                    "label": "Insert After (Tablet)",
+                    "name": "after_tablet",
+                    "type": "number",
+                    "instructions": "Insert after N products on tablet (3-col grid)",
+                    "default_value": 2,
+                    "min": 1,
+                    "max": 50,
+                    "step": 1
+                },
+                {
+                    "key": "field_col_banner_pos_mob",
+                    "label": "Insert After (Mobile)",
+                    "name": "after_mobile",
+                    "type": "number",
+                    "instructions": "Insert after N products on mobile (1-col grid)",
+                    "default_value": 3,
+                    "min": 1,
+                    "max": 50,
+                    "step": 1
+                }
+            ]
+        },
+        {
+            "key": "field_col_tab_settings",
+            "label": "Settings",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_col_page_size",
+            "label": "Catalog Page Size",
+            "name": "collection_page_size",
+            "type": "number",
+            "instructions": "Number of products to load per batch",
+            "default_value": 16,
+            "min": 1,
+            "max": 100,
+            "step": 1
+        },
+        {
+            "key": "field_col_catalog_note",
+            "label": "Catalog Disclaimer Note",
+            "name": "collection_catalog_note",
+            "type": "text",
+            "instructions": "Disclaimer note beneath grid",
+            "default_value": "Product imagery and pricing are provisional pending catalogue verification."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-collection.php"
+            }
+        ],
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "product_cat"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "normal",
+    "style": "default",
+    "active": true
+}
+

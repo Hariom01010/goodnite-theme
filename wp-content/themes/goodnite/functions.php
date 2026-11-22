@@ -20,4 +20,6 @@ require_once get_template_directory() . '/inc/template-tags.php';
 require_once get_template_directory() . '/inc/customizer.php';
 require_once get_template_directory() . '/inc/search-index.php';
 require_once get_template_directory() . '/inc/collection-data.php';
+require_once get_template_directory() . '/inc/pdp.php';
+require_once get_template_directory() . '/inc/contact-form.php';
 require_once get_template_directory() . '/inc/routing.php';

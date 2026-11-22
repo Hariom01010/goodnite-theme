@@ -1,0 +1,383 @@
+{
+    "key": "group_goodnite_product_pdp",
+    "title": "Goodnite Mattress PDP Configuration",
+    "fields": [
+        {
+            "key": "field_pdp_tab_overview",
+            "label": "Overview",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_pdp_tagline",
+            "label": "Product Tagline",
+            "name": "product_tagline",
+            "type": "text",
+            "instructions": "Short descriptor below product name",
+            "default_value": "Everyday comfort, thoughtfully engineered."
+        },
+        {
+            "key": "field_pdp_comfort_pos",
+            "label": "Comfort Feel Position",
+            "name": "comfort_feel_position",
+            "type": "select",
+            "instructions": "Active index on the 5-point comfort scale (0 to 4)",
+            "choices": {
+                "0": "Extra Firm",
+                "1": "Firm",
+                "2": "Medium",
+                "3": "Plush",
+                "4": "Extra Plush"
+            },
+            "default_value": "3",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 1,
+            "return_format": "value"
+        },
+        {
+            "key": "field_pdp_comfort_notes",
+            "label": "Comfort Feel Notes",
+            "name": "comfort_feel_notes",
+            "type": "text",
+            "instructions": "Optional custom notes about comfort feel"
+        },
+        {
+            "key": "field_pdp_tab_features",
+            "label": "Feature Pills",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_pdp_feature_pills",
+            "label": "Feature Pills",
+            "name": "pdp_feature_pills",
+            "type": "repeater",
+            "instructions": "Key feature pills displayed in header with 24x24 icons",
+            "layout": "table",
+            "button_label": "Add Feature Pill",
+            "sub_fields": [
+                {
+                    "key": "field_pdp_pill_preset",
+                    "label": "Preset Icon",
+                    "name": "pill_preset",
+                    "type": "select",
+                    "instructions": "Select a built-in icon preset or choose Custom",
+                    "choices": {
+                        "core-support": "Core Support",
+                        "natural-freshness": "Natural Freshness",
+                        "quilted-finish": "Quilted Finish",
+                        "responsive-comfort": "Responsive Comfort",
+                        "custom": "Custom Icon"
+                    },
+                    "default_value": "core-support"
+                },
+                {
+                    "key": "field_pdp_pill_icon",
+                    "label": "Custom Icon",
+                    "name": "pill_icon",
+                    "type": "image",
+                    "instructions": "24x24 icon image (used when Preset Icon is Custom)",
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all"
+                },
+                {
+                    "key": "field_pdp_pill_label",
+                    "label": "Feature Label",
+                    "name": "pill_label",
+                    "type": "text",
+                    "instructions": "Label displayed next to the icon",
+                    "default_value": "Core Support"
+                }
+            ]
+        },
+        {
+            "key": "field_pdp_tab_const",
+            "label": "Construction",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_pdp_const_title",
+            "label": "Construction Section Title",
+            "name": "construction_title",
+            "type": "text",
+            "instructions": "Section title",
+            "default_value": "What's Inside the Mattress?"
+        },
+        {
+            "key": "field_pdp_const_img",
+            "label": "Construction Diagram Image",
+            "name": "construction_image",
+            "type": "image",
+            "instructions": "Exploded view layer diagram",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_pdp_const_layers",
+            "label": "Construction Layers",
+            "name": "construction_layers",
+            "type": "repeater",
+            "instructions": "Numbered mattress layers",
+            "layout": "row",
+            "button_label": "Add Layer",
+            "sub_fields": [
+                {
+                    "key": "field_pdp_layer_step",
+                    "label": "Layer Number / Step",
+                    "name": "layer_step",
+                    "type": "text",
+                    "default_value": "1."
+                },
+                {
+                    "key": "field_pdp_layer_title",
+                    "label": "Layer Title",
+                    "name": "layer_title",
+                    "type": "text",
+                    "default_value": "Bamboo Charcoal Fabric"
+                },
+                {
+                    "key": "field_pdp_layer_desc",
+                    "label": "Layer Description",
+                    "name": "layer_description",
+                    "type": "textarea",
+                    "rows": 2,
+                    "default_value": "Helps manage moisture and odour while promoting breathable comfort."
+                }
+            ]
+        },
+        {
+            "key": "field_pdp_tab_tech",
+            "label": "Technologies",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_pdp_tech_title",
+            "label": "Technologies Section Title",
+            "name": "tech_section_title",
+            "type": "text",
+            "instructions": "Section title",
+            "default_value": "The Details Make the Difference."
+        },
+        {
+            "key": "field_pdp_tech_list",
+            "label": "Technologies List",
+            "name": "technologies_list",
+            "type": "repeater",
+            "instructions": "Video technology cards",
+            "layout": "row",
+            "button_label": "Add Technology",
+            "sub_fields": [
+                {
+                    "key": "field_pdp_tech_name",
+                    "label": "Technology Name",
+                    "name": "tech_name",
+                    "type": "text",
+                    "default_value": "Bamboo Charcoal"
+                },
+                {
+                    "key": "field_pdp_tech_tagline",
+                    "label": "Tagline / Copy",
+                    "name": "tech_tagline",
+                    "type": "text",
+                    "default_value": "Naturally fresh, breathable comfort."
+                },
+                {
+                    "key": "field_pdp_tech_video",
+                    "label": "Video Asset (MP4)",
+                    "name": "tech_video",
+                    "type": "file",
+                    "return_format": "array",
+                    "mime_types": "mp4",
+                    "library": "all"
+                },
+                {
+                    "key": "field_pdp_tech_poster",
+                    "label": "Poster Image",
+                    "name": "tech_poster",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all"
+                }
+            ]
+        },
+        {
+            "key": "field_pdp_tab_specs",
+            "label": "Specifications",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_pdp_spec_mat",
+            "label": "Product Specifications",
+            "name": "spec_materials",
+            "type": "wysiwyg",
+            "instructions": "Product specifications copy / bullet list",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0
+        },
+        {
+            "key": "field_pdp_care",
+            "label": "Care Instructions",
+            "name": "care_instructions",
+            "type": "wysiwyg",
+            "instructions": "Care guidelines copy / bullet list",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0
+        },
+        {
+            "key": "field_pdp_shipping",
+            "label": "Shipping and Return Policy",
+            "name": "shipping_return_policy",
+            "type": "wysiwyg",
+            "instructions": "Shipping and returns policy copy",
+            "tabs": "all",
+            "toolbar": "basic",
+            "media_upload": 0
+        },
+        {
+            "key": "field_pdp_tab_custom",
+            "label": "Custom Size & Pillow Top",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_pdp_rate_wopt",
+            "label": "Rate Without Pillow Top (INR/sq. in)",
+            "name": "rate_without_pt",
+            "type": "number",
+            "instructions": "Rate per square inch without Pillow Top (INR)",
+            "default_value": 12.55,
+            "step": 0.01
+        },
+        {
+            "key": "field_pdp_rate_wpt",
+            "label": "Rate With Pillow Top (INR/sq. in)",
+            "name": "rate_with_pt",
+            "type": "number",
+            "instructions": "Rate per square inch with Pillow Top (INR)",
+            "default_value": 13.26,
+            "step": 0.01
+        },
+        {
+            "key": "field_pdp_max_dim",
+            "label": "Preview Max Dimension (inches)",
+            "name": "preview_max_dimension",
+            "type": "number",
+            "instructions": "Max length and width allowed in calculator in inches",
+            "default_value": 240
+        },
+        {
+            "key": "field_pdp_pt_exp",
+            "label": "Pillow Top Explanation",
+            "name": "pillow_top_explanation",
+            "type": "textarea",
+            "instructions": "Optional modal text explaining Pillow Top feature",
+            "rows": 4
+        },
+        {
+            "key": "field_pdp_tab_faqs",
+            "label": "FAQs",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_pdp_faqs",
+            "label": "Product FAQs",
+            "name": "product_faqs",
+            "type": "repeater",
+            "instructions": "Frequently asked questions for this mattress",
+            "layout": "row",
+            "button_label": "Add FAQ",
+            "sub_fields": [
+                {
+                    "key": "field_pdp_faq_q",
+                    "label": "Question",
+                    "name": "faq_question",
+                    "type": "text",
+                    "instructions": "FAQ question title"
+                },
+                {
+                    "key": "field_pdp_faq_a",
+                    "label": "Answer",
+                    "name": "faq_answer",
+                    "type": "textarea",
+                    "rows": 3,
+                    "instructions": "FAQ answer copy"
+                }
+            ]
+        },
+        {
+            "key": "field_pdp_tab_rec",
+            "label": "Recommendations",
+            "name": "",
+            "type": "tab",
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_pdp_rec_prods",
+            "label": "Recommended Mattresses",
+            "name": "recommended_products",
+            "type": "relationship",
+            "instructions": "Select 3-4 recommended mattresses (falls back to default collection cards if unselected)",
+            "post_type": [
+                "product"
+            ],
+            "taxonomy": [],
+            "filters": [
+                "search",
+                "post_type",
+                "taxonomy"
+            ],
+            "elements": [
+                "featured_image"
+            ],
+            "min": "",
+            "max": 6,
+            "return_format": "object"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "product"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/template-product.php"
+            }
+        ]
+    ],
+    "menu_order": 2,
+    "position": "normal",
+    "style": "default",
+    "active": true
+}
+

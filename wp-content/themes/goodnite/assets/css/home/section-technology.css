@@ -1,0 +1,161 @@
+/**
+ * Home: Inside Goodnite Technology Component
+ *
+ * @package Goodnite
+ */
+
+.gn-tech-pillars {
+  padding: 104px 0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.gn-tech-pillars__intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.gn-tech-pillars__intro h2 {
+  font-size: var(--type-h2);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.gn-tech-pillars__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.gn-tech-pillars__card {
+  position: relative;
+  min-height: 640px;
+  overflow: hidden;
+  background: #24211f;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: transform 280ms ease, box-shadow 280ms ease;
+}
+
+.gn-tech-pillars__card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.14);
+}
+
+.gn-tech-pillars__image {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.gn-tech-pillars__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.gn-tech-pillars__card:hover .gn-tech-pillars__image img {
+  transform: scale(1.045);
+}
+
+/* Subtle dark gradient overlay on bottom half for high text contrast */
+.gn-tech-pillars__image::after {
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(180deg, rgba(15, 15, 15, 0) 0%, rgba(15, 15, 15, 0.12) 20%, rgba(15, 15, 15, 0.88) 100%);
+  content: "";
+}
+
+.gn-tech-pillars__content {
+  position: relative;
+  z-index: 2;
+  padding: 48px 30px 32px;
+  color: #fff;
+}
+
+.gn-tech-pillars__content h3 {
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.gn-tech-pillars__content p {
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 0;
+}
+
+.gn-tech-pillars__indicators {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.gn-tech-pillars__indicators button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #c9c6c1;
+  transition: width 220ms ease, background 220ms ease;
+}
+
+.gn-tech-pillars__indicators button.is-active {
+  width: 28px;
+  border-radius: 10px;
+  background: var(--brand-red);
+}
+
+@media (max-width: 1100px) {
+  .gn-tech-pillars__grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    gap: 20px;
+    padding-bottom: 8px;
+  }
+  .gn-tech-pillars__grid::-webkit-scrollbar {
+    display: none;
+  }
+  .gn-tech-pillars__card {
+    flex: 0 0 clamp(290px, 75vw, 420px);
+    min-height: 520px;
+    scroll-snap-align: start;
+  }
+  .gn-tech-pillars__indicators {
+    display: flex;
+  }
+}
+
+@media (max-width: 767px) {
+  .gn-tech-pillars {
+    padding: 60px 0;
+  }
+  .gn-tech-pillars__intro {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .gn-tech-pillars__card {
+    min-height: 440px;
+  }
+  .gn-tech-pillars__content {
+    padding: 34px 20px 24px;
+  }
+}

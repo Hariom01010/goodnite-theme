@@ -21,6 +21,7 @@ function goodnite_theme_setup(): void {
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'responsive-embeds' );
 	add_theme_support( 'align-wide' );
+	add_theme_support( 'woocommerce' );
 
 	add_theme_support(
 		'html5',
@@ -71,3 +72,5 @@ function goodnite_document_title_separator( string $sep ): string {
 	return '|';
 }
 add_filter( 'document_title_separator', 'goodnite_document_title_separator' );
+
+

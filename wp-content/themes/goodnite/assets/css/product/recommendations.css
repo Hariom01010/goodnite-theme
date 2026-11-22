@@ -1,0 +1,32 @@
+/**
+ * Product: Recommendations Component
+ *
+ * @package Goodnite
+ */
+
+.gn-pdp-recommendations {
+  padding: 92px 0;
+  background: var(--surface-warm);
+}
+
+.gn-pdp-recommendations .products-head h2 {
+  font-size: var(--type-h2);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.gn-pdp-recommendations .products-head p {
+  color: var(--text-secondary);
+}
+
+.gn-pdp-recommendations .product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+@media (max-width: 1023px) {
+  .gn-pdp-recommendations {
+    padding: 68px 0;
+  }
+}

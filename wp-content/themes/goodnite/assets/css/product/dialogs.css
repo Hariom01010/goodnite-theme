@@ -1,0 +1,215 @@
+/**
+ * Product: Dialog Modals & Interactive Overlays
+ *
+ * @package Goodnite
+ */
+
+.gn-pdp-dialog {
+  width: min(880px, calc(100vw - 32px));
+  max-height: min(88vh, 860px);
+  padding: 32px;
+  border: none;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+}
+
+.gn-pdp-dialog::backdrop {
+  background: rgba(19, 19, 19, 0.54);
+}
+
+.gn-pdp-dialog__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.gn-pdp-dialog__head h2 {
+  font-size: clamp(24px, 3.5vw, 36px);
+  font-weight: 500;
+}
+
+.gn-pdp-dialog__head button {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-warm);
+  color: var(--ink);
+  font-size: 24px;
+}
+
+/* Size Dialog */
+.gn-size-dialog {
+  width: min(720px, calc(100vw - 32px));
+}
+
+.gn-size-dialog__step {
+  padding-bottom: 22px;
+}
+
+.gn-size-dialog__step h3 {
+  font-size: var(--type-body);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.gn-size-dialog__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gn-size-dialog__options button {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  background: var(--surface-warm);
+  color: var(--ink);
+  font-size: var(--type-body-small);
+  font-weight: 500;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.gn-size-dialog__options button:hover,
+.gn-size-dialog__options button.is-selected {
+  border-color: var(--brand-red);
+  background: #fff6f6;
+  color: var(--brand-red);
+}
+
+.gn-size-dialog__footer {
+  padding-top: 18px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.gn-size-dialog__confirm {
+  width: 100%;
+  min-height: 50px;
+  background: var(--brand-red);
+  color: #fff;
+  font-size: var(--type-button);
+  font-weight: 600;
+}
+
+/* Chart Modal */
+.gn-chart__scroll {
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.gn-chart table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.gn-chart thead {
+  position: sticky;
+  top: 0;
+  background: #f3f1ed;
+}
+
+.gn-chart th,
+.gn-chart td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.gn-chart td button {
+  color: var(--brand-red);
+  font-weight: 500;
+}
+
+/* Custom Size Calculator */
+.gn-custom {
+  width: min(620px, calc(100vw - 32px));
+}
+
+.gn-custom__form {
+  display: grid;
+  gap: 18px;
+}
+
+.gn-custom__dimensions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.gn-custom__dimensions label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.gn-custom__dimensions input {
+  height: 48px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+}
+
+.gn-custom__estimate {
+  padding: 18px;
+  background: var(--surface-warm);
+  display: grid;
+  gap: 4px;
+}
+
+.gn-custom__estimate strong {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.gn-custom__submit {
+  min-height: 50px;
+  background: var(--brand-red);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Sticky Bottom Bar */
+.gn-pdp__sticky:not([hidden]) {
+  position: fixed;
+  z-index: 45;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 68px;
+  padding: 10px 24px calc(10px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--border);
+  background: #fff;
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.gn-pdp__sticky button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 20px;
+  background: var(--brand-red);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .gn-pdp-dialog {
+    width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    padding: 20px;
+  }
+}

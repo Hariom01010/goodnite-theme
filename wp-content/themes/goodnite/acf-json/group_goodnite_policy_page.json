@@ -1,0 +1,83 @@
+{
+    "key": "group_goodnite_policy_page",
+    "title": "Policy Page Settings",
+    "fields": [
+        {
+            "key": "field_policy_hero_title",
+            "label": "Hero Title Override",
+            "name": "policy_hero_title",
+            "type": "text",
+            "instructions": "Leave blank to default to page title",
+            "placeholder": "Terms & Conditions"
+        },
+        {
+            "key": "field_policy_hero_desktop_image",
+            "label": "Hero Desktop Image",
+            "name": "policy_hero_desktop_image",
+            "type": "image",
+            "instructions": "Recommended 1672x941 WebP or PNG. Defaults to theme policy hero.",
+            "return_format": "array"
+        },
+        {
+            "key": "field_policy_hero_mobile_image",
+            "label": "Hero Mobile Image",
+            "name": "policy_hero_mobile_image",
+            "type": "image",
+            "instructions": "Recommended mobile portrait crop. Defaults to theme mobile policy hero.",
+            "return_format": "array"
+        },
+        {
+            "key": "field_policy_intro_heading",
+            "label": "Introduction Heading",
+            "name": "policy_intro_heading",
+            "type": "text",
+            "default_value": "Introduction"
+        },
+        {
+            "key": "field_policy_intro_text",
+            "label": "Introduction Text",
+            "name": "policy_intro_text",
+            "type": "textarea",
+            "rows": 4,
+            "instructions": "Introductory summary paragraph"
+        },
+        {
+            "key": "field_policy_sections",
+            "label": "Policy Sections (Repeater)",
+            "name": "policy_sections",
+            "type": "repeater",
+            "instructions": "Add structured policy sections. If left empty, the standard page content (the_content()) will be rendered.",
+            "layout": "block",
+            "button_label": "Add Section",
+            "sub_fields": [
+                {
+                    "key": "field_policy_section_heading",
+                    "label": "Section Heading",
+                    "name": "heading",
+                    "type": "text",
+                    "placeholder": "USE OF SITE ACCESS"
+                },
+                {
+                    "key": "field_policy_section_content",
+                    "label": "Section Content",
+                    "name": "content",
+                    "type": "textarea",
+                    "rows": 5
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/template-policy.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "active": true
+}

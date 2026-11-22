@@ -1,0 +1,119 @@
+/**
+ * Home: Brand USP Strip Component
+ *
+ * @package Goodnite
+ */
+
+.gn-usp-strip {
+  overflow: hidden;
+  background: var(--surface-warm);
+  border-top: 1px solid rgba(28, 28, 28, 0.08);
+  border-bottom: 1px solid rgba(28, 28, 28, 0.08);
+}
+
+.gn-usp-strip__viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.gn-usp-strip__track {
+  display: flex;
+  width: max-content;
+  animation: gnUspMarquee 52s linear infinite;
+  will-change: transform;
+}
+
+.gn-usp-strip__group {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  flex: 0 0 auto;
+  align-items: stretch;
+  width: max(100vw, 1800px);
+  min-width: max(100vw, 1800px);
+  padding-right: 0;
+  border-right: 1px solid rgba(28, 28, 28, 0.14);
+}
+
+.gn-usp-strip__item {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  width: 100%;
+  padding: 24px;
+  position: relative;
+}
+
+.gn-usp-strip__item + .gn-usp-strip__item::before {
+  position: absolute;
+  top: 20%;
+  bottom: 20%;
+  left: 0;
+  width: 1px;
+  background: rgba(28, 28, 28, 0.14);
+  content: "";
+}
+
+.gn-usp-strip__icon {
+  flex: 0 0 auto;
+  align-self: center;
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: var(--brand-red);
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gn-usp-strip__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.gn-usp-strip__title {
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.09em;
+}
+
+.gn-usp-strip__description {
+  color: var(--text-secondary);
+  font-size: var(--type-body-small);
+  line-height: 1.35;
+}
+
+@keyframes gnUspMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.333333%);
+  }
+}
+
+@media (hover: hover) {
+  .gn-usp-strip:hover .gn-usp-strip__track {
+    animation-play-state: paused;
+  }
+}
+
+@media (max-width: 767px) {
+  .gn-usp-strip__group {
+    width: max-content;
+    min-width: max-content;
+  }
+  .gn-usp-strip__item {
+    width: 248px;
+    min-width: 248px;
+    padding: 18px 12px;
+  }
+  .gn-usp-strip__title {
+    font-size: 13px;
+  }
+}

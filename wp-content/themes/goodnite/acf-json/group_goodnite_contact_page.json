@@ -1,0 +1,142 @@
+{
+    "key": "group_goodnite_contact_page",
+    "title": "Contact Us Page Settings",
+    "fields": [
+        {
+            "key": "field_contact_hero_title",
+            "label": "Hero Title",
+            "name": "contact_hero_title",
+            "type": "text",
+            "default_value": "We’re Here to Help."
+        },
+        {
+            "key": "field_contact_hero_description",
+            "label": "Hero Description",
+            "name": "contact_hero_description",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Questions, feedback or a concern? Tell us how we can make your Goodnite experience better."
+        },
+        {
+            "key": "field_contact_hero_desktop_image",
+            "label": "Hero Desktop Image",
+            "name": "contact_hero_desktop_image",
+            "type": "image",
+            "return_format": "array"
+        },
+        {
+            "key": "field_contact_hero_mobile_image",
+            "label": "Hero Mobile Image",
+            "name": "contact_hero_mobile_image",
+            "type": "image",
+            "return_format": "array"
+        },
+        {
+            "key": "field_contact_form_title",
+            "label": "Form Heading",
+            "name": "contact_form_title",
+            "type": "text",
+            "default_value": "How can we help?"
+        },
+        {
+            "key": "field_contact_form_intro",
+            "label": "Form Subtitle",
+            "name": "contact_form_intro",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Share the details below and our team will get back to you with the right support."
+        },
+        {
+            "key": "field_contact_recipient_email",
+            "label": "Recipient Email",
+            "name": "contact_recipient_email",
+            "type": "email",
+            "instructions": "Inquiry notifications will be sent to this email. Defaults to admin email if empty."
+        },
+        {
+            "key": "field_contact_details_title",
+            "label": "Sidebar Details Heading",
+            "name": "contact_details_title",
+            "type": "text",
+            "default_value": "Let’s talk about better sleep."
+        },
+        {
+            "key": "field_contact_details_intro",
+            "label": "Sidebar Details Intro",
+            "name": "contact_details_intro",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Our team is here to help with product guidance, orders and support."
+        },
+        {
+            "key": "field_contact_details_items",
+            "label": "Contact Information Items",
+            "name": "contact_details_items",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add Detail Item",
+            "sub_fields": [
+                {
+                    "key": "field_contact_detail_label",
+                    "label": "Label",
+                    "name": "label",
+                    "type": "text",
+                    "placeholder": "Operating hours"
+                },
+                {
+                    "key": "field_contact_detail_value",
+                    "label": "Value",
+                    "name": "value",
+                    "type": "textarea",
+                    "rows": 2,
+                    "placeholder": "Monday to Saturday\n9:30 AM – 6:30 PM"
+                }
+            ]
+        },
+        {
+            "key": "field_contact_social_heading",
+            "label": "Social Heading",
+            "name": "contact_social_heading",
+            "type": "text",
+            "default_value": "Follow Goodnite"
+        },
+        {
+            "key": "field_contact_social_links",
+            "label": "Social Media Links",
+            "name": "contact_social_links",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add Social Link",
+            "sub_fields": [
+                {
+                    "key": "field_social_label",
+                    "label": "Platform Label",
+                    "name": "label",
+                    "type": "text",
+                    "placeholder": "Instagram"
+                },
+                {
+                    "key": "field_social_url",
+                    "label": "URL",
+                    "name": "url",
+                    "type": "url",
+                    "placeholder": "https://www.instagram.com/"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/template-contact.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "active": true
+}
+

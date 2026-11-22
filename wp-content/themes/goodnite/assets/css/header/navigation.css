@@ -1,0 +1,89 @@
+/**
+ * Header Navigation Component
+ *
+ * @package Goodnite
+ */
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.desktop-nav .primary-menu,
+.desktop-nav .menu-primary-navigation-container > ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 34px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desktop-nav a,
+.nav-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 4px;
+  font-family: inherit;
+  font-size: var(--type-navigation);
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  transition: color 180ms ease;
+}
+
+.desktop-nav a:hover,
+.nav-trigger:hover,
+.nav-trigger[aria-expanded="true"] {
+  color: var(--brand-red);
+}
+
+.header-utilities {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.header-store-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--type-navigation);
+  font-weight: 500;
+  color: var(--brand-red);
+  white-space: nowrap;
+}
+
+.header-store-cta:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.search-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--ink);
+  transition: color 180ms ease;
+}
+
+.search-button:hover {
+  color: var(--brand-red);
+}
+
+.search-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 1023px) {
+  .desktop-nav {
+    display: none;
+  }
+}

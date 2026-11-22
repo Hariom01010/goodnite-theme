@@ -1,0 +1,66 @@
+/**
+ * Global Typography Styles
+ *
+ * @package Goodnite
+ */
+
+.section h2 {
+  font-size: var(--type-h2);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  color: var(--ink);
+}
+
+.section p {
+  font-size: var(--type-body);
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.eyebrow {
+  display: block;
+  font-size: var(--type-eyebrow);
+  line-height: 1.2;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--brand-red);
+}
+
+.card-title {
+  font-size: var(--type-h3);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.card-body {
+  font-size: var(--type-body-small);
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.metrics strong {
+  display: block;
+  font-size: var(--type-metric-xl);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.metrics span {
+  display: block;
+  font-size: var(--type-caption);
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+.product-status {
+  font-size: 0.66rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}

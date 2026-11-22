@@ -47,6 +47,17 @@ function goodnite_get_current_collection_slug(): string {
 		return strtolower( sanitize_title( (string) $_GET['collection'] ) );
 	}
 
+	if ( function_exists( 'is_product_category' ) && is_product_category() ) {
+		$term = get_queried_object();
+		if ( $term instanceof WP_Term && ! empty( $term->slug ) ) {
+			return strtolower( sanitize_title( $term->slug ) );
+		}
+	}
+
+	if ( function_exists( 'is_shop' ) && is_shop() ) {
+		return 'all';
+	}
+
 	$uri_path = trim( (string) ( parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ) ?: '' ), '/' );
 	$home_path = trim( (string) ( parse_url( home_url(), PHP_URL_PATH ) ?: '' ), '/' );
 
@@ -76,6 +87,18 @@ function goodnite_is_collection_page(): bool {
 	}
 
 	if ( is_page( array( 'mattresses', 'collection' ) ) ) {
+		return true;
+	}
+
+	if ( function_exists( 'is_shop' ) && is_shop() ) {
+		return true;
+	}
+
+	if ( function_exists( 'is_product_category' ) && is_product_category() ) {
+		return true;
+	}
+
+	if ( function_exists( 'is_product_taxonomy' ) && is_product_taxonomy() ) {
 		return true;
 	}
 

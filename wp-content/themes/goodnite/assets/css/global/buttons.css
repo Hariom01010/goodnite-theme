@@ -1,0 +1,94 @@
+/**
+ * Global Buttons and Call-to-Action Elements
+ *
+ * @package Goodnite
+ */
+
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 24px;
+  font-family: inherit;
+  font-size: var(--type-button);
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+/* Primary Red Button */
+.button-link.primary {
+  background: var(--brand-red);
+  color: #fff;
+  border: 1px solid var(--brand-red);
+}
+
+.button-link.primary:hover {
+  background: var(--brand-red-hover);
+  border-color: var(--brand-red-hover);
+  color: #fff;
+}
+
+/* Secondary Translucent Button (e.g. over hero imagery) */
+.button-link.secondary-light {
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  color: #fff;
+  background: rgba(15, 15, 15, 0.15);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.button-link.secondary-light:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Outline Button */
+.button-link.outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid #1c1c1c;
+}
+
+.button-link.outline:hover {
+  background: #1c1c1c;
+  color: #fff;
+}
+
+/* Text-Only Link with Chevron/Arrow */
+.button-link.text {
+  min-height: auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--brand-red);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.button-link.text:hover {
+  border-bottom-color: var(--brand-red);
+  color: var(--brand-red);
+}
+
+.button-link.text svg {
+  transition: transform 220ms ease;
+}
+
+.button-link.text:hover svg {
+  transform: translateX(4px);
+}
+
+.button-link:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

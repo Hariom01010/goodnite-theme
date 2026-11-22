@@ -18,6 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return string
  */
 function goodnite_asset_url( string $path ): string {
+	if ( '' === $path ) {
+		return '';
+	}
+	if ( 0 === strpos( $path, 'http://' ) || 0 === strpos( $path, 'https://' ) || 0 === strpos( $path, '//' ) ) {
+		return $path;
+	}
 	return trailingslashit( get_template_directory_uri() ) . 'assets/' . ltrim( $path, '/' );
 }
 

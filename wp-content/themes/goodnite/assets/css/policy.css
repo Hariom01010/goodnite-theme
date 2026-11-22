@@ -1,0 +1,326 @@
+/**
+ * Goodnite India — Policy Page Stylesheet
+ *
+ * Scoped styling for legal and policy page templates (Terms & Conditions,
+ * Privacy Policy, Shipping & Delivery, Returns & Refunds, Warranty).
+ * Matches prototype layout 1:1 and formats standard WordPress WYSIWYG markup.
+ *
+ * @package Goodnite
+ */
+
+.policy-page {
+  background: var(--white);
+}
+
+.policy-hero {
+  position: relative;
+  min-height: clamp(620px, 78vh, 820px);
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--white);
+}
+
+.policy-hero picture,
+.policy-hero img,
+.policy-hero__shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.policy-hero picture {
+  z-index: -2;
+}
+
+.policy-hero img {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.policy-hero__shade {
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(10, 10, 10, .76) 0%, rgba(10, 10, 10, .42) 35%, rgba(10, 10, 10, .06) 70%),
+              linear-gradient(0deg, rgba(10, 10, 10, .44), transparent 58%);
+}
+
+.policy-hero__content {
+  padding-block: 86px 110px;
+}
+
+.policy-hero h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: var(--type-display-xl);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+
+.policy-breadcrumbs {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.policy-breadcrumbs a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.policy-breadcrumbs a:hover {
+  color: var(--brand-red);
+}
+
+.policy-breadcrumbs span[aria-hidden="true"] {
+  color: var(--border-subtle, #d2d2d2);
+}
+
+.policy-breadcrumbs span:last-child {
+  color: var(--text-primary, #111111);
+}
+
+.policy-content {
+  padding-block: 112px;
+}
+
+.policy-content__layout {
+  display: block;
+}
+
+.policy-copy {
+  max-width: none;
+  margin-inline: 0;
+}
+
+.policy-intro {
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.policy-intro h2 {
+  margin: 0 0 22px;
+  font-size: var(--type-h2);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -.025em;
+}
+
+.policy-intro p,
+.policy-section p {
+  color: var(--text-secondary);
+  font-size: var(--type-body-large);
+  line-height: 1.6;
+}
+
+.policy-intro p {
+  margin-bottom: 0;
+}
+
+.policy-section {
+  padding-block: 40px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.policy-section h3 {
+  margin: 0 0 14px;
+  font-size: var(--type-h4);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.015em;
+}
+
+.policy-section p {
+  margin-bottom: 0;
+}
+
+.policy-paragraph {
+  margin: 0 0 40px;
+  color: var(--text-secondary);
+  font-size: var(--type-body-large);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   WordPress WYSIWYG & Standard Content Fallback Formatting
+   ========================================================================== */
+
+.policy-copy > p,
+.policy-copy .entry-content > p {
+  margin: 0 0 24px;
+  color: var(--text-secondary);
+  font-size: var(--type-body-large);
+  line-height: 1.6;
+}
+
+.policy-copy > h2,
+.policy-copy .entry-content > h2 {
+  margin: 48px 0 20px;
+  font-size: var(--type-h2);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.policy-copy > h2:first-child,
+.policy-copy .entry-content > h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.policy-copy > h3,
+.policy-copy .entry-content > h3 {
+  margin: 36px 0 14px;
+  font-size: var(--type-h4);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.015em;
+}
+
+.policy-copy > h4,
+.policy-copy .entry-content > h4 {
+  margin: 28px 0 12px;
+  font-size: var(--type-h5);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.policy-copy ul,
+.policy-copy ol,
+.policy-copy .entry-content ul,
+.policy-copy .entry-content ol {
+  margin: 0 0 28px 24px;
+  padding-left: 12px;
+  color: var(--text-secondary);
+  font-size: var(--type-body-large);
+  line-height: 1.65;
+}
+
+.policy-copy li,
+.policy-copy .entry-content li {
+  margin-bottom: 8px;
+}
+
+.policy-copy a,
+.policy-copy .entry-content a {
+  color: var(--brand-red);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.policy-copy a:hover,
+.policy-copy .entry-content a:hover {
+  color: var(--brand-black, #111111);
+}
+
+.policy-copy strong,
+.policy-copy b,
+.policy-copy .entry-content strong,
+.policy-copy .entry-content b {
+  font-weight: 600;
+  color: var(--text-primary, #111111);
+}
+
+.policy-copy blockquote,
+.policy-copy .entry-content blockquote {
+  margin: 32px 0;
+  padding: 16px 24px;
+  border-left: 3px solid var(--brand-red);
+  background: var(--surface-subtle, #f9f9f9);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+@media (min-width: 1024px) and (max-width: 1201px) {
+  .policy-hero__content {
+    padding-block: 86px 110px;
+  }
+  .policy-intro h2 {
+    font-size: var(--type-h2);
+  }
+  .policy-intro p,
+  .policy-section p {
+    font-size: var(--type-body-large);
+  }
+  .policy-section h3 {
+    font-size: var(--type-h4);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .policy-hero__content {
+    padding-block: 58px 68px;
+  }
+  .policy-content {
+    padding-block: 88px;
+  }
+  .policy-intro h2 {
+    font-size: var(--type-h2);
+  }
+  .policy-intro p,
+  .policy-section p {
+    font-size: var(--type-body-large);
+  }
+  .policy-section h3 {
+    font-size: var(--type-h4);
+  }
+}
+
+@media (max-width: 767px) {
+  .policy-hero {
+    min-height: calc(100svh - 98px);
+    align-items: end;
+  }
+  .policy-hero__shade {
+    background: linear-gradient(0deg, rgba(10, 10, 10, .82) 0%, rgba(10, 10, 10, .36) 48%, rgba(10, 10, 10, .04) 77%);
+  }
+  .policy-hero__content {
+    padding-block: 190px 44px;
+  }
+  .policy-hero h1 {
+    font-size: var(--type-display-xl);
+    line-height: 1.05;
+  }
+  .policy-breadcrumbs {
+    min-height: 68px;
+    font-size: 12px;
+  }
+  .policy-content {
+    padding-block: 54px;
+  }
+  .policy-intro {
+    padding-bottom: 36px;
+  }
+  .policy-intro h2 {
+    margin-bottom: 18px;
+    font-size: var(--type-h2);
+  }
+  .policy-intro p,
+  .policy-section p {
+    font-size: var(--type-body-large);
+    line-height: 1.6;
+  }
+  .policy-section {
+    padding-block: 32px;
+  }
+  .policy-section h3 {
+    margin-bottom: 12px;
+    font-size: var(--type-h4);
+  }
+}

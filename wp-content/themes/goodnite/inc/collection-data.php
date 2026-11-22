@@ -38,8 +38,12 @@ function goodnite_get_collections(): array {
 	];
 
 	$shared_banners = [
-		['id'=>'cooler-materials','after'=>4,'after_mobile'=>4,'title'=>'Breathable materials for cooler sleep.','image'=>'collection-banner-materials.png','alt'=>'Layered breathable mattress materials in a warm neutral studio'],
-		['id'=>'considered-craft','after'=>8,'after_mobile'=>8,'title'=>'Considered craft in every detail.','image'=>'collection-banner-craft.png','alt'=>'Close detail of quilted mattress stitching and tailored upholstery'],
+		// Desktop (4 columns): row 1 / column 4, row 3 / column 1.
+		['id'=>'cooler-materials-1','after'=>3,'after_tablet'=>2,'after_mobile'=>3,'title'=>'Breathable materials for cooler sleep.','image'=>'collection-banner-materials.png','alt'=>'Layered breathable mattress materials in a warm neutral studio'],
+		['id'=>'considered-craft-1','after'=>7,'after_tablet'=>5,'after_mobile'=>7,'title'=>'Considered craft in every detail.','image'=>'collection-banner-craft.png','alt'=>'Close detail of quilted mattress stitching and tailored upholstery'],
+		// Repeat the same pattern: row 5 / column 4, then row 7 / column 1.
+		['id'=>'cooler-materials-2','after'=>17,'after_tablet'=>12,'after_mobile'=>11,'title'=>'Breathable materials for cooler sleep.','image'=>'collection-banner-materials.png','alt'=>'Layered breathable mattress materials in a warm neutral studio'],
+		['id'=>'considered-craft-2','after'=>21,'after_tablet'=>15,'after_mobile'=>15,'title'=>'Considered craft in every detail.','image'=>'collection-banner-craft.png','alt'=>'Close detail of quilted mattress stitching and tailored upholstery'],
 	];
 
 	$data = [

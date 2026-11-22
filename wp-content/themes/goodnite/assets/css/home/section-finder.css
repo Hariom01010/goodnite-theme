@@ -1,0 +1,147 @@
+/**
+ * Home: Sleep Finder Component (Your Sleep. Your Way.)
+ *
+ * @package Goodnite
+ */
+
+.gn-sleep-finder {
+  padding: 104px 0;
+  background: #fff;
+}
+
+.gn-sleep-finder__grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: clamp(40px, 6vw, 92px);
+}
+
+.gn-sleep-finder__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gn-sleep-finder h2 {
+  font-size: var(--type-h2);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.gn-sleep-finder__intro {
+  font-size: var(--type-body-large);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.gn-sleep-finder__options-label {
+  font-size: var(--type-caption);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.preference-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.preference-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-warm);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.preference-option:hover {
+  border-color: rgba(217, 0, 0, 0.4);
+}
+
+.preference-option.is-selected {
+  border-color: var(--brand-red);
+  background: #fff6f6;
+}
+
+.preference-option__icon {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+}
+
+.preference-option__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.preference-option__title {
+  font-size: var(--type-body);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.preference-option__desc {
+  font-size: var(--type-caption);
+  color: var(--text-secondary);
+}
+
+.gn-sleep-finder__preview {
+  position: relative;
+  background: var(--surface-warm);
+  border: 1px solid var(--border-subtle);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gn-sleep-finder__preview-image {
+  aspect-ratio: 1.1 / 1;
+  overflow: hidden;
+  background: #eeeae3;
+}
+
+.gn-sleep-finder__preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gn-sleep-finder__preview-info h3 {
+  font-size: var(--type-h4);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.gn-sleep-finder__preview-info p {
+  font-size: var(--type-body-small);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 1023px) {
+  .gn-sleep-finder {
+    padding: 76px 0;
+  }
+  .gn-sleep-finder__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .gn-sleep-finder {
+    padding: 60px 0;
+  }
+  .preference-grid {
+    grid-template-columns: 1fr;
+  }
+}

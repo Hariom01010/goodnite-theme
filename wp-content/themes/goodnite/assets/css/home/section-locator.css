@@ -1,0 +1,155 @@
+/**
+ * Home: Store Locator Component (Experience Goodnite Comfort)
+ *
+ * @package Goodnite
+ */
+
+.locator {
+  padding: 104px 0;
+  background: #fff;
+}
+
+.locator-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(40px, 6vw, 92px);
+}
+
+.locator-image {
+  position: relative;
+  aspect-ratio: 1.15 / 1;
+  overflow: hidden;
+  background: var(--surface-warm);
+}
+
+.locator-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.locator-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.locator-copy h2 {
+  font-size: var(--type-h2);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.locator-copy p {
+  font-size: var(--type-body);
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.search-field {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  max-width: 480px;
+  margin-top: 8px;
+}
+
+.store-search-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.store-search-input svg {
+  color: var(--text-muted);
+}
+
+.store-search-input input {
+  flex: 1;
+  min-width: 0;
+  height: 50px;
+  border: none;
+  outline: none;
+  font-size: var(--type-body);
+}
+
+.search-field button {
+  height: 52px;
+  padding: 0 24px;
+  background: var(--brand-red);
+  color: #fff;
+  font-weight: 600;
+  font-size: var(--type-button);
+  transition: background 180ms ease;
+}
+
+.search-field button:hover {
+  background: var(--brand-red-hover);
+}
+
+.locator-results {
+  margin-top: 28px;
+}
+
+.locator-results__head h3 {
+  font-size: var(--type-h5);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.locator-results__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.locator-dealer-card {
+  padding: 18px;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-warm);
+}
+
+.locator-dealer-card h4 {
+  font-size: var(--type-h6);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.locator-dealer-card p {
+  font-size: var(--type-body-small);
+  color: var(--text-secondary);
+}
+
+.locator-reset {
+  margin-top: 14px;
+  color: var(--brand-red);
+  font-size: var(--type-body-small);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 1023px) {
+  .locator {
+    padding: 76px 0;
+  }
+  .locator-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .locator {
+    padding: 60px 0;
+  }
+  .search-field {
+    grid-template-columns: 1fr;
+  }
+}

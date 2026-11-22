@@ -24,7 +24,13 @@
     var form = panel ? panel.querySelector('[data-filter-form]') : null;
     var applyButton = panel ? panel.querySelector('[data-filter-apply]') : null;
     var previousFocus = null;
-    var mobileLayout = window.matchMedia('(max-width: 767px)').matches;
+    var layoutMode = getLayoutMode();
+
+    function getLayoutMode() {
+      if (window.matchMedia('(max-width: 767px)').matches) return 'mobile';
+      if (window.matchMedia('(max-width: 1201px)').matches) return 'tablet';
+      return 'desktop';
+    }
 
     function initFilterAccordions() {
       if (!form) return;
@@ -62,14 +68,14 @@
     }
 
     function productMarkup(product) {
-      return '<article class="product-card" data-product-card data-product-id="' + esc(product.id) + '">' +
-        '<a class="focus-ring" href="' + esc(product.url) + '"><div class="product-image"><img src="' + esc(product.image_url) + '" alt="' + esc(product.alt) + '" width="1100" height="1375" loading="lazy" decoding="async"><span class="product-collection-overlay">' + esc(product.collection) + '</span></div></a>' +
-        '<div class="product-info"><h3><a href="' + esc(product.url) + '">' + esc(product.name) + '</a></h3><span class="product-technology">' + esc(product.descriptor) + '</span><span class="product-price">' + esc(product.price_label) + '</span><button class="buy-now-link" type="button" disabled aria-label="Shopping action for ' + esc(product.name) + ' is not yet available" title="Shopping action coming soon">' + bagIcon() + '</button></div>' +
+      return '<article class="gn-collection-product-card product-card" data-product-card data-product-id="' + esc(product.id) + '">' +
+        '<a class="gn-product-image-link focus-ring" href="' + esc(product.url) + '"><div class="gn-product-image product-image"><img class="gn-product-image__asset" src="' + esc(product.image_url) + '" alt="' + esc(product.alt) + '" width="1100" height="1375" loading="lazy" decoding="async"><span class="gn-product-collection product-collection-overlay">' + esc(product.collection) + '</span></div></a>' +
+        '<div class="gn-product-info product-info"><h3 class="gn-product-name"><a href="' + esc(product.url) + '">' + esc(product.name) + '</a></h3><span class="gn-product-technology product-technology">' + esc(product.descriptor) + '</span><span class="gn-product-price product-price">Starting from ' + esc(product.price_label) + '</span></div>' +
         '</article>';
     }
 
     function bannerMarkup(banner) {
-      return '<article class="gn-plp-banner" data-editorial-banner><img src="' + esc(banner.image_url) + '" alt="' + esc(banner.alt) + '" width="1200" height="1500" loading="lazy" decoding="async"><div class="gn-plp-banner__overlay"></div><div class="gn-plp-banner__content"><h2>' + esc(banner.title) + '</h2></div></article>';
+      return '<article class="gn-collection-banner gn-plp-banner" data-editorial-banner><img class="gn-collection-banner__image" src="' + esc(banner.image_url) + '" alt="' + esc(banner.alt) + '" width="1200" height="1500" loading="lazy" decoding="async"><div class="gn-plp-banner__overlay"></div><div class="gn-plp-banner__content"><h2 class="gn-collection-banner__title">' + esc(banner.title) + '</h2></div></article>';
     }
 
     function inPriceRange(product) {
@@ -114,7 +120,8 @@
         html += productMarkup(product);
         if (!allowBanners) return;
         banners.forEach(function (banner) {
-          var position = mobileLayout ? Number(banner.after_mobile || banner.after) : Number(banner.after);
+          var positionKey = layoutMode === 'mobile' ? 'after_mobile' : layoutMode === 'tablet' ? 'after_tablet' : 'after';
+          var position = Number(banner[positionKey] || banner.after);
           if (position === index + 1) html += bannerMarkup(banner);
         });
       });
@@ -168,8 +175,8 @@
     }
 
     window.addEventListener('resize', function () {
-      var nextMobile = window.matchMedia('(max-width: 767px)').matches;
-      if (nextMobile !== mobileLayout) { mobileLayout = nextMobile; render(); }
+      var nextLayoutMode = getLayoutMode();
+      if (nextLayoutMode !== layoutMode) { layoutMode = nextLayoutMode; render(); }
     });
     render();
   }
