@@ -5,9 +5,9 @@ deployment:
 
     - |
       if [ "$BRANCH" = "main" ]; then
-        export DEPLOY_ROOT="/home/goodnite/public_html"
+        export DEPLOY_ROOT="$HOME/public_html"
       else
-        export DEPLOY_ROOT="/home/goodnite/staging.goodnite.in"
+        export DEPLOY_ROOT="$HOME/staging.goodnite.in"
       fi
 
     - /bin/mkdir -p $DEPLOY_ROOT/wp-content/themes

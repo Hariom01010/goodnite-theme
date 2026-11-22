@@ -13,12 +13,13 @@ jobs:
       - name: Select Deployment Target
         id: target
         run: |
+          USER="${{ secrets.CPANEL_USER }}"
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "repo_path=/home/goodnite/home/goodnite/repositories/goodnite-live" >> $GITHUB_OUTPUT
+            echo "repo_path=/home/${USER}/repositories/goodnite-live" >> $GITHUB_OUTPUT
             echo "branch=main" >> $GITHUB_OUTPUT
             echo "env_name=Production (goodnite.in)" >> $GITHUB_OUTPUT
           else
-            echo "repo_path=/home/goodnite/home/goodnite/repositories/goodnite-staging" >> $GITHUB_OUTPUT
+            echo "repo_path=/home/${USER}/repositories/goodnite-staging" >> $GITHUB_OUTPUT
             echo "branch=preview" >> $GITHUB_OUTPUT
             echo "env_name=Staging (staging.goodnite.in)" >> $GITHUB_OUTPUT
           fi
@@ -34,6 +35,7 @@ jobs:
           CLEAN_HOST=$(echo "$RAW_HOST" | sed -E 's|https?://||' | sed -E 's|:.*||' | sed -E 's|/.*||' | xargs)
 
           echo "Target server: ${CLEAN_HOST}"
+          echo "Repository path: ${REPO_PATH}"
           echo "Branch: ${BRANCH}"
 
           # 1. Update from remote (cPanel requires &branch= to trigger git pull)
