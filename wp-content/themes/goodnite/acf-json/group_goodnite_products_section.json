@@ -1,0 +1,59 @@
+{
+    "key": "group_goodnite_products_section",
+    "title": "Homepage - Products Carousel Section",
+    "fields": [
+        {
+            "key": "field_products_title",
+            "label": "Section Heading",
+            "name": "products_title",
+            "type": "text",
+            "default_value": "Comfort Worth Discovering."
+        },
+        {
+            "key": "field_products_cta_label",
+            "label": "CTA Link Text",
+            "name": "products_cta_label",
+            "type": "text",
+            "default_value": "Shop All Mattresses"
+        },
+        {
+            "key": "field_products_cta_url",
+            "label": "CTA Link URL",
+            "name": "products_cta_url",
+            "type": "text",
+            "default_value": "/mattresses"
+        },
+        {
+            "key": "field_products_selection",
+            "label": "Featured WooCommerce Products",
+            "name": "products_selection",
+            "type": "post_object",
+            "post_type": ["product"],
+            "multiple": 1,
+            "return_format": "id",
+            "instructions": "Select specific WooCommerce products to showcase. If empty, all published WooCommerce products or default dummy mattresses will be displayed."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/front-page.php"
+            }
+        ]
+    ],
+    "menu_order": 3,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true
+}

@@ -3,70 +3,204 @@
     "title": "Homepage - Collections Section",
     "fields": [
         {
-            "key": "field_collections_title",
-            "label": "Section Title",
-            "name": "collections_title",
+            "key": "field_collections_heading",
+            "label": "Section Heading",
+            "name": "collections_heading",
             "type": "text",
-            "default_value": "Three Collections. A World of Comfort."
+            "default_value": "Three Collections. A World of Comfort.",
+            "placeholder": "Three Collections. A World of Comfort."
         },
         {
-            "key": "field_collections_body",
-            "label": "Section Description",
-            "name": "collections_body",
+            "key": "field_collections_subtitle",
+            "label": "Section Subtitle",
+            "name": "collections_subtitle",
             "type": "textarea",
             "rows": 3,
             "default_value": "From essential engineered comfort to advanced sleep technology and our most sophisticated constructions."
         },
         {
-            "key": "field_collections_items",
-            "label": "Collections Cards (Repeater)",
-            "name": "collections_items",
-            "type": "repeater",
-            "button_label": "Add Collection Card",
-            "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_collection_item_title",
-                    "label": "Collection Title",
-                    "name": "title",
-                    "type": "text",
-                    "default_value": "Dreamer Series"
-                },
-                {
-                    "key": "field_collection_item_subtitle",
-                    "label": "Subtitle / Tagline",
-                    "name": "subtitle",
-                    "type": "text",
-                    "default_value": "Essential Engineered Comfort"
-                },
-                {
-                    "key": "field_collection_item_desc",
-                    "label": "Description",
-                    "name": "description",
-                    "type": "textarea",
-                    "rows": 2
-                },
-                {
-                    "key": "field_collection_item_img",
-                    "label": "Card Image",
-                    "name": "image",
-                    "type": "image",
-                    "return_format": "array"
-                },
-                {
-                    "key": "field_collection_item_alt",
-                    "label": "Image Alt Text",
-                    "name": "alt_text",
-                    "type": "text"
-                },
-                {
-                    "key": "field_collection_item_url",
-                    "label": "Target URL",
-                    "name": "url",
-                    "type": "text",
-                    "default_value": "/mattresses/dreamer"
-                }
-            ]
+            "key": "field_col_1_tab",
+            "label": "Collection 1",
+            "type": "tab"
+        },
+        {
+            "key": "field_col_1_cat",
+            "label": "Select WooCommerce Category",
+            "name": "col_1_cat",
+            "type": "taxonomy",
+            "taxonomy": "product_cat",
+            "field_type": "select",
+            "allow_null": 1,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "instructions": "Select WooCommerce category. If selected, name, image, description, and link will be pulled automatically."
+        },
+        {
+            "key": "field_col_1_name",
+            "label": "Fallback - Collection Name",
+            "name": "col_1_name",
+            "type": "text",
+            "default_value": "Dreamer Series"
+        },
+        {
+            "key": "field_col_1_subtitle",
+            "label": "Fallback - Subtitle",
+            "name": "col_1_subtitle",
+            "type": "text",
+            "default_value": "Essential Engineered Comfort"
+        },
+        {
+            "key": "field_col_1_desc",
+            "label": "Fallback - Description",
+            "name": "col_1_desc",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Purposeful materials, dependable support and familiar comfort technologies."
+        },
+        {
+            "key": "field_col_1_img",
+            "label": "Fallback - Collection Image",
+            "name": "col_1_image",
+            "type": "image",
+            "return_format": "array"
+        },
+        {
+            "key": "field_col_1_cta",
+            "label": "Fallback - CTA Text",
+            "name": "col_1_cta",
+            "type": "text",
+            "default_value": "Explore Dreamer"
+        },
+        {
+            "key": "field_col_1_url",
+            "label": "Fallback - Target URL",
+            "name": "col_1_url",
+            "type": "text",
+            "default_value": "/mattresses/dreamer"
+        },
+        {
+            "key": "field_col_2_tab",
+            "label": "Collection 2",
+            "type": "tab"
+        },
+        {
+            "key": "field_col_2_cat",
+            "label": "Select WooCommerce Category",
+            "name": "col_2_cat",
+            "type": "taxonomy",
+            "taxonomy": "product_cat",
+            "field_type": "select",
+            "allow_null": 1,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id"
+        },
+        {
+            "key": "field_col_2_name",
+            "label": "Fallback - Collection Name",
+            "name": "col_2_name",
+            "type": "text",
+            "default_value": "Love Series"
+        },
+        {
+            "key": "field_col_2_subtitle",
+            "label": "Fallback - Subtitle",
+            "name": "col_2_subtitle",
+            "type": "text",
+            "default_value": "Advanced Sleep Technology"
+        },
+        {
+            "key": "field_col_2_desc",
+            "label": "Fallback - Description",
+            "name": "col_2_desc",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "A technology-led range shaped around individual comfort preferences."
+        },
+        {
+            "key": "field_col_2_img",
+            "label": "Fallback - Collection Image",
+            "name": "col_2_image",
+            "type": "image",
+            "return_format": "array"
+        },
+        {
+            "key": "field_col_2_cta",
+            "label": "Fallback - CTA Text",
+            "name": "col_2_cta",
+            "type": "text",
+            "default_value": "Explore Love"
+        },
+        {
+            "key": "field_col_2_url",
+            "label": "Fallback - Target URL",
+            "name": "col_2_url",
+            "type": "text",
+            "default_value": "/mattresses/love"
+        },
+        {
+            "key": "field_col_3_tab",
+            "label": "Collection 3",
+            "type": "tab"
+        },
+        {
+            "key": "field_col_3_cat",
+            "label": "Select WooCommerce Category",
+            "name": "col_3_cat",
+            "type": "taxonomy",
+            "taxonomy": "product_cat",
+            "field_type": "select",
+            "allow_null": 1,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id"
+        },
+        {
+            "key": "field_col_3_name",
+            "label": "Fallback - Collection Name",
+            "name": "col_3_name",
+            "type": "text",
+            "default_value": "Signature Series"
+        },
+        {
+            "key": "field_col_3_subtitle",
+            "label": "Fallback - Subtitle",
+            "name": "col_3_subtitle",
+            "type": "text",
+            "default_value": "Engineered Beyond Comfort"
+        },
+        {
+            "key": "field_col_3_desc",
+            "label": "Fallback - Description",
+            "name": "col_3_desc",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Sophisticated constructions and premium materials for an elevated sleep experience."
+        },
+        {
+            "key": "field_col_3_img",
+            "label": "Fallback - Collection Image",
+            "name": "col_3_image",
+            "type": "image",
+            "return_format": "array"
+        },
+        {
+            "key": "field_col_3_cta",
+            "label": "Fallback - CTA Text",
+            "name": "col_3_cta",
+            "type": "text",
+            "default_value": "Explore Signature"
+        },
+        {
+            "key": "field_col_3_url",
+            "label": "Fallback - Target URL",
+            "name": "col_3_url",
+            "type": "text",
+            "default_value": "/mattresses/signature"
         }
     ],
     "location": [

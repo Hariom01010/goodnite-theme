@@ -5,3 +5,6 @@ deployment:
     - /bin/mkdir -p $DEPLOY_ROOT/wp-content/themes
     - /bin/mkdir -p $DEPLOY_ROOT/wp-content/plugins
     - /bin/cp -R wp-content/* $DEPLOY_ROOT/wp-content/
+    - /bin/mkdir -p $DEPLOY_ROOT/wp/wp-content/themes
+    - /bin/mkdir -p $DEPLOY_ROOT/wp/wp-content/plugins
+    - /bin/cp -R wp-content/* $DEPLOY_ROOT/wp/wp-content/

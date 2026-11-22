@@ -432,7 +432,7 @@
   };
 
   // ==========================================================================
-  // 6. Interactive Sleep Finder (2-Preference Selection)
+  // 6. Interactive Sleep Finder (2-Preference Selection with WooCommerce Matching)
   // ==========================================================================
   const initSleepFinder = () => {
     const finder = document.querySelector('[data-sleep-finder]');
@@ -441,16 +441,44 @@
     const buttons = Array.from(finder.querySelectorAll('.gn-sleep-finder__option'));
     const limitStatus = finder.querySelector('.gn-sleep-finder__limit');
     const cta = finder.querySelector('[data-finder-cta]');
+    const defaultLabel = finder.dataset.defaultCta || 'Find My Sleep Match';
+    let combinations = {};
+    try {
+      combinations = JSON.parse(finder.dataset.combinations || '{}');
+    } catch (e) {
+      combinations = {};
+    }
     const selected = [];
 
     const updateCTA = () => {
       if (!cta) return;
-      const base = cta.getAttribute('href')?.split('?')[0] || '/find-your-mattress';
+      const base = cta.dataset.baseUrl || cta.getAttribute('href')?.split('?')[0] || '/find-your-mattress';
+
+      if (selected.length === 2) {
+        const sortedKey = [...selected].sort().join('+');
+        if (combinations[sortedKey]) {
+          cta.setAttribute('href', combinations[sortedKey].url);
+          cta.innerHTML = `${combinations[sortedKey].label} <span aria-hidden="true">→</span>`;
+          return;
+        }
+      }
+
+      if (selected.length === 1) {
+        const activeBtn = buttons.find((b) => b.dataset.preference === selected[0]);
+        const prodUrl = activeBtn?.dataset.productUrl;
+        if (prodUrl) {
+          cta.setAttribute('href', prodUrl);
+          cta.innerHTML = `${defaultLabel} <span aria-hidden="true">→</span>`;
+          return;
+        }
+      }
+
       const url = new URL(base, window.location.origin);
       if (selected.length) {
         url.searchParams.set('preferences', selected.join(','));
       }
       cta.setAttribute('href', url.pathname + url.search);
+      cta.innerHTML = `${defaultLabel} <span aria-hidden="true">→</span>`;
     };
 
     buttons.forEach((btn) => {
@@ -660,7 +688,7 @@
       if (errorMsg) errorMsg.hidden = true;
     });
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const pin = input?.value.trim() || '';
 
@@ -671,31 +699,73 @@
       }
 
       if (pincodeLabel) pincodeLabel.textContent = pin;
-      if (resultsGrid) {
-        const cityName = cityFor(pin);
-        resultsGrid.innerHTML = `
-          <article class="locator-dealer-card">
-            <h4>Goodnite Sleep Studio</h4>
-            <ul>
-              <li>
-                <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-                <span>Central ${cityName}, ${pin}</span>
-              </li>
-              <li>
-                <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92Z"/></svg>
-                <span>+91 (080) 4123 9000</span>
-              </li>
-              <li>
-                <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-                <span>studio@goodniteindia.com</span>
-              </li>
-            </ul>
-          </article>
-        `;
-      }
-
       if (searchState) searchState.hidden = true;
       if (resultsPanel) resultsPanel.hidden = false;
+
+      if (resultsGrid) {
+        resultsGrid.innerHTML = `
+          <div class="locator-loading" style="padding: 24px; text-align: center; color: var(--color-ink-muted, #666);">
+            <span>Searching authorized dealers for ${pin}...</span>
+          </div>
+        `;
+
+        try {
+          // Query the official Goodnite Store Locator REST API endpoint
+          const apiUrl = `/wp-json/goodnite/v1/stores/search?pincode=${encodeURIComponent(pin)}`;
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+
+          if (data && data.success && data.dealers && data.dealers.length > 0) {
+            resultsGrid.innerHTML = data.dealers.map((dealer) => `
+              <article class="locator-dealer-card" style="border: 1px solid rgba(0,0,0,0.08); padding: 20px; border-radius: 8px; margin-bottom: 16px; background: #fff;">
+                <h4 style="margin: 0 0 10px; font-size: 1.15rem; color: var(--color-ink, #111);">${dealer.name}</h4>
+                <ul style="list-style: none; padding: 0; margin: 0 0 14px; font-size: 0.95rem; line-height: 1.6;">
+                  <li style="display: flex; gap: 8px; margin-bottom: 6px;">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                    <span>${dealer.address}, ${dealer.city} - ${dealer.pincode}</span>
+                  </li>
+                  ${dealer.phone ? `
+                    <li style="display: flex; gap: 8px; margin-bottom: 6px;">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92Z"/></svg>
+                      <a href="${dealer.phone_url}" style="color: inherit; text-decoration: underline;">${dealer.phone}</a>
+                    </li>
+                  ` : ''}
+                  ${dealer.timings ? `
+                    <li style="display: flex; gap: 8px; color: #666;">
+                      <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      <span>${dealer.timings}</span>
+                    </li>
+                  ` : ''}
+                </ul>
+                ${dealer.google_maps_link ? `
+                  <a href="${dealer.google_maps_link}" target="_blank" rel="noopener noreferrer" class="button-link text focus-ring" style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.9rem; font-weight: 600;">
+                    Get Directions →
+                  </a>
+                ` : ''}
+              </article>
+            `).join('');
+          } else {
+            resultsGrid.innerHTML = `
+              <div class="locator-empty" style="padding: 24px; text-align: center; border: 1px dashed rgba(0,0,0,0.15); border-radius: 8px; background: #fafafa;">
+                <p style="margin: 0 0 8px; font-weight: 500;">No authorized store found directly in pincode <strong>${pin}</strong>.</p>
+                <p style="margin: 0; font-size: 0.9rem; color: #666;">Try searching your city's central pincode or contact our concierge.</p>
+              </div>
+            `;
+          }
+        } catch (err) {
+          // Fallback if plugin API is not active or returns network error
+          const cityName = cityFor(pin);
+          resultsGrid.innerHTML = `
+            <article class="locator-dealer-card">
+              <h4>Goodnite Experience Partner</h4>
+              <ul>
+                <li><span>${cityName} Region, ${pin}</span></li>
+                <li><span>Call Store Concierge: +91 1800-GOODNITE</span></li>
+              </ul>
+            </article>
+          `;
+        }
+      }
     });
 
     resetBtn?.addEventListener('click', () => {

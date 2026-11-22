@@ -1,0 +1,87 @@
+{
+    "key": "group_goodnite_technology_section",
+    "title": "Homepage - Technology Section",
+    "fields": [
+        {
+            "key": "field_tech_title",
+            "label": "Section Heading",
+            "name": "tech_title",
+            "type": "text",
+            "default_value": "Inside Goodnite Technology."
+        },
+        {
+            "key": "field_tech_cta_label",
+            "label": "CTA Button Label",
+            "name": "tech_cta_label",
+            "type": "text",
+            "default_value": "Explore Technologies"
+        },
+        {
+            "key": "field_tech_cta_url",
+            "label": "CTA Button URL",
+            "name": "tech_cta_url",
+            "type": "text",
+            "default_value": "/sleep-technology"
+        },
+        {
+            "key": "field_tech_pillars",
+            "label": "Technology Pillars",
+            "name": "tech_pillars",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add Technology Pillar",
+            "sub_fields": [
+                {
+                    "key": "field_pillar_title",
+                    "label": "Pillar Title",
+                    "name": "title",
+                    "type": "text",
+                    "placeholder": "Our Fabric"
+                },
+                {
+                    "key": "field_pillar_description",
+                    "label": "Pillar Description",
+                    "name": "description",
+                    "type": "textarea",
+                    "rows": 3
+                },
+                {
+                    "key": "field_pillar_image",
+                    "label": "Pillar Image",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium"
+                },
+                {
+                    "key": "field_pillar_alt_text",
+                    "label": "Image Alt Text",
+                    "name": "alt_text",
+                    "type": "text"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/front-page.php"
+            }
+        ]
+    ],
+    "menu_order": 5,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true
+}

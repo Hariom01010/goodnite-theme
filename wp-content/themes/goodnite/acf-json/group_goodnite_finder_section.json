@@ -1,0 +1,188 @@
+{
+    "key": "group_goodnite_finder_section",
+    "title": "Homepage - Sleep Finder Section",
+    "fields": [
+        {
+            "key": "field_finder_title",
+            "label": "Finder Title",
+            "name": "finder_title",
+            "type": "text",
+            "default_value": "Your Sleep. Your Way."
+        },
+        {
+            "key": "field_finder_description",
+            "label": "Finder Description",
+            "name": "finder_description",
+            "type": "textarea",
+            "rows": 3,
+            "default_value": "Some prefer a cooler night. Others seek firmer support, softer comfort or more natural materials. Tell us what matters to you, and discover a better place to begin."
+        },
+        {
+            "key": "field_finder_prompt_text",
+            "label": "Prompt Heading",
+            "name": "finder_prompt_text",
+            "type": "text",
+            "default_value": "Choose Two Options :"
+        },
+        {
+            "key": "field_finder_image",
+            "label": "Visual Side Image",
+            "name": "finder_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_finder_primary_cta_label",
+            "label": "Primary CTA Label",
+            "name": "finder_primary_cta_label",
+            "type": "text",
+            "default_value": "Find My Sleep Match"
+        },
+        {
+            "key": "field_finder_primary_cta_url",
+            "label": "Primary CTA Fallback URL",
+            "name": "finder_primary_cta_url",
+            "type": "text",
+            "default_value": "/find-your-mattress"
+        },
+        {
+            "key": "field_finder_secondary_cta_label",
+            "label": "Secondary CTA Label",
+            "name": "finder_secondary_cta_label",
+            "type": "text",
+            "default_value": "Explore All Mattresses"
+        },
+        {
+            "key": "field_finder_secondary_cta_url",
+            "label": "Secondary CTA URL",
+            "name": "finder_secondary_cta_url",
+            "type": "text",
+            "default_value": "/mattresses"
+        },
+        {
+            "key": "field_finder_options_tab",
+            "label": "Preference Options",
+            "type": "tab"
+        },
+        {
+            "key": "field_finder_options",
+            "label": "Sleep Preferences (6 Options)",
+            "name": "finder_options",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add Preference Option",
+            "sub_fields": [
+                {
+                    "key": "field_opt_id",
+                    "label": "Option ID / Slug",
+                    "name": "id",
+                    "type": "text",
+                    "instructions": "Unique slug (e.g. cooling, support, pressure_relief, motion_isolation, natural, luxury)"
+                },
+                {
+                    "key": "field_opt_icon",
+                    "label": "Icon Symbol / Unicode",
+                    "name": "icon",
+                    "type": "text",
+                    "default_value": "✧"
+                },
+                {
+                    "key": "field_opt_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "default_value": "Stay Cooler"
+                },
+                {
+                    "key": "field_opt_subtitle",
+                    "label": "Subtitle / Description",
+                    "name": "subtitle",
+                    "type": "text",
+                    "default_value": "Cooling surfaces and breathable comfort."
+                },
+                {
+                    "key": "field_opt_default_product",
+                    "label": "Default WooCommerce Product",
+                    "name": "default_product",
+                    "type": "post_object",
+                    "post_type": ["product"],
+                    "allow_null": 1,
+                    "multiple": 0,
+                    "return_format": "id",
+                    "instructions": "Recommended WooCommerce product when this single option is picked."
+                }
+            ]
+        },
+        {
+            "key": "field_finder_combinations_tab",
+            "label": "Combination Recommendations",
+            "type": "tab"
+        },
+        {
+            "key": "field_finder_combinations",
+            "label": "Product Recommendations by Combination",
+            "name": "finder_combinations",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add Combination Rule",
+            "instructions": "Select which WooCommerce product to recommend when two options are selected.",
+            "sub_fields": [
+                {
+                    "key": "field_comb_pref_1",
+                    "label": "Preference 1 (ID)",
+                    "name": "pref_1",
+                    "type": "text",
+                    "instructions": "e.g. cooling, support, natural, luxury, etc."
+                },
+                {
+                    "key": "field_comb_pref_2",
+                    "label": "Preference 2 (ID)",
+                    "name": "pref_2",
+                    "type": "text",
+                    "instructions": "e.g. cooling, support, natural, luxury, etc."
+                },
+                {
+                    "key": "field_comb_product",
+                    "label": "Recommended WooCommerce Product",
+                    "name": "product",
+                    "type": "post_object",
+                    "post_type": ["product"],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "id"
+                },
+                {
+                    "key": "field_comb_cta_label",
+                    "label": "Custom CTA Label (optional)",
+                    "name": "cta_label",
+                    "type": "text",
+                    "placeholder": "View Recommended Mattress →"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/front-page.php"
+            }
+        ]
+    ],
+    "menu_order": 4,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true
+}

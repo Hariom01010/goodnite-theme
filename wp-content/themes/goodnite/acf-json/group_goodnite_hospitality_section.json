@@ -1,0 +1,72 @@
+{
+    "key": "group_goodnite_hospitality_section",
+    "title": "Homepage - Hospitality Section",
+    "fields": [
+        {
+            "key": "field_hospitality_eyebrow",
+            "label": "Eyebrow Text",
+            "name": "hospitality_eyebrow",
+            "type": "text",
+            "default_value": "GOODNITE HOSPITALITY"
+        },
+        {
+            "key": "field_hospitality_title",
+            "label": "Section Heading",
+            "name": "hospitality_title",
+            "type": "text",
+            "default_value": "Exceptional Sleep for Exceptional Stays."
+        },
+        {
+            "key": "field_hospitality_body",
+            "label": "Description Text",
+            "name": "hospitality_body",
+            "type": "textarea",
+            "rows": 4,
+            "default_value": "For hotels, resorts and hospitality destinations, Goodnite brings decades of international mattress expertise to the guest experience, delivering thoughtfully engineered comfort where expectations are high."
+        },
+        {
+            "key": "field_hospitality_image",
+            "label": "Showcase Image",
+            "name": "hospitality_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_hospitality_cta_label",
+            "label": "CTA Button Label",
+            "name": "hospitality_cta_label",
+            "type": "text",
+            "default_value": "Explore Hospitality Solutions"
+        },
+        {
+            "key": "field_hospitality_cta_url",
+            "label": "CTA Button URL",
+            "name": "hospitality_cta_url",
+            "type": "text",
+            "default_value": "/hospitality"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/front-page.php"
+            }
+        ]
+    ],
+    "menu_order": 6,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true
+}
