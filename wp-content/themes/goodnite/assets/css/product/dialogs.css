@@ -4,14 +4,17 @@
  * @package Goodnite
  */
 
+/* Base PDP Dialog Component */
 .gn-pdp-dialog {
-  width: min(880px, calc(100vw - 32px));
+  width: min(880px, calc(100vw - 30px));
   max-height: min(88vh, 860px);
-  padding: 32px;
-  border: none;
+  padding: 28px;
+  border: 0;
   background: #fff;
-  color: var(--ink);
+  color: var(--ink, #222);
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .gn-pdp-dialog::backdrop {
@@ -23,38 +26,48 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 18px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .gn-pdp-dialog__head h2 {
-  font-size: clamp(24px, 3.5vw, 36px);
+  margin: 0;
+  font-size: clamp(26px, 3.5vw, 36px);
   font-weight: 500;
+  color: var(--ink);
 }
 
 .gn-pdp-dialog__head button {
-  width: 40px;
-  height: 40px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--surface-warm);
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  border: 0;
+  background: var(--surface-warm, #f1efec);
   color: var(--ink);
-  font-size: 24px;
+  cursor: pointer;
+  transition: background 180ms ease;
 }
 
-/* Size Dialog */
+.gn-pdp-dialog__head button:hover {
+  background: #e6e3df;
+}
+
+/* 1. Size Selection Dialog */
 .gn-size-dialog {
-  width: min(720px, calc(100vw - 32px));
+  width: min(700px, calc(100vw - 30px));
+  padding: 28px 28px 0;
 }
 
 .gn-size-dialog__step {
-  padding-bottom: 22px;
+  padding-bottom: 24px;
 }
 
 .gn-size-dialog__step h3 {
-  font-size: var(--type-body);
+  margin: 0 0 12px;
+  font-size: var(--type-body, 16px);
   font-weight: 600;
-  margin-bottom: 12px;
+  color: var(--ink);
 }
 
 .gn-size-dialog__options {
@@ -64,14 +77,16 @@
 }
 
 .gn-size-dialog__options button {
-  min-height: 44px;
-  padding: 10px 16px;
-  border: 1px solid var(--border);
-  background: var(--surface-warm);
-  color: var(--ink);
-  font-size: var(--type-body-small);
+  min-height: 42px;
+  padding: 9px 14px;
+  border: 1px solid #e8e6e2;
+  border-radius: 0;
+  background: #fbfaf8;
+  color: #777;
+  font-size: var(--type-body-small, 14px);
   font-weight: 500;
-  transition: border-color 160ms ease, background 160ms ease;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
 }
 
 .gn-size-dialog__options button:hover,
@@ -81,21 +96,41 @@
   color: var(--brand-red);
 }
 
+.gn-size-dialog__options button[hidden] {
+  display: none;
+}
+
 .gn-size-dialog__footer {
-  padding-top: 18px;
+  position: sticky;
+  bottom: 0;
+  margin: 0 -28px;
+  padding: 18px 28px 28px;
   border-top: 1px solid var(--border-subtle);
+  background: #fff;
 }
 
 .gn-size-dialog__confirm {
   width: 100%;
   min-height: 50px;
+  border: 0;
+  border-radius: 4px;
   background: var(--brand-red);
   color: #fff;
-  font-size: var(--type-button);
+  font-size: var(--type-button, 14px);
   font-weight: 600;
+  cursor: pointer;
+  transition: background 180ms ease;
 }
 
-/* Chart Modal */
+.gn-size-dialog__confirm:hover {
+  background: var(--brand-red-hover);
+}
+
+/* 2. Size Chart Dialog */
+.gn-chart {
+  width: min(880px, calc(100vw - 30px));
+}
+
 .gn-chart__scroll {
   max-height: 55vh;
   overflow-y: auto;
@@ -110,24 +145,59 @@
 .gn-chart thead {
   position: sticky;
   top: 0;
+  z-index: 1;
   background: #f3f1ed;
 }
 
 .gn-chart th,
 .gn-chart td {
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--border);
+  padding: 13px 12px;
+  border-bottom: 1px solid #e9e6e2;
   text-align: left;
 }
 
-.gn-chart td button {
-  color: var(--brand-red);
+.gn-chart tbody th {
   font-weight: 500;
+  color: var(--ink);
 }
 
-/* Custom Size Calculator */
+.gn-chart td button {
+  display: block;
+  width: 100%;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: #222;
+  text-align: left;
+  cursor: pointer;
+}
+
+.gn-chart td button:hover,
+.gn-chart td button:focus-visible {
+  color: var(--brand-red);
+}
+
+.gn-chart td button::after {
+  content: 'Select';
+  display: inline;
+  margin-left: 8px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--brand-red);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 3. Custom Size Calculator */
 .gn-custom {
-  width: min(620px, calc(100vw - 32px));
+  width: min(620px, calc(100vw - 30px));
+}
+
+.gn-custom > p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 18px;
 }
 
 .gn-custom__form {
@@ -138,79 +208,465 @@
 .gn-custom__dimensions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 12px;
 }
 
 .gn-custom__dimensions label {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  display: grid;
+  gap: 7px;
   font-size: 13px;
   font-weight: 600;
 }
 
 .gn-custom__dimensions input {
+  width: 100%;
   height: 48px;
-  padding: 0 12px;
-  border: 1px solid var(--border);
+  padding: 9px 12px;
+  border: 1px solid #bdb9b3;
+  box-sizing: border-box;
+}
+
+.gn-custom fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.gn-custom legend {
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.gn-custom fieldset label {
+  font-size: 13px;
+  cursor: pointer;
 }
 
 .gn-custom__estimate {
+  display: grid;
+  gap: 3px;
   padding: 18px;
   background: var(--surface-warm);
-  display: grid;
-  gap: 4px;
+}
+
+.gn-custom__estimate span,
+.gn-custom__estimate small {
+  color: #686868;
+  font-size: 12px;
 }
 
 .gn-custom__estimate strong {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
+}
+
+.gn-custom__estimate strong.is-warning {
+  color: #686868;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.gn-custom__estimate .gn-custom__summary {
+  color: #686868;
+  font-size: 12px;
+}
+
+.gn-custom__error {
+  margin: 0;
+  color: #ae0000;
+  font-size: 13px;
 }
 
 .gn-custom__submit {
   min-height: 50px;
+  border: 0;
+  border-radius: 4px;
   background: var(--brand-red);
   color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 180ms ease;
+}
+
+.gn-custom__submit:hover {
+  background: var(--brand-red-hover);
+}
+
+.gn-custom__submit:disabled {
+  background: #bbb;
+  cursor: not-allowed;
+}
+
+/* 4. Pillow Top Information Dialog */
+.gn-pillow-info {
+  width: min(500px, calc(100vw - 30px));
+}
+
+.gn-pillow-info p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 5. Help Callback Dialog */
+.gn-help-dialog {
+  width: min(520px, calc(100vw - 30px));
+}
+
+.gn-help-dialog__intro {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+
+.gn-help-form {
+  display: grid;
+  gap: 16px;
+}
+
+.gn-help-form label {
+  display: grid;
+  gap: 7px;
+  font-size: 13px;
   font-weight: 600;
 }
 
-/* Sticky Bottom Bar */
-.gn-pdp__sticky:not([hidden]) {
-  position: fixed;
-  z-index: 45;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  min-height: 68px;
-  padding: 10px 24px calc(10px + env(safe-area-inset-bottom));
-  border-top: 1px solid var(--border);
-  background: #fff;
-  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.06);
+.gn-help-form input {
+  width: 100%;
+  height: 48px;
+  padding: 9px 12px;
+  border: 1px solid #bdb9b3;
+  box-sizing: border-box;
 }
 
-.gn-pdp__sticky button {
+.gn-help-form input[aria-invalid="true"] {
+  border-color: #ae0000;
+  box-shadow: 0 0 0 1px #ae0000;
+}
+
+.gn-help-form__error {
+  margin: 0;
+  color: #ae0000;
+  font-size: 13px;
+}
+
+.gn-help-form__submit {
+  min-height: 50px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--brand-red);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 180ms ease;
+}
+
+.gn-help-form__submit:hover {
+  background: var(--brand-red-hover);
+}
+
+.gn-help-form__success {
+  margin: 0;
+  color: #236b35;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* 6. Store Locator Dialog */
+.gn-store-locator {
+  width: min(620px, calc(100vw - 30px));
+}
+
+.gn-store-locator .locator-copy {
+  max-width: none;
+  padding: 0;
+  text-align: left;
+}
+
+.gn-store-locator .locator-copy > p {
+  margin: 0 0 18px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.gn-store-locator .search-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  min-height: 0;
+  border: 0;
+}
+
+.gn-store-locator .store-search-input {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  align-items: center;
+  min-height: 54px;
+  border: 1px solid #cfcfcf;
+}
+
+.gn-store-locator .store-search-input svg {
+  justify-self: center;
+  color: var(--text-muted);
+}
+
+.gn-store-locator .store-search-input input {
+  min-width: 0;
+  height: 52px;
+  padding: 0 15px;
+  border: 0;
+  outline: 0;
+  font-size: 1rem;
+}
+
+.gn-store-locator .search-field > button {
+  min-height: 54px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--brand-red);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 180ms ease;
+}
+
+.gn-store-locator .search-field > button:hover {
+  background: var(--brand-red-hover);
+}
+
+.gn-store-locator .locator-results {
+  margin-top: 28px;
+}
+
+.gn-store-locator .locator-results__head {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 16px;
+}
+
+.gn-store-locator .locator-results__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.gn-store-locator .locator-reset {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 46px;
-  padding: 0 20px;
-  background: var(--brand-red);
-  color: #fff;
+  margin-top: 16px;
+  border: 0;
+  background: none;
+  color: var(--brand-red);
+  font-size: 13px;
   font-weight: 600;
-  font-size: 14px;
+  cursor: pointer;
 }
 
-@media (max-width: 767px) {
+.gn-store-locator .locator-results__note {
+  display: block;
+  margin-top: 12px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* 7. Gallery Zoom Dialog */
+.gn-zoom {
+  width: min(850px, calc(100vw - 24px));
+  max-height: 90vh;
+  padding: 12px;
+  background: #fff;
+}
+
+.gn-zoom > button {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  background: var(--surface-warm, #f1efec);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.gn-zoom img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(90vh - 24px);
+  margin: auto;
+  object-fit: contain;
+}
+
+/* 8. Sticky Bottom Bar */
+.gn-pdp__sticky {
+  display: none;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
   .gn-pdp-dialog {
     width: 100vw;
+    max-width: 100vw;
     height: 100dvh;
     max-height: 100dvh;
+    margin: 0;
     padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .gn-pdp-dialog__head {
+    position: sticky;
+    z-index: 3;
+    top: -20px;
+    margin-inline: -4px;
+    padding: 4px 4px 12px;
+    background: #fff;
+  }
+
+  .gn-pdp-dialog__head h2 {
+    font-size: clamp(24px, 6vw, 32px);
+  }
+
+  .gn-size-dialog {
+    padding-bottom: 0;
+  }
+
+  .gn-size-dialog__footer {
+    margin-inline: -20px;
+    padding: 16px 20px;
+  }
+
+  .gn-chart__scroll {
+    max-height: calc(100dvh - 170px);
+    overflow-x: hidden;
+  }
+
+  .gn-chart thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .gn-chart table,
+  .gn-chart tbody,
+  .gn-chart tr {
+    display: block;
+    width: 100%;
+  }
+
+  .gn-chart tr {
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border: 1px solid #e3dfd9;
+  }
+
+  .gn-chart th,
+  .gn-chart td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 0;
+    border-bottom: 1px solid #eee;
+    text-align: right;
+    font-size: 13px;
+  }
+
+  .gn-chart th::before,
+  .gn-chart td::before {
+    content: attr(data-label);
+    flex: 0 0 48%;
+    color: #696969;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .gn-chart td button {
+    width: auto;
+    text-align: right;
+  }
+
+  .gn-chart td button span {
+    display: inline;
+    margin-left: 5px;
+  }
+
+  .gn-custom__dimensions {
+    grid-template-columns: 1fr;
+  }
+
+  .gn-custom__dimensions input {
+    height: 50px;
+  }
+
+  .gn-store-locator .search-field {
+    grid-template-columns: 1fr;
+  }
+
+  .gn-store-locator .search-field > button {
+    grid-column: auto;
+    min-height: 50px;
+  }
+
+  .gn-pdp__sticky:not([hidden]) {
+    position: fixed;
+    z-index: 45;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    gap: 10px;
+    min-height: 68px;
+    padding: 9px max(18px, env(safe-area-inset-right)) calc(9px + env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
+    border-top: 1px solid var(--border);
+    background: var(--background, #fff);
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  .gn-pdp__sticky button {
+    width: 100%;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--brand-red);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .gn-pdp__sticky button svg {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
   }
 }
-

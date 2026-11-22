@@ -39,35 +39,22 @@ function goodnite_enqueue_assets(): void {
 	);
 	wp_script_add_data( 'goodnite-theme', 'strategy', 'defer' );
 
-	// 2. Modular Home Sections (Enqueued conditionally on the front page or homepage template).
+	// 2. Homepage Stylesheet (Consolidated production-grade styles for all 9 sections).
 	$is_home_screen = is_front_page()
 		|| is_home()
 		|| is_page_template( 'page-templates/template-home.php' )
-		|| is_page( 'home' );
+		|| is_page_template( 'page-find-your-mattress.php' )
+		|| is_page( array( 'home', 'homepage', 'find-your-mattress', 'stores' ) );
 
 	if ( $is_home_screen ) {
-		$home_sections = array(
-			'hero'        => 'section-hero.css',
-			'usp'         => 'section-usp-strip.css',
-			'legacy'      => 'section-legacy.css',
-			'collections' => 'section-collections.css',
-			'finder'      => 'section-finder.css',
-			'technology'  => 'section-technology.css',
-			'products'    => 'section-products.css',
-			'hospitality' => 'section-hospitality.css',
-			'locator'     => 'section-locator.css',
-		);
-
-		foreach ( $home_sections as $sec_key => $sec_file ) {
-			$file_path = get_template_directory() . '/assets/css/home/' . $sec_file;
-			if ( file_exists( $file_path ) ) {
-				wp_enqueue_style(
-					'goodnite-home-' . $sec_key,
-					get_template_directory_uri() . '/assets/css/home/' . $sec_file,
-					array( 'goodnite-theme' ),
-					(string) filemtime( $file_path )
-				);
-			}
+		$home_css = get_template_directory() . '/assets/css/home.css';
+		if ( file_exists( $home_css ) ) {
+			wp_enqueue_style(
+				'goodnite-home',
+				get_template_directory_uri() . '/assets/css/home.css',
+				array( 'goodnite-theme' ),
+				(string) filemtime( $home_css )
+			);
 		}
 	}
 

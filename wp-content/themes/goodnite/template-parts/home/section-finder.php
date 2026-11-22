@@ -78,10 +78,10 @@ if ( function_exists( 'get_field' ) ) {
 // Fallback: exactly 4 options matching Goodnite Website/Homepage.
 if ( empty( $finder_options ) ) {
 	$finder_options = array(
-		array( 'id' => 'cooling', 'title' => 'Stay Cooler', 'icon' => '✧', 'product_url' => '' ),
-		array( 'id' => 'support', 'title' => 'Feel Supported', 'icon' => '⌁', 'product_url' => '' ),
-		array( 'id' => 'pressure_relief', 'title' => 'Ease Pressure', 'icon' => '∿', 'product_url' => '' ),
-		array( 'id' => 'motion_isolation', 'title' => 'Sleep Undisturbed', 'icon' => '☾', 'product_url' => '' ),
+		array( 'id' => 'cooling', 'title' => 'Stay Cooler', 'icon' => '○', 'product_url' => '' ),
+		array( 'id' => 'support', 'title' => 'Feel Supported', 'icon' => '○', 'product_url' => '' ),
+		array( 'id' => 'pressure_relief', 'title' => 'Ease Pressure', 'icon' => '○', 'product_url' => '' ),
+		array( 'id' => 'motion_isolation', 'title' => 'Sleep Undisturbed', 'icon' => '○', 'product_url' => '' ),
 	);
 }
 

@@ -1,5 +1,6 @@
 /**
  * Home: Brand USP Strip Component
+ * 1:1 Visual Parity with Goodnite Prototype & Template Markup
  *
  * @package Goodnite
  */
@@ -21,6 +22,10 @@
   width: max-content;
   animation: gnUspMarquee 52s linear infinite;
   will-change: transform;
+}
+
+.gn-usp-strip:hover .gn-usp-strip__track {
+  animation-play-state: paused;
 }
 
 .gn-usp-strip__group {
@@ -67,6 +72,13 @@
   stroke-linejoin: round;
 }
 
+.gn-usp-strip__icon-img {
+  width: 28px;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 .gn-usp-strip__copy {
   display: flex;
   flex-direction: column;
@@ -82,12 +94,6 @@
   letter-spacing: 0.09em;
 }
 
-.gn-usp-strip__description {
-  color: var(--text-secondary);
-  font-size: var(--type-body-small);
-  line-height: 1.35;
-}
-
 @keyframes gnUspMarquee {
   from {
     transform: translateX(0);
@@ -97,24 +103,20 @@
   }
 }
 
-@media (hover: hover) {
-  .gn-usp-strip:hover .gn-usp-strip__track {
-    animation-play-state: paused;
-  }
-}
-
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .gn-usp-strip__group {
+    display: flex;
     width: max-content;
     min-width: max-content;
   }
+
   .gn-usp-strip__item {
     width: 248px;
     min-width: 248px;
-    padding: 18px 12px;
+    padding: 18px 16px;
   }
+
   .gn-usp-strip__title {
     font-size: 13px;
   }
 }
-

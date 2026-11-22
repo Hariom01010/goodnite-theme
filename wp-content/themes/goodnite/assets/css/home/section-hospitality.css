@@ -1,22 +1,27 @@
 /**
  * Home: Hospitality Showcase Component (Exceptional Sleep for Exceptional Stays)
+ * 1:1 Visual Parity with Goodnite Prototype & Template Markup
  *
  * @package Goodnite
  */
 
 .gn-hospitality {
+  height: clamp(560px, 48vw, 620px);
+  min-height: clamp(560px, 48vw, 620px);
   display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(420px, 0.88fr);
-  min-height: 720px;
-  background: #202020;
+  grid-template-columns: minmax(0, 1.08fr) minmax(380px, 0.92fr);
+  grid-template-rows: minmax(0, 1fr);
+  background: var(--editorial-dark, #191919);
   color: #fff;
   overflow: hidden;
 }
 
 .gn-hospitality__visual {
-  min-height: 720px;
+  min-height: 0;
+  height: auto;
+  position: relative;
   overflow: hidden;
-  background: #e8e3dc;
+  background: #202020;
 }
 
 .gn-hospitality__visual img {
@@ -30,51 +35,53 @@
 .gn-hospitality__content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   min-width: 0;
-  padding: clamp(54px, 6vw, 96px) clamp(34px, 6vw, 92px);
+  padding: 44px 40px;
 }
 
 .gn-hospitality__content h2 {
-  font-size: var(--type-display-l);
+  max-width: 460px;
+  margin: 0 0 16px;
+  font-size: clamp(2.4rem, 3.8vw, 3.2rem);
   font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.035em;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
   color: #fff;
-  margin-bottom: 20px;
 }
 
 .gn-hospitality__description {
-  max-width: 540px;
-  font-size: var(--type-body);
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.76);
-  margin-bottom: 32px;
+  max-width: 470px;
+  margin: 0 0 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .gn-hospitality__cta {
   align-self: flex-start;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
 }
 
 .gn-hospitality__clients {
   margin-top: auto;
+  padding-top: 16px;
 }
 
 .gn-hospitality__clients-label {
+  margin-bottom: 14px;
+  color: rgba(255, 255, 255, 0.52);
   font-size: var(--type-eyebrow);
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.52);
-  margin-bottom: 16px;
 }
 
 .gn-hospitality__marquee {
   position: relative;
   max-width: 100%;
   overflow: hidden;
-  padding: 6px 0;
+  padding: 4px 0;
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
@@ -85,7 +92,8 @@
   animation: gnHospitalityMarquee 58s linear infinite;
 }
 
-.gn-hospitality__marquee:hover .gn-hospitality__marquee-track {
+.gn-hospitality__marquee:hover .gn-hospitality__marquee-track,
+.gn-hospitality__marquee:focus-within .gn-hospitality__marquee-track {
   animation-play-state: paused;
 }
 
@@ -94,66 +102,61 @@
   align-items: center;
   gap: 34px;
   padding-right: 34px;
-  white-space: nowrap;
 }
 
 .gn-hospitality__logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: auto;
   height: 48px;
-  min-height: 48px;
-  flex: 0 0 auto;
+  opacity: 0.7;
+  transition: opacity 200ms ease;
+}
+
+.gn-hospitality__logo:hover {
+  opacity: 1;
 }
 
 .gn-hospitality__logo img {
-  display: block;
+  max-height: 42px;
+  max-width: 120px;
   width: auto;
-  height: 48px;
-  max-width: 160px;
+  height: auto;
   object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 @keyframes gnHospitalityMarquee {
-  from {
+  0% {
     transform: translateX(0);
   }
-  to {
+  100% {
     transform: translateX(-50%);
   }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 768px) {
   .gn-hospitality {
-    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.85fr);
-    min-height: 620px;
-  }
-  .gn-hospitality__visual {
-    min-height: 620px;
-  }
-  .gn-hospitality__content {
-    padding-inline: 40px;
-  }
-}
-
-@media (max-width: 767px) {
-  .gn-hospitality {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    height: auto;
     min-height: auto;
   }
+
   .gn-hospitality__visual {
-    order: 1;
     min-height: 320px;
     height: 320px;
   }
+
   .gn-hospitality__content {
-    order: 2;
-    padding: 44px 20px;
+    padding: 40px 20px;
   }
-  .gn-hospitality__cta {
-    width: 100%;
+
+  .gn-hospitality__content h2 {
+    font-size: clamp(2rem, 8vw, 2.6rem);
+  }
+
+  .gn-hospitality__clients {
+    padding-top: 28px;
   }
 }
-

@@ -125,8 +125,8 @@ for ( $i = 1; $i <= 3; $i++ ) {
 							<img src="<?php echo esc_url( $collection['image_url'] ); ?>" alt="<?php echo esc_attr( $collection['alt'] ? $collection['alt'] : $collection['title'] ); ?>" width="1086" height="1448" loading="lazy" decoding="async">
 						</div>
 						<div class="collection-meta">
-							<span><?php echo esc_html( $collection['id'] ); ?></span>
-							<div>
+							<span class="collection-meta-num"><?php echo esc_html( $collection['id'] ); ?></span>
+							<div class="collection-meta-body">
 								<h3><?php echo esc_html( $collection['title'] ); ?></h3>
 								<strong><?php echo esc_html( $collection['subtitle'] ); ?></strong>
 								<p><?php echo esc_html( $collection['description'] ); ?></p>

@@ -1,22 +1,1153 @@
 /**
  * Goodnite Master Theme Stylesheet
- * Clean, modular architecture.
+ * Clean, modular architecture: global baseline, header, navigation, and footer.
  *
  * @package Goodnite
  */
 
-/* 1. Global Baseline */
-@import "global/variables.css";
-@import "global/reset.css";
-@import "global/typography.css";
-@import "global/buttons.css";
+/* --- assets/css/global/variables.css --- */
+/**
+ * Global CSS Design Tokens and Variables
+ *
+ * @package Goodnite
+ */
 
-/* 2. Header & Navigation */
-@import "header/header.css";
-@import "header/navigation.css";
-@import "header/mega-menu.css";
-@import "header/mobile-drawer.css";
-@import "header/search-modal.css";
+:root {
+  /* Colors */
+  --background: #ffffff;
+  --foreground: #1c1c1c;
+  --brand-red: #d90000;
+  --brand-red-hover: #b90000;
+  --white: #ffffff;
+  --ink: #1c1c1c;
+  --text-primary: #1c1c1c;
+  --text-secondary: #626262;
+  --text-muted: #777777;
+  --surface-warm: #f7f6f3;
+  --surface-light: #f3f3f3;
+  --border: #e5e5e5;
+  --border-subtle: #e5e5e5;
+  --editorial-dark: #191919;
+  --ring: #d90000;
 
-/* 3. Footer */
-@import "footer/footer.css";
+  /* Typography Scale */
+  --type-display-xl: clamp(4.25rem, 5.35vw, 4.75rem);
+  --type-display-l: clamp(2.75rem, 4vw, 3.5rem);
+  --type-h1: clamp(3rem, 4.5vw, 4rem);
+  --type-h2: clamp(2.75rem, 4vw, 3.5rem);
+  --type-h3: 1.7rem;
+  --type-h4: 1.45rem;
+  --type-h5: 1.65rem;
+  --type-h6: 1.16rem;
+  --type-body-large: 1.12rem;
+  --type-body: 1.05rem;
+  --type-body-small: 0.9rem;
+  --type-caption: 0.82rem;
+  --type-eyebrow: 0.75rem;
+  --type-button: 0.93rem;
+  --type-navigation: 0.88rem;
+  --type-metric-xl: clamp(2rem, 2.5vw, 2.75rem);
+
+  /* Transitions */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-fast: 180ms ease;
+  --transition-normal: 240ms ease;
+  --transition-smooth: 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --type-display-xl: clamp(3.2rem, 7vw, 4.25rem);
+    --type-h2: clamp(2.4rem, 5vw, 3rem);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --type-display-xl: clamp(2.7rem, 12vw, 3.35rem);
+    --type-h2: clamp(2.2rem, 10vw, 2.75rem);
+    --type-body-large: 1rem;
+    --type-body: 1rem;
+  }
+}
+
+
+
+/* --- assets/css/global/reset.css --- */
+/**
+ * Global CSS Reset & Baseline Styles
+ *
+ * @package Goodnite
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+body.navigation-open,
+body.search-is-open {
+  overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+::selection {
+  color: #fff;
+  background: var(--brand-red);
+}
+
+.screen-reader-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.screen-reader-text:focus {
+  z-index: 99999;
+  top: 8px;
+  left: 8px;
+  width: auto;
+  height: auto;
+  padding: 12px 16px;
+  margin: 0;
+  clip: auto;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.focus-ring:focus-visible {
+  outline: 3px solid rgba(217, 0, 0, 0.35);
+  outline-offset: 4px;
+}
+
+.container-shell {
+  width: min(100% - 40px, 1280px);
+  margin-inline: auto;
+}
+
+@media (max-width: 1023px) {
+  .container-shell {
+    width: min(100% - 56px, 1152px);
+  }
+}
+
+@media (max-width: 767px) {
+  .container-shell {
+    width: calc(100% - 32px);
+  }
+}
+
+
+
+/* --- assets/css/global/typography.css --- */
+/**
+ * Global Typography Styles
+ *
+ * @package Goodnite
+ */
+
+.section h2 {
+  font-size: var(--type-h2);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  color: var(--ink);
+}
+
+.section p {
+  font-size: var(--type-body);
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.eyebrow {
+  display: block;
+  font-size: var(--type-eyebrow);
+  line-height: 1.2;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--brand-red);
+}
+
+.card-title {
+  font-size: var(--type-h3);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.card-body {
+  font-size: var(--type-body-small);
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.metrics strong {
+  display: block;
+  font-size: var(--type-metric-xl);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.metrics span {
+  display: block;
+  font-size: var(--type-caption);
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+.product-status {
+  font-size: 0.66rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+
+
+/* --- assets/css/global/buttons.css --- */
+/**
+ * Global Buttons and Call-to-Action Elements
+ *
+ * @package Goodnite
+ */
+
+.button-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 24px;
+  font-family: inherit;
+  font-size: var(--type-button);
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+/* Primary Red Button */
+.button-link.primary {
+  background: var(--brand-red);
+  color: #fff;
+  border: 1px solid var(--brand-red);
+}
+
+.button-link.primary:hover {
+  background: var(--brand-red-hover);
+  border-color: var(--brand-red-hover);
+  color: #fff;
+}
+
+/* Secondary Translucent Button (e.g. over hero imagery) */
+.button-link.secondary-light {
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  color: #fff;
+  background: rgba(15, 15, 15, 0.15);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.button-link.secondary-light:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* Outline Button */
+.button-link.outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid #1c1c1c;
+}
+
+.button-link.outline:hover {
+  background: #1c1c1c;
+  color: #fff;
+}
+
+/* Text-Only Link with Chevron/Arrow */
+.button-link.text {
+  min-height: auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--brand-red);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.button-link.text:hover {
+  border-bottom-color: var(--brand-red);
+  color: var(--brand-red);
+}
+
+.button-link.text svg {
+  transition: transform 220ms ease;
+}
+
+.button-link.text:hover svg {
+  transform: translateX(4px);
+}
+
+.button-link:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+
+/* --- assets/css/header/header.css --- */
+/**
+ * Site Header Component
+ * 1:1 Parity with Goodnite Website/Homepage
+ *
+ * @package Goodnite
+ */
+
+.announcement {
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: var(--brand-red, #d90000);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(251, 250, 248, 0.97);
+  border-bottom: 1px solid transparent;
+  transition: min-height 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+}
+
+.site-header.is-compact {
+  border-color: var(--border-subtle, #e5e5e5);
+  box-shadow: 0 10px 34px rgba(20, 20, 20, 0.05);
+}
+
+.header-row {
+  min-height: 80px;
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  align-items: center;
+  gap: 24px;
+  transition: min-height 240ms ease;
+}
+
+.site-header.is-compact .header-row {
+  min-height: 70px;
+}
+
+.custom-logo-link,
+.brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+}
+
+.custom-logo,
+.brand-logo-image {
+  display: block;
+  width: auto;
+  max-width: 150px;
+  max-height: 52px;
+  object-fit: contain;
+}
+
+.desktop-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 34px);
+}
+
+.desktop-nav .primary-menu,
+.desktop-nav .menu-primary-navigation-container > ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 34px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desktop-nav a,
+.nav-trigger {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink, #1c1c1c);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 180ms ease;
+}
+
+.desktop-nav a:hover,
+.nav-trigger:hover,
+.nav-trigger[aria-expanded="true"] {
+  color: var(--brand-red, #d90000);
+}
+
+.header-utilities {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon-button {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--ink, #1c1c1c);
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  color: var(--brand-red, #d90000);
+}
+
+/* Crucial: Mobile menu hamburger must be HIDDEN on desktop */
+.icon-button.mobile-menu-button,
+.mobile-menu-button {
+  display: none;
+}
+
+.admin-bar .site-header {
+  top: 32px;
+}
+
+@media (max-width: 768px) {
+  .admin-bar .site-header {
+    top: 46px;
+  }
+
+  .header-row {
+    min-height: 64px;
+    grid-template-columns: 48px 1fr 48px;
+    gap: 12px;
+  }
+
+  .icon-button.mobile-menu-button,
+  .mobile-menu-button {
+    display: grid;
+    place-items: center;
+  }
+
+  .brand-logo-link,
+  .custom-logo-link {
+    justify-self: center;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+}
+
+
+/* --- assets/css/header/navigation.css --- */
+/**
+ * Header Navigation Component
+ *
+ * @package Goodnite
+ */
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.desktop-nav .primary-menu,
+.desktop-nav .menu-primary-navigation-container > ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 34px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desktop-nav a,
+.nav-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 4px;
+  font-family: inherit;
+  font-size: var(--type-navigation);
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  transition: color 180ms ease;
+}
+
+.desktop-nav a:hover,
+.nav-trigger:hover,
+.nav-trigger[aria-expanded="true"] {
+  color: var(--brand-red);
+}
+
+.header-utilities {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.header-store-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--type-navigation);
+  font-weight: 500;
+  color: var(--brand-red);
+  white-space: nowrap;
+}
+
+.header-store-cta:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.search-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--ink);
+  transition: color 180ms ease;
+}
+
+.search-button:hover {
+  color: var(--brand-red);
+}
+
+.search-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 1023px) {
+  .desktop-nav {
+    display: none;
+  }
+}
+
+
+
+/* --- assets/css/header/mega-menu.css --- */
+/**
+ * Header Mega Menu Component
+ * 1:1 Parity with Goodnite Website/Homepage & header.php
+ *
+ * @package Goodnite
+ */
+
+.mega-menu {
+  position: absolute;
+  inset: 100% 0 auto;
+  background: var(--surface-page, #fbfaf8);
+  border-top: 1px solid var(--border-subtle, #e5e5e5);
+  border-bottom: 1px solid var(--border-subtle, #e5e5e5);
+  box-shadow: 0 24px 44px rgba(20, 20, 20, 0.09);
+  z-index: 40;
+}
+
+.mega-menu[hidden] {
+  display: none;
+}
+
+.mega-grid {
+  display: grid;
+  grid-template-columns: 1.25fr repeat(3, 1fr);
+  gap: 0;
+  padding-block: 34px 38px;
+}
+
+.mega-grid > * {
+  padding: 8px 26px;
+  border-left: 1px solid var(--border-subtle, #e5e5e5);
+}
+
+.mega-grid > :first-child {
+  border-left: 0;
+}
+
+.mega-grid > a.mega-collection-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  transition: color 180ms ease;
+  color: var(--ink, #1c1c1c);
+}
+
+.mega-grid > a.mega-collection-link:hover {
+  color: var(--brand-red, #d90000);
+}
+
+.mega-collection-icon {
+  display: block;
+  width: 72px;
+  height: 72px;
+  margin: 0 0 10px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.mega-grid > a.mega-collection-link small {
+  margin: 0 0 5px;
+  color: var(--brand-red, #d90000);
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.mega-grid > a.mega-collection-link strong {
+  margin: 0 0 6px;
+  color: var(--ink, #1c1c1c);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.mega-grid > a.mega-collection-link span {
+  color: var(--text-secondary, #626262);
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .mega-menu {
+    display: none !important;
+  }
+}
+
+
+/* --- assets/css/header/mobile-drawer.css --- */
+/**
+ * Mobile Navigation Drawer Component
+ * 1:1 Parity with Goodnite Website/Homepage & mobile-drawer.php
+ *
+ * @package Goodnite
+ */
+
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.46);
+}
+
+.mobile-overlay[hidden] {
+  display: none;
+}
+
+.mobile-sheet {
+  width: min(92vw, 430px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-page, #fbfaf8);
+  color: var(--ink, #1c1c1c);
+  padding: 16px 8px 28px;
+  box-shadow: 20px 0 50px rgba(0, 0, 0, 0.18);
+  animation: drawer-in 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  overflow-y: auto;
+}
+
+.mobile-sheet-head {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  padding: 12px 16px 24px;
+  border-bottom: 1px solid var(--border-subtle, #e5e5e5);
+}
+
+.mobile-sheet-head > button {
+  position: absolute;
+  top: 3px;
+  right: 10px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--ink, #1c1c1c);
+  cursor: pointer;
+}
+
+@keyframes drawer-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+}
+
+.mobile-nav > a,
+.mobile-nav summary,
+.mobile-primary-menu > li > a {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle, #e5e5e5);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--ink, #1c1c1c);
+  cursor: pointer;
+  list-style: none;
+}
+
+.mobile-nav summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-nav details[open] summary svg {
+  transform: rotate(180deg);
+}
+
+.mobile-subnav {
+  display: grid;
+  padding: 8px 0 12px 16px;
+  border-bottom: 1px solid var(--border-subtle, #e5e5e5);
+}
+
+.mobile-subnav a {
+  padding: 11px 0;
+  color: var(--text-secondary, #626262);
+  font-size: 0.95rem;
+}
+
+.mobile-collection-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-collection-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.mobile-primary-menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mobile-utility-links {
+  margin: auto 16px 0;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-subtle, #e5e5e5);
+  color: var(--text-secondary, #626262);
+  font-size: 0.84rem;
+}
+
+.mobile-utility-links .utility-menu {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+
+/* --- assets/css/header/search-modal.css --- */
+/**
+ * Header Search Modal Component
+ * 1:1 Parity with Goodnite Website/Homepage & search-modal.php
+ *
+ * @package Goodnite
+ */
+
+.gn-search-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+}
+
+.gn-search-panel[hidden] {
+  display: none;
+}
+
+.gn-search-panel__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.35);
+}
+
+.gn-search-panel__surface {
+  position: absolute;
+  top: var(--search-top, 112px);
+  left: 50%;
+  width: min(1180px, calc(100% - 40px));
+  max-height: min(680px, calc(100vh - var(--search-top, 112px) - 24px));
+  overflow-y: auto;
+  transform: translateX(-50%);
+  padding: 28px 34px 32px;
+  background: #fff;
+  color: var(--ink, #1c1c1c);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+  animation: gnSearchIn 220ms ease both;
+}
+
+@keyframes gnSearchIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.gn-search-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.gn-search-panel__head h2 {
+  margin: 0;
+  font-size: var(--type-h5, 1.25rem);
+  font-weight: 500;
+}
+
+.gn-search-panel__close {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: transparent;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--ink, #1c1c1c);
+  cursor: pointer;
+}
+
+.gn-search-panel__form {
+  display: grid;
+  grid-template-columns: 24px 1fr 34px;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  border-bottom: 1px solid var(--ink, #1c1c1c);
+}
+
+.gn-search-panel__form input {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: 1.15rem;
+  color: var(--ink, #1c1c1c);
+}
+
+.gn-search-panel__clear {
+  border: 0;
+  background: transparent;
+  font-size: 20px;
+  color: var(--text-muted, #777);
+  cursor: pointer;
+}
+
+.gn-search-panel__clear[hidden] {
+  display: none;
+}
+
+.gn-search-panel__initial {
+  margin-top: 24px;
+}
+
+.gn-search-panel__kicker {
+  margin: 0 0 12px;
+  color: var(--text-muted, #777);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.gn-search-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.gn-search-suggestion-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--border-subtle, #e5e5e5);
+  border-radius: 99px;
+  background: var(--surface-warm, #f7f6f3);
+  font-size: 0.84rem;
+  color: var(--ink, #1c1c1c);
+  cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.gn-search-suggestion-btn:hover {
+  border-color: var(--brand-red, #d90000);
+  background: #fff;
+  color: var(--brand-red, #d90000);
+}
+
+.gn-search-panel__results {
+  margin-top: 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.gn-search-panel__results[hidden],
+.gn-search-panel__empty[hidden] {
+  display: none;
+}
+
+.gn-search-panel__empty {
+  margin: 24px 0 0;
+  color: var(--text-secondary, #626262);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .gn-search-panel__surface {
+    top: 64px;
+    width: 100%;
+    max-height: calc(100vh - 64px);
+    padding: 20px 16px;
+  }
+}
+
+
+/* --- assets/css/footer/footer.css --- */
+/**
+ * Site Footer Component
+ * 1:1 Parity with Goodnite Website/Homepage
+ *
+ * @package Goodnite
+ */
+
+.site-footer {
+  padding-block: 78px 28px;
+  background: #121212;
+  color: #fff;
+}
+
+.site-footer .container-shell {
+  width: min(100% - 40px, 1280px);
+  margin-inline: auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(4, 1fr);
+  gap: 48px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 280px;
+}
+
+.footer-brand .brand-logo-image,
+.footer-brand .custom-logo {
+  filter: brightness(0) invert(1);
+}
+
+.footer-brand p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.footer-group h2 {
+  margin: 0 0 20px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.footer-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.footer-menu a {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.footer-menu a:hover {
+  color: #fff;
+}
+
+.footer-social-menu li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-bottom a {
+  color: inherit;
+  text-decoration: none;
+  margin-right: 20px;
+  transition: color 180ms ease;
+}
+
+.footer-bottom a:hover {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .site-footer {
+    padding-block: 56px 24px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-bottom: 40px;
+  }
+
+  .footer-brand {
+    max-width: 100%;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+}
+
+
