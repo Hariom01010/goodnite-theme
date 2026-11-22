@@ -1,16 +1,4 @@
----
-deployment:
-  tasks:
-    - export BRANCH=$(/usr/bin/git branch --show-current)
-
-    - |
-      if [ "$BRANCH" = "main" ]; then
-        export DEPLOY_ROOT="$HOME/public_html"
-      else
-        export DEPLOY_ROOT="$HOME/staging.goodnite.in"
-      fi
-
+    - export DEPLOY_ROOT="$HOME/public_html"
     - /bin/mkdir -p $DEPLOY_ROOT/wp-content/themes
     - /bin/mkdir -p $DEPLOY_ROOT/wp-content/plugins
-
     - /bin/cp -R wp-content/* $DEPLOY_ROOT/wp-content/
