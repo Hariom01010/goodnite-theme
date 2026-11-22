@@ -39,8 +39,13 @@ function goodnite_enqueue_assets(): void {
 	);
 	wp_script_add_data( 'goodnite-theme', 'strategy', 'defer' );
 
-	// 2. Modular Home Sections (Enqueued conditionally only on the front page).
-	if ( is_front_page() || is_home() ) {
+	// 2. Modular Home Sections (Enqueued conditionally on the front page or homepage template).
+	$is_home_screen = is_front_page()
+		|| is_home()
+		|| is_page_template( 'page-templates/template-home.php' )
+		|| is_page( 'home' );
+
+	if ( $is_home_screen ) {
 		$home_sections = array(
 			'hero'        => 'section-hero.css',
 			'usp'         => 'section-usp-strip.css',

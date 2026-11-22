@@ -1,148 +1,301 @@
 /**
  * Home: Sleep Finder Component (Your Sleep. Your Way.)
+ * 1:1 Parity with Goodnite Website/Homepage reference styling.
  *
  * @package Goodnite
  */
 
 .gn-sleep-finder {
-  padding: 104px 0;
-  background: #fff;
+  background: #f7f6f3;
+  color: #1c1c1c;
+  padding: clamp(3rem, 7vw, 6.5rem) 0;
+  overflow: hidden;
 }
 
-.gn-sleep-finder__grid {
+.gn-sleep-finder__inner {
+  width: min(1280px, calc(100% - 40px));
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  align-items: center;
-  gap: clamp(40px, 6vw, 92px);
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: stretch;
 }
 
-.gn-sleep-finder__copy {
+.gn-sleep-finder__content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  justify-content: center;
+  padding: clamp(1rem, 2vw, 2rem) 0;
 }
 
 .gn-sleep-finder h2 {
-  font-size: var(--type-h2);
+  margin: 0;
+  font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+  line-height: 1.02;
   font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.04em;
-  color: var(--ink);
+  letter-spacing: -0.045em;
+  color: #1c1c1c;
+}
+
+.gn-sleep-finder__way {
+  white-space: nowrap;
 }
 
 .gn-sleep-finder__intro {
-  font-size: var(--type-body-large);
-  line-height: 1.6;
-  color: var(--text-secondary);
+  max-width: 41rem;
+  margin: 1.5rem 0 24px;
+  color: #626262;
+  font-size: 16px;
+  line-height: 1.65;
 }
 
-.gn-sleep-finder__options-label {
-  font-size: var(--type-caption);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
+.gn-sleep-finder__question h3 {
+  margin: 0 0 1.25rem;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #1c1c1c;
 }
 
-.preference-grid {
+.gn-sleep-finder__question > p:not(.gn-sleep-finder__limit) {
+  margin: 0.5rem 0 1.25rem;
+  color: #626262;
+  font-size: 14px;
+}
+
+.gn-sleep-finder__options {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
 
-.preference-option {
+.gn-sleep-finder__option {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 16px;
-  border: 1px solid var(--border-subtle);
-  background: var(--surface-warm);
+  min-height: 74px;
+  padding: 14px;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  background: #fff;
+  color: #1c1c1c;
   text-align: left;
   cursor: pointer;
-  transition: border-color 180ms ease, background 180ms ease;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
-.preference-option:hover {
-  border-color: rgba(217, 0, 0, 0.4);
+.gn-sleep-finder__option:hover {
+  border-color: #a8a8a8;
 }
 
-.preference-option.is-selected {
-  border-color: var(--brand-red);
-  background: #fff6f6;
+.gn-sleep-finder__option:focus-visible {
+  outline: 3px solid rgba(217, 0, 0, 0.28);
+  outline-offset: 3px;
 }
 
-.preference-option__icon {
-  width: 28px;
-  height: 28px;
-  flex: 0 0 auto;
+.gn-sleep-finder__option[aria-pressed="true"] {
+  border-color: var(--brand-red, #d90000);
+  background: #fff8f8;
+  box-shadow: inset 0 0 0 1px var(--brand-red, #d90000);
 }
 
-.preference-option__copy {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+.gn-sleep-finder__icon {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+  border: 1px solid #c8c8c8;
+  border-radius: 50%;
+  color: #626262;
+  font-size: 18px;
+  line-height: 1;
 }
 
-.preference-option__title {
-  font-size: var(--type-body);
+.gn-sleep-finder__option[aria-pressed="true"] .gn-sleep-finder__icon {
+  border-color: var(--brand-red, #d90000);
+  color: var(--brand-red, #d90000);
+}
+
+.gn-sleep-finder__option[aria-pressed="true"] .gn-sleep-finder__icon::after {
+  content: "✓";
+  font-size: 16px;
+}
+
+.gn-sleep-finder__option strong {
+  display: block;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--ink);
+  color: #1c1c1c;
 }
 
-.preference-option__desc {
-  font-size: var(--type-caption);
-  color: var(--text-secondary);
+.gn-sleep-finder__option small {
+  display: block;
+  margin-top: 4px;
+  color: #626262;
+  font-size: 12px;
+  line-height: 1.35;
 }
 
-.gn-sleep-finder__preview {
-  position: relative;
-  background: var(--surface-warm);
-  border: 1px solid var(--border-subtle);
-  padding: 24px;
+.gn-sleep-finder__limit {
+  min-height: 20px;
+  margin: 0.7rem 0 0;
+  color: var(--brand-red, #d90000);
+  font-size: 13px;
+}
+
+.gn-sleep-finder__actions {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.1rem;
 }
 
-.gn-sleep-finder__preview-image {
-  aspect-ratio: 1.1 / 1;
+.gn-sleep-finder__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 13px 22px;
+  background: var(--brand-red, #d90000);
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 2px;
+  transition: background 0.2s ease;
+}
+
+.gn-sleep-finder__cta:hover {
+  background: var(--brand-red-hover, #b80000);
+  color: #fff;
+}
+
+.gn-sleep-finder__cta span {
+  transition: transform 0.2s ease;
+}
+
+.gn-sleep-finder__cta:hover span {
+  transform: translateX(3px);
+}
+
+.gn-sleep-finder__secondary {
+  color: #1c1c1c;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.gn-sleep-finder__secondary:hover {
+  color: var(--brand-red, #d90000);
+}
+
+.gn-sleep-finder__reassurance {
+  margin: 1.25rem 0 0;
+  color: #626262;
+  font-size: 12px;
+}
+
+.gn-sleep-finder__visual {
+  min-height: 650px;
   overflow: hidden;
+  border-radius: 3px;
   background: #eeeae3;
 }
 
-.gn-sleep-finder__preview-image img {
+.gn-sleep-finder__visual picture,
+.gn-sleep-finder__visual img {
+  display: block;
   width: 100%;
   height: 100%;
+}
+
+.gn-sleep-finder__visual img {
   object-fit: cover;
-}
-
-.gn-sleep-finder__preview-info h3 {
-  font-size: var(--type-h4);
-  font-weight: 500;
-  margin-bottom: 4px;
-}
-
-.gn-sleep-finder__preview-info p {
-  font-size: var(--type-body-small);
-  color: var(--text-secondary);
+  object-position: center;
 }
 
 @media (max-width: 1023px) {
-  .gn-sleep-finder {
-    padding: 76px 0;
-  }
-  .gn-sleep-finder__grid {
+  .gn-sleep-finder__inner {
     grid-template-columns: 1fr;
-    gap: 40px;
+  }
+
+  .gn-sleep-finder__visual {
+    order: -1;
+    min-height: clamp(320px, 55vw, 520px);
+  }
+
+  .gn-sleep-finder__content {
+    padding: 0;
+  }
+
+  .gn-sleep-finder__intro {
+    max-width: 52rem;
   }
 }
 
 @media (max-width: 767px) {
   .gn-sleep-finder {
-    padding: 60px 0;
+    padding: 3.25rem 0;
   }
-  .preference-grid {
-    grid-template-columns: 1fr;
+
+  .gn-sleep-finder__inner {
+    width: calc(100% - 32px);
+    gap: 2.25rem;
+  }
+
+  .gn-sleep-finder__visual {
+    min-height: 285px;
+  }
+
+  .gn-sleep-finder h2 {
+    font-size: 36px;
+  }
+
+  .gn-sleep-finder__intro {
+    margin: 1.1rem 0 20px;
+    font-size: 15px;
+  }
+
+  .gn-sleep-finder__options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .gn-sleep-finder__option {
+    min-height: 64px;
+    padding: 10px;
+  }
+
+  .gn-sleep-finder__option strong {
+    font-size: 13px;
+  }
+
+  .gn-sleep-finder__option small {
+    font-size: 11px;
+  }
+
+  .gn-sleep-finder__actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .gn-sleep-finder__cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .gn-sleep-finder__secondary {
+    font-size: 14px;
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .gn-sleep-finder__option,
+  .gn-sleep-finder__cta,
+  .gn-sleep-finder__cta span {
+    transition: none;
+  }
+}

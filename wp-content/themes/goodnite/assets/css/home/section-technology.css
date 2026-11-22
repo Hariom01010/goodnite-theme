@@ -89,11 +89,28 @@
   margin-bottom: 10px;
 }
 
-.gn-tech-pillars__content p {
-  font-size: 0.96rem;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.92);
-  margin-bottom: 0;
+.gn-tech-pillars__intro-cta {
+  color: var(--brand-red, #d90000);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  min-height: auto;
+}
+
+.gn-tech-pillars__intro-cta:hover {
+  color: var(--brand-red-hover, #b80000);
+}
+
+.gn-tech-pillars__content small {
+  display: block;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.82rem;
+  line-height: 1.5;
 }
 
 .gn-tech-pillars__indicators {
