@@ -109,7 +109,6 @@ if ( function_exists( 'get_field' ) ) {
 					<div class="gn-tech-pillars__content">
 						<h3><?php echo esc_html( $pillar['title'] ); ?></h3>
 						<p><?php echo esc_html( $pillar['description'] ); ?></p>
-						<small><?php echo esc_html( $pillar['microcopy'] ); ?></small>
 					</div>
 				</article>
 			<?php endforeach; ?>
