@@ -25,7 +25,7 @@ $legacy_cta_url   = function_exists( 'get_field' ) ? (string) get_field( 'legacy
 $legacy_cta_url   = $legacy_cta_url ?: goodnite_mod( 'goodnite_legacy_cta_url', '/our-story' );
 
 $scf_img          = function_exists( 'get_field' ) ? get_field( 'legacy_image', $post_id ) : null;
-$scf_img_url      = is_array( $scf_img ) ? ( $scf_img['url'] ?? '' ) : ( is_string( $scf_img ) ? $scf_img : '' );
+$scf_img_url      = goodnite_resolve_image_url( $scf_img );
 ?>
 <section class="gn-home-legacy section legacy" data-section="brand-legacy" aria-labelledby="legacy-heading">
 	<div class="container-shell legacy-grid">

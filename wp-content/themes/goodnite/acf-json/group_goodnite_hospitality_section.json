@@ -87,7 +87,14 @@
             {
                 "param": "page_template",
                 "operator": "==",
-                "value": "page-templates/front-page.php"
+                "value": "page-templates/template-home.php"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "front-page.php"
             }
         ]
     ],

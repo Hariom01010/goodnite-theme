@@ -49,6 +49,16 @@
             "default_value": "/find-your-mattress"
         },
         {
+            "key": "field_hero_image",
+            "label": "Hero Image (Single)",
+            "name": "hero_image",
+            "type": "image",
+            "instructions": "Main hero background image (Used if Hero Slides below is empty). Recommended 1920x960 WebP or JPG",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
             "key": "field_hero_slides",
             "label": "Hero Slides (Repeater)",
             "name": "hero_slides",
@@ -81,6 +91,20 @@
                 "param": "page_type",
                 "operator": "==",
                 "value": "front_page"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/template-home.php"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "front-page.php"
             }
         ]
     ],

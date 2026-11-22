@@ -10,6 +10,14 @@
             "default_value": "Comfort Worth Discovering."
         },
         {
+            "key": "field_products_body",
+            "label": "Section Subtitle / Description",
+            "name": "products_body",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "Explore thoughtfully engineered mattresses for different sleep preferences."
+        },
+        {
             "key": "field_products_cta_label",
             "label": "CTA Text",
             "name": "products_cta_label",
@@ -57,7 +65,14 @@
             {
                 "param": "page_template",
                 "operator": "==",
-                "value": "page-templates/front-page.php"
+                "value": "page-templates/template-home.php"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "front-page.php"
             }
         ]
     ],

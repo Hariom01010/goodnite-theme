@@ -28,6 +28,34 @@ function goodnite_asset_url( string $path ): string {
 }
 
 /**
+ * Resolve an image value from SCF/ACF (array, ID, string) or fallback to a theme asset.
+ *
+ * @param mixed  $val      ACF/SCF return value or attachment ID.
+ * @param string $fallback Relative fallback path inside assets/ (e.g. 'images/foo.webp').
+ * @return string Full image URL.
+ */
+function goodnite_resolve_image_url( mixed $val, string $fallback = '' ): string {
+	if ( ! empty( $val ) ) {
+		if ( is_array( $val ) && ! empty( $val['url'] ) ) {
+			return (string) $val['url'];
+		}
+		if ( is_numeric( $val ) ) {
+			$url = wp_get_attachment_image_url( (int) $val, 'full' );
+			if ( $url ) {
+				return $url;
+			}
+		}
+		if ( is_string( $val ) && '' !== trim( $val ) ) {
+			return $val;
+		}
+	}
+	if ( '' !== $fallback ) {
+		return goodnite_asset_url( $fallback );
+	}
+	return '';
+}
+
+/**
  * Wrapper for get_theme_mod with fallback.
  *
  * @param string $key Theme mod key.

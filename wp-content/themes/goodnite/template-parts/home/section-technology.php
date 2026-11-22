@@ -26,8 +26,7 @@ $pillars   = array();
 
 if ( ! empty( $scf_cards ) && is_array( $scf_cards ) ) {
 	foreach ( $scf_cards as $c ) {
-		$img_arr = $c['image'] ?? null;
-		$img_url = is_array( $img_arr ) ? ( $img_arr['url'] ?? '' ) : ( is_string( $img_arr ) ? $img_arr : '' );
+		$img_url = goodnite_resolve_image_url( $c['image'] ?? null );
 		if ( ! empty( $c['title'] ) ) {
 			$pillars[] = array(
 				'title'       => (string) $c['title'],

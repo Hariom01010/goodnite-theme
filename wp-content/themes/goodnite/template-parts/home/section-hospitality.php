@@ -28,10 +28,7 @@ $hosp_client_lbl  = function_exists( 'get_field' ) ? (string) get_field( 'hospit
 $hosp_client_lbl  = $hosp_client_lbl ?: 'OUR HOSPITALITY CLIENT PORTFOLIO';
 
 $scf_img          = function_exists( 'get_field' ) ? get_field( 'hospitality_image', $post_id ) : null;
-$hosp_img_url     = is_array( $scf_img ) ? ( $scf_img['url'] ?? '' ) : ( is_string( $scf_img ) ? $scf_img : '' );
-if ( empty( $hosp_img_url ) ) {
-	$hosp_img_url = goodnite_asset_url( 'images/goodnite-hospitality-suite-v2.png' );
-}
+$hosp_img_url     = goodnite_resolve_image_url( $scf_img, 'images/goodnite-hospitality-suite-v2.png' );
 
 $hospitality_logos = array(
 	array( 'name' => 'Taj', 'file' => '01_Taj 1.png' ),

@@ -73,4 +73,19 @@ function goodnite_document_title_separator( string $sep ): string {
 }
 add_filter( 'document_title_separator', 'goodnite_document_title_separator' );
 
+/**
+ * Register ACF / SCF JSON save and load points.
+ */
+function goodnite_acf_json_load_point( array $paths ): array {
+	$paths[] = get_template_directory() . '/acf-json';
+	return $paths;
+}
+add_filter( 'acf/settings/load_json', 'goodnite_acf_json_load_point' );
+
+function goodnite_acf_json_save_point( string $path ): string {
+	return get_template_directory() . '/acf-json';
+}
+add_filter( 'acf/settings/save_json', 'goodnite_acf_json_save_point' );
+
+
 

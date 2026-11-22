@@ -31,9 +31,56 @@ $hero_sec_url     = function_exists( 'get_field' ) ? (string) get_field( 'hero_s
 $hero_sec_url     = $hero_sec_url ?: goodnite_mod( 'goodnite_hero_secondary_url', '/find-your-mattress' );
 
 $hero_alt         = goodnite_mod( 'goodnite_hero_alt', 'Contemporary bedroom with an ivory upholstered king bed in warm morning light' );
+
+// Collect slides from SCF repeater or single image, fallback to default prototype images
+$slides = array();
+if ( function_exists( 'get_field' ) ) {
+	$scf_slides = get_field( 'hero_slides', $post_id );
+	if ( ! empty( $scf_slides ) && is_array( $scf_slides ) ) {
+		foreach ( $scf_slides as $s ) {
+			$url = goodnite_resolve_image_url( $s['image'] ?? null );
+			if ( $url ) {
+				$slides[] = array(
+					'url' => $url,
+					'alt' => ! empty( $s['alt_text'] ) ? (string) $s['alt_text'] : $hero_title,
+				);
+			}
+		}
+	}
+	if ( empty( $slides ) ) {
+		$single_img = goodnite_resolve_image_url( get_field( 'hero_image', $post_id ) );
+		if ( $single_img ) {
+			$slides[] = array(
+				'url' => $single_img,
+				'alt' => $hero_title,
+			);
+		}
+	}
+}
+
+if ( empty( $slides ) ) {
+	$slides = array(
+		array(
+			'url' => goodnite_asset_url( 'images/goodnite-hero-desktop.webp' ),
+			'alt' => $hero_alt,
+		),
+		array(
+			'url' => goodnite_asset_url( 'images/goodnite-collection-dreamer.webp' ),
+			'alt' => 'Dreamer Collection Mattress',
+		),
+		array(
+			'url' => goodnite_asset_url( 'images/goodnite-collection-love.webp' ),
+			'alt' => 'Love Collection Mattress',
+		),
+	);
+}
 ?>
 <section class="gn-home-hero hero" data-section="hero" aria-labelledby="hero-heading">
-	<div class="hero-media"><?php goodnite_picture( 'goodnite_hero_image_desktop', 'goodnite_hero_image_mobile', 'goodnite-hero-desktop.webp', 'goodnite-hero-mobile.webp', $hero_alt, '', true ); ?></div>
+	<div class="hero-image-slider" aria-label="<?php esc_attr_e( 'Hero images', 'goodnite' ); ?>">
+		<?php foreach ( $slides as $i => $slide ) : ?>
+			<div class="hero-image-slider__slide<?php echo 0 === $i ? ' is-active' : ''; ?>" style="background-image: url('<?php echo esc_url( $slide['url'] ); ?>');" role="img" aria-label="<?php echo esc_attr( $slide['alt'] ); ?>"></div>
+		<?php endforeach; ?>
+	</div>
 	<div class="container-shell hero-content"><div class="hero-copy">
 		<h1 id="hero-heading"><?php echo esc_html( $hero_title ); ?></h1>
 		<p><?php echo esc_html( $hero_body ); ?></p>

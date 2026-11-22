@@ -224,15 +224,14 @@
     var hero=document.querySelector('.hero');
     if(!hero||hero.dataset.heroSliderReady)return;
     hero.dataset.heroSliderReady='true';
-    var root=hero.querySelector('.hero-content')||hero.firstElementChild;
-    var images=['assets/images/goodnite-hero-desktop.webp','assets/images/goodnite-collection-dreamer.webp','assets/images/goodnite-collection-love.webp'];
-    var slider=document.createElement('div');slider.className='hero-image-slider';slider.setAttribute('aria-label','Hero images');
-    images.forEach(function(src,i){var s=document.createElement('div');s.className='hero-image-slider__slide'+(i===0?' is-active':'');s.style.backgroundImage='url("'+src+'")';slider.appendChild(s)});
-    hero.insertBefore(slider,hero.firstChild);
+    var slider=hero.querySelector('.hero-image-slider');
+    if(!slider)return;
+    var slides=[].slice.call(slider.querySelectorAll('.hero-image-slider__slide'));
+    if(slides.length<=1)return;
     var controls=document.createElement('div');controls.className='hero-slider-controls';
     controls.innerHTML='<button class="hero-slider-arrow hero-slider-prev" type="button" aria-label="Previous image"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><div class="hero-slider-dots" role="tablist" aria-label="Choose hero image"></div><button class="hero-slider-arrow hero-slider-next" type="button" aria-label="Next image"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>';
     hero.appendChild(controls);
-    var slides=[].slice.call(slider.children),dots=controls.querySelector('.hero-slider-dots'),index=0,timer;
+    var dots=controls.querySelector('.hero-slider-dots'),index=0,timer;
     slides.forEach(function(_,i){var d=document.createElement('button');d.className='hero-slider-dot'+(i===0?' is-active':'');d.type='button';d.setAttribute('role','tab');d.setAttribute('aria-label','Show image '+(i+1));d.setAttribute('aria-selected',i===0);d.addEventListener('click',function(){show(i);restart()});dots.appendChild(d)});
     function show(next){index=(next+slides.length)%slides.length;slides.forEach(function(s,i){s.classList.toggle('is-active',i===index)});[].slice.call(dots.children).forEach(function(d,i){d.classList.toggle('is-active',i===index);d.setAttribute('aria-selected',i===index)})}
     function restart(){clearInterval(timer);timer=setInterval(function(){show(index+1)},6000)}
@@ -405,27 +404,48 @@
 })();
 /* Interactive Your Sleep. Your Way. preference discovery */
 (function(){
-  var allowed=['cooling','support','pressure_relief','motion_isolation'];
-  function findSection(){return [].slice.call(document.querySelectorAll('section')).find(function(section){return /your sleep\. your way/i.test(section.textContent)})||document.querySelector('[class*="sleep-finder"]')}
-  function render(){
+  function findSection(){return document.querySelector('.gn-sleep-finder')||[].slice.call(document.querySelectorAll('section')).find(function(section){return /your sleep\. your way/i.test(section.textContent)})}
+  function initSleepFinder(){
     var section=findSection();if(!section||section.dataset.gnSleepFinderReady)return;
-    section.dataset.gnSleepFinderReady='true';section.className='gn-sleep-finder';
-    section.innerHTML='<div class="gn-sleep-finder__inner"><div class="gn-sleep-finder__content"><h2 id="gn-sleep-finder-title">Your Sleep. <span class="gn-sleep-finder__way">Your Way.</span></h2><p class="gn-sleep-finder__intro">Some prefer a cooler night. Others seek firmer support, softer comfort or more natural materials. Tell us what matters to you, and discover a better place to begin.</p><div class="gn-sleep-finder__question"><h3>Choose Two Options :</h3><div class="gn-sleep-finder__options" role="group" aria-label="Sleep preferences"></div><p class="gn-sleep-finder__limit" role="status" aria-live="polite"></p><div class="gn-sleep-finder__actions"><a class="gn-sleep-finder__cta" href="/find-your-mattress">Find My Sleep Match <span aria-hidden="true">→</span></a><a class="gn-sleep-finder__secondary" href="/mattresses">Explore All Mattresses</a></div></div></div><div class="gn-sleep-finder__visual"><picture><source media="(max-width:767px)" srcset="assets/images/goodnite-sleep-finder.webp"><img src="assets/images/goodnite-sleep-finder.webp" width="1448" height="1086" loading="lazy" decoding="async" alt="Softly creased white bedding in a calm bedroom at morning"></picture></div></div>';
-    var data=[['cooling','Stay Cooler','Cooling surfaces and breathable comfort.','✧'],['support','Feel Supported','A steadier, more supportive sleep feel.','⌁'],['pressure_relief','Ease Pressure','Contouring and cushioning comfort.','∿'],['motion_isolation','Sleep Undisturbed','Less disturbance from movement.','☾']];
-    var options=section.querySelector('.gn-sleep-finder__options'),selected=[];
-    data.forEach(function(item){var button=document.createElement('button');button.type='button';button.className='gn-sleep-finder__option';button.dataset.preference=item[0];button.setAttribute('aria-pressed','false');button.innerHTML='<span class="gn-sleep-finder__icon" aria-hidden="true">'+item[3]+'</span><span><strong>'+item[1]+'</strong></span>';options.appendChild(button)});
-    var status=section.querySelector('.gn-sleep-finder__limit'),cta=section.querySelector('.gn-sleep-finder__cta');
-    options.addEventListener('click',function(e){var button=e.target.closest('button');if(!button)return;var id=button.dataset.preference,index=selected.indexOf(id);if(index>-1){selected.splice(index,1);button.setAttribute('aria-pressed','false');status.textContent=''}else if(selected.length<2){selected.push(id);button.setAttribute('aria-pressed','true');status.textContent=''}else{status.textContent='Choose up to two preferences.';return} });
-    cta.addEventListener('click',function(e){var url=new URL(cta.href,window.location.origin);if(selected.length)url.searchParams.set('preferences',selected.join(','));window.location.href=url.toString();});
+    section.dataset.gnSleepFinderReady='true';
+    var options=section.querySelector('.gn-sleep-finder__options');
+    if(!options)return;
+    var status=section.querySelector('.gn-sleep-finder__limit'),cta=section.querySelector('.gn-sleep-finder__cta'),selected=[];
+    options.addEventListener('click',function(e){
+      var button=e.target.closest('.gn-sleep-finder__option');
+      if(!button)return;
+      var id=button.dataset.preference,index=selected.indexOf(id);
+      if(index>-1){
+        selected.splice(index,1);
+        button.setAttribute('aria-pressed','false');
+        if(status)status.textContent='';
+      }else if(selected.length<2){
+        selected.push(id);
+        button.setAttribute('aria-pressed','true');
+        if(status)status.textContent='';
+      }else{
+        if(status)status.textContent='Choose up to two preferences.';
+        return;
+      }
+    });
+    if(cta){
+      cta.addEventListener('click',function(e){
+        try{
+          var url=new URL(cta.href,window.location.origin);
+          if(selected.length)url.searchParams.set('preferences',selected.join(','));
+          window.location.href=url.toString();
+          e.preventDefault();
+        }catch(err){}
+      });
+    }
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initSleepFinder);else initSleepFinder();
 })();
 /* Use the approved Goodnite logo asset in header and footer */
 (function(){
   function replaceBrandLogos(){
     document.querySelectorAll('.temp-logo').forEach(function(link){
       link.classList.add('brand-logo-link');
-      link.innerHTML='<img class="brand-logo-image" src="assets/images/brand-logo.png" alt="Goodnite 1989">';
     });
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',replaceBrandLogos);else replaceBrandLogos();
@@ -491,9 +511,11 @@
 /* Use the approved PNG favicon */
 (function(){
   function setFavicon(){
-    var link=document.querySelector('link[rel~="icon"]')||document.createElement('link');
-    link.rel='icon';link.type='image/png';link.href='assets/images/favicon.png';
-    if(!link.parentNode)document.head.appendChild(link);
+    var link=document.querySelector('link[rel~="icon"]');
+    if(link)return;
+    link=document.createElement('link');
+    link.rel='icon';link.type='image/png';link.href='/wp-content/themes/goodnite/assets/images/favicon.png';
+    document.head.appendChild(link);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setFavicon);else setFavicon();
 })();
