@@ -1,6 +1,7 @@
 <?php
 /**
  * Interactive 2-preference "Your Sleep. Your Way." finder section with SCF & WooCommerce integration.
+ * Matches Goodnite Website/Homepage with 4 options and WooCommerce matchmaker.
  *
  * @package Goodnite
  */
@@ -54,7 +55,7 @@ if ( empty( $finder_image_url ) ) {
 	$finder_image_url = goodnite_asset_url( 'images/goodnite-sleep-finder.webp' );
 }
 
-// Preference options: check SCF repeater or use defaults.
+// 4 Preference Options from SCF or default.
 $finder_options = array();
 if ( function_exists( 'get_field' ) ) {
 	$scf_options = get_field( 'finder_options', $post_id );
@@ -67,7 +68,6 @@ if ( function_exists( 'get_field' ) ) {
 					'id'          => ! empty( $opt['id'] ) ? sanitize_key( (string) $opt['id'] ) : sanitize_title( (string) $opt['title'] ),
 					'icon'        => (string) ( $opt['icon'] ?? '✧' ),
 					'title'       => (string) $opt['title'],
-					'desc'        => (string) ( $opt['subtitle'] ?? '' ),
 					'product_url' => $prod_url ? (string) $prod_url : '',
 				);
 			}
@@ -75,15 +75,13 @@ if ( function_exists( 'get_field' ) ) {
 	}
 }
 
-// Fallback options if none in SCF.
+// Fallback: exactly 4 options matching Goodnite Website/Homepage.
 if ( empty( $finder_options ) ) {
 	$finder_options = array(
-		array( 'id' => 'cooling', 'title' => 'Stay Cooler', 'desc' => 'Cooling surfaces and breathable comfort.', 'icon' => '✧', 'product_url' => '' ),
-		array( 'id' => 'support', 'title' => 'Feel Supported', 'desc' => 'A steadier, more supportive sleep feel.', 'icon' => '⌁', 'product_url' => '' ),
-		array( 'id' => 'pressure_relief', 'title' => 'Ease Pressure', 'desc' => 'Contouring and cushioning comfort.', 'icon' => '∿', 'product_url' => '' ),
-		array( 'id' => 'motion_isolation', 'title' => 'Sleep Undisturbed', 'desc' => 'Less disturbance from movement.', 'icon' => '☾', 'product_url' => '' ),
-		array( 'id' => 'natural', 'title' => 'Natural Comfort', 'desc' => 'Explore latex and naturally derived materials.', 'icon' => '⌇', 'product_url' => '' ),
-		array( 'id' => 'luxury', 'title' => 'Luxury Feel', 'desc' => 'Sophisticated, layered sleep experiences.', 'icon' => '◇', 'product_url' => '' ),
+		array( 'id' => 'cooling', 'title' => 'Stay Cooler', 'icon' => '✧', 'product_url' => '' ),
+		array( 'id' => 'support', 'title' => 'Feel Supported', 'icon' => '⌁', 'product_url' => '' ),
+		array( 'id' => 'pressure_relief', 'title' => 'Ease Pressure', 'icon' => '∿', 'product_url' => '' ),
+		array( 'id' => 'motion_isolation', 'title' => 'Sleep Undisturbed', 'icon' => '☾', 'product_url' => '' ),
 	);
 }
 
@@ -93,8 +91,8 @@ if ( function_exists( 'get_field' ) ) {
 	$scf_combinations = get_field( 'finder_combinations', $post_id );
 	if ( ! empty( $scf_combinations ) && is_array( $scf_combinations ) ) {
 		foreach ( $scf_combinations as $comb ) {
-			$p1 = sanitize_key( (string) ( $comb['pref_1'] ?? '' ) );
-			$p2 = sanitize_key( (string) ( $comb['pref_2'] ?? '' ) );
+			$p1  = sanitize_key( (string) ( $comb['pref_1'] ?? '' ) );
+			$p2  = sanitize_key( (string) ( $comb['pref_2'] ?? '' ) );
 			$pid = ! empty( $comb['product'] ) ? (int) $comb['product'] : 0;
 			if ( $p1 && $p2 && $pid > 0 ) {
 				$prefs = array( $p1, $p2 );
@@ -110,11 +108,11 @@ if ( function_exists( 'get_field' ) ) {
 	}
 }
 ?>
-<section class="gn-sleep-finder" aria-labelledby="gn-sleep-finder-title" data-sleep-finder data-combinations="<?php echo esc_attr( wp_json_encode( $combinations_map ) ); ?>" data-default-cta="<?php echo esc_attr( $finder_cta_primary_label ); ?>">
+<section class="gn-home-sleep-finder gn-sleep-finder" data-section="sleep-finder" aria-labelledby="gn-sleep-finder-title" data-sleep-finder data-combinations="<?php echo esc_attr( wp_json_encode( $combinations_map ) ); ?>" data-default-cta="<?php echo esc_attr( $finder_cta_primary_label ); ?>">
 	<div class="gn-sleep-finder__inner">
 		<div class="gn-sleep-finder__content">
 			<h2 id="gn-sleep-finder-title">
-				<?php echo esc_html( $finder_title ); ?>
+				<?php esc_html_e( 'Your Sleep.', 'goodnite' ); ?> <span class="gn-sleep-finder__way"><?php esc_html_e( 'Your Way.', 'goodnite' ); ?></span>
 			</h2>
 
 			<p class="gn-sleep-finder__intro">
@@ -128,10 +126,7 @@ if ( function_exists( 'get_field' ) ) {
 					<?php foreach ( $finder_options as $option ) : ?>
 						<button class="gn-sleep-finder__option focus-ring" type="button" data-preference="<?php echo esc_attr( $option['id'] ); ?>" data-product-url="<?php echo esc_attr( $option['product_url'] ); ?>" aria-pressed="false">
 							<span class="gn-sleep-finder__icon" aria-hidden="true"><?php echo esc_html( $option['icon'] ); ?></span>
-							<span>
-								<strong><?php echo esc_html( $option['title'] ); ?></strong>
-								<small><?php echo esc_html( $option['desc'] ); ?></small>
-							</span>
+							<span><strong><?php echo esc_html( $option['title'] ); ?></strong></span>
 						</button>
 					<?php endforeach; ?>
 				</div>
@@ -148,7 +143,7 @@ if ( function_exists( 'get_field' ) ) {
 		<div class="gn-sleep-finder__visual">
 			<picture>
 				<source media="(max-width:767px)" srcset="<?php echo esc_url( $finder_image_url ); ?>">
-				<img src="<?php echo esc_url( $finder_image_url ); ?>" width="1448" height="1086" loading="lazy" decoding="async" alt="<?php echo esc_attr( $finder_title ); ?>">
+				<img src="<?php echo esc_url( $finder_image_url ); ?>" width="1448" height="1086" loading="lazy" decoding="async" alt="<?php esc_attr_e( 'Softly creased white bedding in a calm bedroom at morning', 'goodnite' ); ?>">
 			</picture>
 		</div>
 	</div>

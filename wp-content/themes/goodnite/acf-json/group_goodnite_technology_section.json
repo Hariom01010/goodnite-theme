@@ -24,40 +24,46 @@
             "default_value": "/sleep-technology"
         },
         {
-            "key": "field_tech_pillars",
-            "label": "Technology Pillars",
-            "name": "tech_pillars",
+            "key": "field_tech_cards",
+            "label": "Technology Cards (3 Cards)",
+            "name": "tech_cards",
             "type": "repeater",
             "layout": "block",
-            "button_label": "Add Technology Pillar",
+            "button_label": "Add Technology Card",
+            "instructions": "Configure the 3 technology pillar cards: Image, Title, Subtitle, and Description.",
             "sub_fields": [
                 {
-                    "key": "field_pillar_title",
-                    "label": "Pillar Title",
-                    "name": "title",
-                    "type": "text",
-                    "placeholder": "Our Fabric"
-                },
-                {
-                    "key": "field_pillar_description",
-                    "label": "Pillar Description",
-                    "name": "description",
-                    "type": "textarea",
-                    "rows": 3
-                },
-                {
-                    "key": "field_pillar_image",
-                    "label": "Pillar Image",
+                    "key": "field_card_image",
+                    "label": "Card Image",
                     "name": "image",
                     "type": "image",
                     "return_format": "array",
-                    "preview_size": "medium"
+                    "preview_size": "medium",
+                    "library": "all"
                 },
                 {
-                    "key": "field_pillar_alt_text",
-                    "label": "Image Alt Text",
-                    "name": "alt_text",
-                    "type": "text"
+                    "key": "field_card_title",
+                    "label": "Card Title",
+                    "name": "title",
+                    "type": "text",
+                    "placeholder": "Our Fabric",
+                    "default_value": "Our Fabric"
+                },
+                {
+                    "key": "field_card_subtitle",
+                    "label": "Card Subtitle / Microcopy",
+                    "name": "subtitle",
+                    "type": "text",
+                    "placeholder": "Includes anti-static, cooling, protective and comfort-focused fabric technologies.",
+                    "default_value": "Includes anti-static, cooling, protective and comfort-focused fabric technologies."
+                },
+                {
+                    "key": "field_card_description",
+                    "label": "Card Description",
+                    "name": "description",
+                    "type": "textarea",
+                    "rows": 3,
+                    "default_value": "The sleep surface is where comfort begins. Goodnite’s fabric technologies are designed around cooling, softness, protection and everyday sleep comfort."
                 }
             ]
         }

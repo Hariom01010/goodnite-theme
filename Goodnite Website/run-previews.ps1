@@ -21,7 +21,7 @@ if (-not $php) {
 $baseDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 $servers = @(
-    @{ Name = 'Homepage';       Path = "$baseDir\Homepage";             Port = 8080; Router = 'server/router.php' },
+    @{ Name = 'Homepage';       Path = "$baseDir\Homepage";             Port = 8000; Router = 'server/router.php' },
     @{ Name = 'Collection Page'; Path = "$baseDir\Collection Page";      Port = 8081; Router = '' },
     @{ Name = 'Product Page';    Path = "$baseDir\Product Page";         Port = 8082; Router = '' },
     @{ Name = 'Contact Us Page'; Path = "$baseDir\Contact Us Page";      Port = 8083; Router = '' },
@@ -39,7 +39,7 @@ if ($Page -eq 'all') {
         Start-Process -FilePath $php -ArgumentList $args -WorkingDirectory $srv.Path
     }
     Write-Host "`nAll prototype servers launched in background!" -ForegroundColor Yellow
-    Write-Host "1. Homepage:        http://127.0.0.1:8080"
+    Write-Host "1. Homepage:        http://127.0.0.1:8000"
     Write-Host "2. Collection Page: http://127.0.0.1:8081"
     Write-Host "3. Product Page:    http://127.0.0.1:8082"
     Write-Host "4. Contact Us Page: http://127.0.0.1:8083"
@@ -56,3 +56,4 @@ if ($Page -eq 'all') {
         & $php -S 127.0.0.1:$($target.Port)
     }
 }
+

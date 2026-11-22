@@ -1,0 +1,57 @@
+{
+    "key": "group_goodnite_usp_section",
+    "title": "Homepage - Brand USP Strip",
+    "fields": [
+        {
+            "key": "field_usp_items",
+            "label": "USP Strip Items",
+            "name": "usp_items",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add USP Item",
+            "instructions": "Add credibility items for the continuous marquee strip. Each item takes an icon image and text.",
+            "sub_fields": [
+                {
+                    "key": "field_usp_icon",
+                    "label": "Icon (Image)",
+                    "name": "icon",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "instructions": "Upload an icon (SVG or PNG recommended)."
+                },
+                {
+                    "key": "field_usp_text",
+                    "label": "Text",
+                    "name": "text",
+                    "type": "text",
+                    "placeholder": "Since 1989",
+                    "instructions": "USP highlight text (e.g. 'Since 1989', '5M+ Mattresses Sold')"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/front-page.php"
+            }
+        ]
+    ],
+    "menu_order": 2,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true
+}
