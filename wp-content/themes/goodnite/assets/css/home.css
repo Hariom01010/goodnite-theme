@@ -2169,16 +2169,23 @@ ol {
   color: #a91d24
 }
 
+.collections-section .collection-meta .card-link,
 .collections-section .card-link {
-  display: inline-flex;
+  display: inline-flex !important;
   align-items: center;
   gap: .45rem;
   color: #c9232b;
   white-space: nowrap;
+  width: max-content !important;
+  max-width: max-content !important;
+  flex: 0 0 auto !important;
+  border-bottom: 1px solid transparent;
 }
 
+.collections-section .collection-meta .card-link:hover,
 .collections-section .card-link:hover {
-  color: #a91d24
+  color: #a91d24;
+  border-bottom-color: #a91d24;
 }
 
 .collections-section .card-link::after {
@@ -2249,13 +2256,8 @@ ol {
   white-space: nowrap
 }
 
-.gn-sleep-finder__option[aria-pressed=true] .gn-sleep-finder__icon {
-  font-size: 0
-}
-
 .gn-sleep-finder__option[aria-pressed=true] .gn-sleep-finder__icon::after {
-  content: '✓';
-  font-size: 16px
+  content: none !important;
 }
 
 .gn-sleep-finder__intro {
@@ -2325,21 +2327,48 @@ ol {
 }
 
 .gn-sleep-finder__icon {
-  display: grid;
-  place-items: center;
-  width: 27px;
-  height: 27px;
-  flex: 0 0 27px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  flex: 0 0 28px !important;
   border: 1px solid #c8c8c8;
   border-radius: 50%;
   color: #626262;
-  font-size: 18px;
-  line-height: 1
+  font-size: 16px;
+  line-height: 1;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.gn-sleep-finder__icon-sym {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.gn-sleep-finder__icon-check {
+  display: none;
+  width: 14px;
+  height: 14px;
+  stroke: #fff;
 }
 
 .gn-sleep-finder__option[aria-pressed=true] .gn-sleep-finder__icon {
   border-color: #d90000;
-  color: #d90000
+  background: #d90000;
+  color: #fff;
+}
+
+.gn-sleep-finder__option[aria-pressed=true] .gn-sleep-finder__icon .gn-sleep-finder__icon-sym {
+  display: none !important;
+}
+
+.gn-sleep-finder__option[aria-pressed=true] .gn-sleep-finder__icon .gn-sleep-finder__icon-check {
+  display: block !important;
 }
 
 .gn-sleep-finder__option strong {
@@ -6375,4 +6404,25 @@ button,
   height: 38px;
   flex: 0 0 38px;
   object-fit: contain;
+}
+
+/* Mobile (<768px): default underline on all CTAs */
+@media (max-width: 768px) {
+  .button-link.text,
+  .legacy-cta,
+  .card-link,
+  .collections-section .card-link,
+  .gn-sleep-finder__cta,
+  .gn-sleep-finder__secondary,
+  .gn-tech-pillars__intro-cta,
+  .gn-tech-pillars__cta,
+  .gn-hospitality__cta,
+  .products-head > .button-link,
+  .mobile-shop-link .button-link,
+  .locator-reset,
+  .buy-now-link {
+    text-decoration: underline !important;
+    text-underline-offset: 4px !important;
+    border-bottom: 1px solid currentColor !important;
+  }
 }

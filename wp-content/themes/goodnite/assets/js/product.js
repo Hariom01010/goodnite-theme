@@ -191,16 +191,52 @@
   const zoomImage = $('[data-zoom-image]');
   const thumbs = Array.from(root.querySelectorAll('[data-gallery-thumb]'));
   const indicatorDots = Array.from(root.querySelectorAll('[data-gallery-indicator-dot]'));
+
+  function resolveImageUrl(imgObj, index) {
+    const rawSrc = typeof imgObj === 'string' ? imgObj : (imgObj?.src || '');
+    if (rawSrc) {
+      if (rawSrc.startsWith('http://') || rawSrc.startsWith('https://') || rawSrc.startsWith('//') || rawSrc.startsWith('/')) {
+        return rawSrc;
+      }
+      const clean = rawSrc.replace(/^assets\//, '');
+      const themeBase = (window.goodniteData && window.goodniteData.themeUrl) ? window.goodniteData.themeUrl : '/wp-content/themes/goodnite';
+      return `${themeBase}/assets/${clean}`;
+    }
+    const thumbImg = thumbs[index]?.querySelector('img');
+    if (thumbImg && thumbImg.src) {
+      return thumbImg.src;
+    }
+    return '';
+  }
+
   function showImage(index) {
-    if (!data.gallery.length) return;
-    state.image = (index + data.gallery.length) % data.gallery.length;
+    if (!data.gallery || !data.gallery.length) return;
+    const total = data.gallery.length;
+    state.image = ((index % total) + total) % total;
     const image = data.gallery[state.image];
-    galleryImage.src = `assets/${image.src}`;
-    galleryImage.alt = image.alt;
-    zoomImage.src = galleryImage.src;
-    zoomImage.alt = image.alt;
-    thumbs.forEach((thumb, i) => { thumb.classList.toggle('is-active', i === state.image); thumb.setAttribute('aria-pressed', String(i === state.image)); });
-    indicatorDots.forEach((dot, i) => { dot.classList.toggle('is-active', i === state.image); dot.setAttribute('aria-selected', String(i === state.image)); });
+    const resolvedUrl = resolveImageUrl(image, state.image);
+
+    if (galleryImage && resolvedUrl) {
+      galleryImage.src = resolvedUrl;
+      galleryImage.alt = (image && image.alt) || '';
+    }
+    if (zoomImage && resolvedUrl) {
+      zoomImage.src = resolvedUrl;
+      zoomImage.alt = (image && image.alt) || '';
+    }
+    thumbs.forEach((thumb, i) => {
+      const isActive = i === state.image;
+      thumb.classList.toggle('is-active', isActive);
+      thumb.setAttribute('aria-pressed', String(isActive));
+      if (isActive) {
+        thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+      }
+    });
+    indicatorDots.forEach((dot, i) => {
+      const isActive = i === state.image;
+      dot.classList.toggle('is-active', isActive);
+      dot.setAttribute('aria-selected', String(isActive));
+    });
   }
   thumbs.forEach((thumb) => thumb.addEventListener('click', () => showImage(Number(thumb.dataset.galleryThumb))));
   indicatorDots.forEach((dot) => dot.addEventListener('click', () => showImage(Number(dot.dataset.galleryIndicatorDot))));
@@ -211,6 +247,14 @@
   let touchStart = null;
   gallery.addEventListener('touchstart', (event) => { touchStart = event.changedTouches[0]?.clientX ?? null; }, { passive: true });
   gallery.addEventListener('touchend', (event) => { if (touchStart === null) return; const delta = (event.changedTouches[0]?.clientX ?? touchStart) - touchStart; if (Math.abs(delta) > 35) showImage(state.image + (delta < 0 ? 1 : -1)); touchStart = null; }, { passive: true });
+  let stageWheelTimeout = null;
+  gallery.querySelector('.gn-gallery__stage')?.addEventListener('wheel', (event) => {
+    if (Math.abs(event.deltaY) > 35) {
+      if (stageWheelTimeout) return;
+      stageWheelTimeout = setTimeout(() => { stageWheelTimeout = null; }, 260);
+      showImage(state.image + (event.deltaY > 0 ? 1 : -1));
+    }
+  }, { passive: true });
 
   function standardMessage() {
     const variant = currentVariant();

@@ -470,13 +470,6 @@
     footer.querySelectorAll('a').forEach(function(link){
       if(/^(find your mattress|faqs)$/i.test(link.textContent.trim()))link.closest('li')?.remove()||link.remove();
     });
-    var policyTerms=/privacy|terms|conditions|returns|refunds|warranty|shipping|delivery/i;
-    var policyLinks=[].slice.call(footer.querySelectorAll('a')).filter(function(link){return policyTerms.test(link.textContent)});
-    if(policyLinks.length>1){
-      var bottom=footer.querySelector('.footer-bottom');if(!bottom)return;
-      var group=bottom.querySelector('.footer-policies');if(!group){group=document.createElement('div');group.className='footer-policies';bottom.appendChild(group)}
-      policyLinks.forEach(function(link){if(!group.contains(link))group.appendChild(link)});
-    }
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',tidyFooter);else tidyFooter();
 })();
@@ -528,10 +521,37 @@
       cards.forEach(function(card){card.classList.add('reveal','is-visible')});
       var controls=document.createElement('div');controls.className='products-carousel-controls';controls.innerHTML='<button class="products-carousel-arrow products-carousel-prev" type="button" aria-label="Previous product"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button><div class="products-carousel-dots" role="tablist" aria-label="Choose product"></div><button class="products-carousel-arrow products-carousel-next" type="button" aria-label="Next product"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>';
       var shopLink=grid.parentNode.querySelector('.mobile-shop-link');if(shopLink)grid.parentNode.insertBefore(controls,shopLink);else grid.parentNode.appendChild(controls);var dots=controls.querySelector('.products-carousel-dots');
-      cards.forEach(function(card,i){var dot=document.createElement('button');dot.className='products-carousel-dot'+(i===0?' is-active':'');dot.type='button';dot.setAttribute('aria-label','Show product '+(i+1));dot.addEventListener('click',function(){grid.scrollTo({left:card.offsetLeft,behavior:'smooth'})});dots.appendChild(dot)});
-      function active(){var nearest=0,min=Infinity;cards.forEach(function(card,i){var distance=Math.abs(card.offsetLeft-grid.scrollLeft);if(distance<min){min=distance;nearest=i}});[].slice.call(dots.children).forEach(function(dot,i){dot.classList.toggle('is-active',i===nearest)})}
-      function move(direction){var current=cards.findIndex(function(card){return Math.abs(card.offsetLeft-grid.scrollLeft)<card.offsetWidth*.5});var next=Math.max(0,Math.min(cards.length-1,current+direction));grid.scrollTo({left:cards[next].offsetLeft,behavior:'smooth'})}
-      controls.querySelector('.products-carousel-prev').addEventListener('click',function(){move(-1)});controls.querySelector('.products-carousel-next').addEventListener('click',function(){move(1)});grid.addEventListener('scroll',active,{passive:true});active();
+      function getCardX(card){
+        return card.getBoundingClientRect().left - grid.getBoundingClientRect().left + grid.scrollLeft;
+      }
+      cards.forEach(function(card,i){
+        var dot=document.createElement('button');
+        dot.className='products-carousel-dot'+(i===0?' is-active':'');
+        dot.type='button';
+        dot.setAttribute('aria-label','Show product '+(i+1));
+        dot.addEventListener('click',function(){
+          grid.scrollTo({left:getCardX(card),behavior:'smooth'});
+        });
+        dots.appendChild(dot);
+      });
+      function active(){
+        var nearest=0,min=Infinity;
+        cards.forEach(function(card,i){
+          var distance=Math.abs(getCardX(card)-grid.scrollLeft);
+          if(distance<min){min=distance;nearest=i}
+        });
+        [].slice.call(dots.children).forEach(function(dot,i){dot.classList.toggle('is-active',i===nearest)});
+      }
+      function move(direction){
+        var current=cards.findIndex(function(card){return Math.abs(getCardX(card)-grid.scrollLeft)<card.offsetWidth*.5});
+        if(current===-1)current=0;
+        var next=Math.max(0,Math.min(cards.length-1,current+direction));
+        grid.scrollTo({left:getCardX(cards[next]),behavior:'smooth'});
+      }
+      controls.querySelector('.products-carousel-prev').addEventListener('click',function(){move(-1)});
+      controls.querySelector('.products-carousel-next').addEventListener('click',function(){move(1)});
+      grid.addEventListener('scroll',active,{passive:true});
+      active();
     });
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initProductsCarousel);else initProductsCarousel();
@@ -559,23 +579,6 @@
     document.querySelectorAll('.products .products-head p').forEach(function(el){el.remove()});
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',removeProductsSubtext);else removeProductsSubtext();
-})();
-/* Header search overlay and shared public index */
-(function(){
-  function initSearch(){
-    var panel=document.querySelector('[data-search-panel]'),trigger=document.querySelector('[data-search-open]'),input=document.querySelector('[data-search-input]');
-    if(!panel||!trigger||!input)return;
-    var data=document.getElementById('goodnite-search-index'),index=[];try{index=JSON.parse(data.textContent||'[]')}catch(e){}
-    var initial=panel.querySelector('[data-search-initial]'),results=panel.querySelector('[data-search-results]'),empty=panel.querySelector('[data-search-empty]'),clear=panel.querySelector('[data-search-clear]'),form=panel.querySelector('[data-search-form]'),previous=document.activeElement;
-    function norm(v){return String(v||'').toLowerCase().replace(/[®™]/g,'').replace(/\s+/g,' ').trim()}
-    function score(item,q){var n=norm(q),title=norm(item.title),body=norm([item.description||'',...(item.keywords||[]),...(item.aliases||[])].join(' '));if(title===n)return 1000;if(title.indexOf(n)===0)return 850;if(title.indexOf(n)>-1)return 700;if((item.aliases||[]).some(function(a){return norm(a)===n}))return 650;if(body.indexOf(n)>-1)return 450;return n.split(' ').reduce(function(s,t){return t.length>1&&(title.indexOf(t)>-1||body.indexOf(t)>-1)?s+100:s},0)}
-    function search(q){return index.map(function(i){return {item:i,score:score(i,q)}}).filter(function(x){return x.score>0}).sort(function(a,b){return b.score-a.score||a.item.title.localeCompare(b.item.title)}).map(function(x){return x.item})}
-    function icon(){return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>'}
-    function render(q){var clean=norm(q);initial.hidden=!!clean;clear.hidden=!clean;results.hidden=!clean;empty.hidden=true;results.innerHTML='';if(!clean)return;var found=search(clean);if(!found.length){results.hidden=true;empty.hidden=false;empty.textContent='No results found. Try a mattress name, collection, sleep technology or article topic.';return}var groups={product:'Products',collection:'Collections',technology:'Technologies',article:'Articles'};['product','collection','technology','article'].forEach(function(type){var list=found.filter(function(i){return i.type===type});if(!list.length)return;var section=document.createElement('section');section.className='gn-search-group';var h=document.createElement('h3');h.textContent=groups[type];section.appendChild(h);list.slice(0,5).forEach(function(item){var a=document.createElement('a');a.className='gn-search-result';a.href=item.url;var body=document.createElement('span');body.className='gn-search-result__body';var strong=document.createElement('strong');strong.textContent=item.title;var small=document.createElement('small');small.textContent=item.description;body.append(strong,small);a.append(body);a.insertAdjacentHTML('beforeend',icon());section.appendChild(a)});results.appendChild(section)});if(found.length>15){var more=document.createElement('a');more.className='gn-search-more';more.href='/search.php?q='+encodeURIComponent(q);more.textContent='View All Results for “'+q+'” '+String.fromCharCode(8594);results.appendChild(more)}}
-    function setOpen(open){panel.hidden=!open;trigger.setAttribute('aria-expanded',open?'true':'false');document.body.classList.toggle('search-is-open',open);if(open){previous=document.activeElement;var header=document.querySelector('[data-site-header]');if(header)panel.style.setProperty('--search-top',Math.round(header.getBoundingClientRect().bottom)+'px');setTimeout(function(){input.focus()},20)}else{input.value='';render('');if(previous&&previous.focus)previous.focus()}}
-    trigger.addEventListener('click',function(){setOpen(panel.hidden)});panel.querySelectorAll('[data-search-close]').forEach(function(el){el.addEventListener('click',function(){setOpen(false)})});input.addEventListener('input',function(){render(input.value)});clear.addEventListener('click',function(){input.value='';render('');input.focus()});panel.querySelectorAll('[data-search-suggestion]').forEach(function(button){button.addEventListener('click',function(){input.value=button.dataset.searchSuggestion||'';render(input.value);input.focus()})});form.addEventListener('submit',function(e){if(!norm(input.value)){e.preventDefault();return}});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!panel.hidden)setOpen(false)});document.addEventListener('click',function(e){if(panel.hidden||panel.contains(e.target)||trigger.contains(e.target))return;setOpen(false)});
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initSearch);else initSearch();
 })();
 /* Technology pillar slider indicators */
 (function(){

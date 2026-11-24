@@ -72,8 +72,22 @@
   line-height: 1.5;
 }
 
+.gn-pdp-tech .gn-pdp-tech__carousel-controls,
 .gn-pdp-tech__carousel-controls {
-  display: none;
+  display: none !important;
+}
+
+@media (min-width: 769px) {
+  .gn-pdp-tech .gn-pdp-tech__carousel-controls,
+  .gn-pdp-tech__carousel-controls {
+    display: none !important;
+  }
+
+  .gn-pdp-tech__grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    overflow: visible !important;
+  }
 }
 
 /* Responsive Layout */
@@ -109,8 +123,9 @@
     padding: 48px 18px 18px;
   }
 
+  .gn-pdp-tech .gn-pdp-tech__carousel-controls,
   .gn-pdp-tech__carousel-controls {
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     gap: 12px;

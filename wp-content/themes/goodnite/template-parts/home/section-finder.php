@@ -56,10 +56,10 @@ if ( ! empty( $scf_options ) && is_array( $scf_options ) ) {
 
 if ( empty( $options ) ) {
 	$options = array(
-		array( 'slug' => 'cooling', 'icon' => '○', 'title' => 'Stay Cooler' ),
-		array( 'slug' => 'support', 'icon' => '○', 'title' => 'Feel Supported' ),
-		array( 'slug' => 'pressure_relief', 'icon' => '○', 'title' => 'Ease Pressure' ),
-		array( 'slug' => 'motion_isolation', 'icon' => '○', 'title' => 'Sleep Undisturbed' ),
+		array( 'slug' => 'cooling', 'icon' => '✧', 'title' => 'Stay Cooler' ),
+		array( 'slug' => 'support', 'icon' => '⌁', 'title' => 'Feel Supported' ),
+		array( 'slug' => 'pressure_relief', 'icon' => '∿', 'title' => 'Ease Pressure' ),
+		array( 'slug' => 'motion_isolation', 'icon' => '☾', 'title' => 'Sleep Undisturbed' ),
 	);
 }
 ?>
@@ -72,7 +72,13 @@ if ( empty( $options ) ) {
         <h3><?php echo esc_html( $finder_prompt ); ?></h3>
         <div class="gn-sleep-finder__options" role="group" aria-label="<?php esc_attr_e( 'Sleep preferences', 'goodnite' ); ?>">
           <?php foreach ( $options as $opt ) : ?>
-            <button class="gn-sleep-finder__option" type="button" data-preference="<?php echo esc_attr( $opt['slug'] ); ?>" aria-pressed="false"><span class="gn-sleep-finder__icon" aria-hidden="true"><?php echo esc_html( $opt['icon'] ); ?></span><span><strong><?php echo esc_html( $opt['title'] ); ?></strong></span></button>
+            <button class="gn-sleep-finder__option" type="button" data-preference="<?php echo esc_attr( $opt['slug'] ); ?>" aria-pressed="false">
+              <span class="gn-sleep-finder__icon" aria-hidden="true">
+                <span class="gn-sleep-finder__icon-sym"><?php echo esc_html( $opt['icon'] ); ?></span>
+                <svg class="gn-sleep-finder__icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              <span><strong><?php echo esc_html( $opt['title'] ); ?></strong></span>
+            </button>
           <?php endforeach; ?>
         </div>
         <p class="gn-sleep-finder__limit" role="status" aria-live="polite"></p>

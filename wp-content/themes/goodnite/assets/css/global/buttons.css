@@ -84,6 +84,14 @@
   transition: transform 220ms ease;
 }
 
+@media (max-width: 768px) {
+  .button-link.text {
+    border-bottom-color: var(--brand-red);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
 .button-link.text:hover svg {
   transform: translateX(4px);
 }
