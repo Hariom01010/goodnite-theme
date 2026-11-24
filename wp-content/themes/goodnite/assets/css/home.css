@@ -6406,23 +6406,57 @@ button,
   object-fit: contain;
 }
 
-/* Mobile (<768px): default underline on all CTAs */
-@media (max-width: 768px) {
-  .button-link.text,
-  .legacy-cta,
-  .card-link,
-  .collections-section .card-link,
-  .gn-sleep-finder__cta,
-  .gn-sleep-finder__secondary,
-  .gn-tech-pillars__intro-cta,
-  .gn-tech-pillars__cta,
-  .gn-hospitality__cta,
-  .products-head > .button-link,
-  .mobile-shop-link .button-link,
-  .locator-reset,
-  .buy-now-link {
-    text-decoration: underline !important;
-    text-underline-offset: 4px !important;
-    border-bottom: 1px solid currentColor !important;
-  }
+/* Single line footer divider */
+.site-footer .footer-top {
+  border-bottom: none !important;
+}
+
+.site-footer .footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+/* Specific CTAs with single underline (no double lines) */
+.legacy-section .button-link.text,
+.legacy-cta,
+.legacy-section a.button-link,
+.collections-section .collection-meta .card-link,
+.collections-section .card-link,
+.gn-tech-pillars__intro-cta,
+.gn-tech-pillars__cta,
+.technology .button-link.text,
+.products-head > .button-link,
+.mobile-shop-link .button-link,
+.products .button-link.text {
+  text-decoration: underline !important;
+  text-underline-offset: 5px !important;
+  text-decoration-thickness: 1px !important;
+  border-bottom: none !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  width: max-content !important;
+  max-width: max-content !important;
+}
+
+.legacy-section .button-link.text *,
+.legacy-cta *,
+.collections-section .collection-meta .card-link *,
+.collections-section .card-link *,
+.gn-tech-pillars__intro-cta *,
+.gn-tech-pillars__cta *,
+.technology .button-link.text *,
+.products-head > .button-link *,
+.mobile-shop-link .button-link *,
+.products .button-link.text * {
+  border-bottom: none !important;
+}
+
+/* Ensure no default underline on other CTAs */
+.gn-sleep-finder__cta,
+.gn-sleep-finder__secondary,
+.gn-hospitality__cta,
+.locator-reset,
+.buy-now-link {
+  text-decoration: none !important;
+  border-bottom: none !important;
 }
